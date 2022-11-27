@@ -3,7 +3,8 @@
     "baseUrl": "src",
     "paths": {
       "@components/*": ["components/*"],
-      "@components-library/*": ["components-library/*"]
+      "@components-library/*": ["components-library/*"],
+      "@assets/*": ["assets/*"]
     },
     "experimentalDecorators": true,
     "jsx": "react-jsx",

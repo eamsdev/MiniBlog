@@ -1,5 +1,6 @@
 // shared config (dev and prod)
 const { resolve } = require('path');
+const Mode = require('frontmatter-markdown-loader/mode');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -30,6 +31,13 @@ module.exports = {
           'file-loader?hash=sha512&digest=hex&name=img/[contenthash].[ext]',
           'image-webpack-loader?bypassOnDebug&optipng.optimizationLevel=7&gifsicle.interlaced=false',
         ],
+      },
+      {
+        test: /\.md$/,
+        loader: 'frontmatter-markdown-loader',
+        options: {
+          mode: [Mode.BODY],
+        },
       },
     ],
   },
