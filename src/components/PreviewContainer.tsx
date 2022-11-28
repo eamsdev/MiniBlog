@@ -7,7 +7,8 @@ import { StylisedMarkdown } from './StylisedMarkdown';
 export const PreviewContainer: FC = () => {
   return (
     <Container>
-      <div className="preview-container mt-3">
+      <div className="preview-container m-5">
+        {/* TODO: dynamic import of md files */}
         <StylisedMarkdown markdown={fm.body} />
         <div className="read-more"></div>
       </div>

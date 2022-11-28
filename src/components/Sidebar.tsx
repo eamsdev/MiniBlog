@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 export const Sidebar: FC = () => {
-  return <>Sidebar content placeholder</>;
+  return <div className="sidebar">Sidebar content placeholder</div>;
 };
 
 export const SidebarMobile: FC = () => {

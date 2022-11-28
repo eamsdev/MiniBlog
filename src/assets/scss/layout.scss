@@ -1,30 +1,49 @@
 html,
 #root {
+  overflow-x: hidden;
   background-color: $primary-color;
+
+  > .page {
+    overflow-x: hidden;
+  }
 }
 
-.root {
-  > .row:first-child {
-    > div:first-child {
-      background-color: $secondary-color;
-      color: $text-secondary-color;
-      position: fixed;
-      height: 100%;
-    }
+.markdown > p {
+  overflow: auto;
 
-    > div:nth-child(2) {
-      background-color: $secondary-color;
-      color: $text-secondary-color;
-    }
+  > img {
+    max-width: 100%;
+    min-width: 400px;
+  }
+}
 
-    > div:last-child {
-      color: $text-primary-color;
-    }
+.sidebar {
+  background-color: $secondary-color;
+  color: $text-secondary-color;
+  position: fixed;
+  height: 100%;
+  width: 300px;
+  @include basic-transition;
+
+  @include media-breakpoint-down(md) {
+    transform: translateX(-300px);
+    -webkit-transform: translateX(-300px);
+  }
+}
+
+.content {
+  margin-left: 300px;
+  color: $text-primary-color;
+  @include basic-transition;
+
+  @include media-breakpoint-down(md) {
+    margin-left: 0;
   }
 }
 
 .preview-container {
   height: 500px;
+  max-width: 800px;
   overflow: hidden;
   position: relative;
 }

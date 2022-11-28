@@ -9,6 +9,7 @@ export const StylisedMarkdown: FC<{ markdown: string }> = (props) => {
   const { markdown } = props;
   return (
     <ReactMarkdown
+      className="markdown"
       children={markdown}
       components={{
         // https://github.com/remarkjs/react-markdown#use-custom-components-syntax-highlight
