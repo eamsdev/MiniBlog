@@ -58,17 +58,57 @@ html,
   }
 }
 
+$preview-title-banner-height: 80px;
+
 .preview-container {
   height: 500px;
   max-width: 800px;
   overflow: hidden;
   position: relative;
-}
 
-.read-more {
-  width: 100%;
-  height: 100px;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.3) 100%);
-  position: absolute;
-  bottom: 0;
+  > .preview-title {
+    width: 100%;
+    height: $preview-title-banner-height;
+    position: absolute;
+    background: $primary-color;
+    top: 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+
+    > .title-card {
+      @include secondary-palette;
+      align-items: center;
+      display: flex;
+      padding: 10px;
+      height: 50px;
+      font-weight: bolder;
+      font-size: 25px;
+    }
+  }
+  // TODO: Add fade offset
+  > .title-fade {
+    width: 100%;
+    height: 300px;
+    position: absolute;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, $primary-color 100%);
+    top: $preview-title-banner-height;
+  }
+
+  > .read-more {
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, #49417d4b);
+    position: absolute;
+    bottom: 0;
+  }
+
+  > .separator {
+    width: 100%;
+    height: 2px;
+    background-color: $secondary-color;
+    position: absolute;
+    bottom: 0;
+  }
 }
