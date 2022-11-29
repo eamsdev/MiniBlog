@@ -4,3 +4,13 @@ $tertiary-color: #57a773;
 
 $text-primary-color: black;
 $text-secondary-color: #f7faf9;
+
+@mixin primary-pallete {
+  background-color: $primary-color;
+  color: $text-primary-color;
+}
+
+@mixin secondary-palette {
+  background-color: $secondary-color;
+  color: $text-secondary-color;
+}

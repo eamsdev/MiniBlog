@@ -1,13 +1,13 @@
 import { MainContent } from './MainContent';
+import { Navbar } from './Navbar';
 import { Sidebar } from './Sidebar';
 
 export const App = () => {
   return (
     <div className="page">
       <Sidebar />
-      <div className="content">
-        <MainContent />
-      </div>
+      <Navbar />
+      <MainContent />
     </div>
   );
 };

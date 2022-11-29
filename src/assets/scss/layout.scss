@@ -1,3 +1,7 @@
+$sidebar-width: 300px;
+$navbar-height: 40px;
+$banner-breakpoint: lg;
+
 html,
 #root {
   overflow-x: hidden;
@@ -17,27 +21,40 @@ html,
   }
 }
 
+.navbar {
+  @include secondary-palette;
+  @include basic-transition;
+  @include media-breakpoint-up($banner-breakpoint) {
+    transform: translateY(-$navbar-height);
+    -webkit-transform: translateY(-$navbar-height);
+  }
+}
+
 .sidebar {
-  background-color: $secondary-color;
-  color: $text-secondary-color;
   position: fixed;
   height: 100%;
-  width: 300px;
-  @include basic-transition;
+  width: $sidebar-width;
 
-  @include media-breakpoint-down(md) {
-    transform: translateX(-300px);
-    -webkit-transform: translateX(-300px);
+  @include secondary-palette;
+  @include basic-transition;
+  @include media-breakpoint-down($banner-breakpoint) {
+    transform: translateX(-$sidebar-width);
+    -webkit-transform: translateX(-$sidebar-width);
   }
 }
 
 .content {
-  margin-left: 300px;
+  margin-left: $sidebar-width;
   color: $text-primary-color;
   @include basic-transition;
 
-  @include media-breakpoint-down(md) {
+  @include media-breakpoint-down($banner-breakpoint) {
     margin-left: 0;
+  }
+
+  @include media-breakpoint-up($banner-breakpoint) {
+    transform: translateY(-$navbar-height);
+    -webkit-transform: translateY(-$navbar-height);
   }
 }
 
