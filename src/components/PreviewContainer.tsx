@@ -10,11 +10,12 @@ export const PreviewContainer: FC = () => {
       <div className="preview-container m-5">
         <div className="preview-title">
           <div className="title-card">{fm.attributes['title']}</div>
+          <div className="title-separator"></div>
         </div>
         <div className="title-fade"></div>
         {/* TODO: dynamic import of md files */}
         <StylisedMarkdown markdown={fm.body} />
-        <div className="read-more"></div>
+        <div className="preview-container-bottom-fade"></div>
         <div className="separator"></div>
       </div>
     </Container>
