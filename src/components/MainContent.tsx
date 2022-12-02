@@ -5,6 +5,7 @@ export const MainContent: FC = () => {
   return (
     <div className="content">
       <PreviewContainer />
+      <PreviewContainer />
     </div>
   );
 };

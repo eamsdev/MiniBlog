@@ -11,7 +11,7 @@ $banner-breakpoint: lg;
 html,
 #root {
   overflow-x: hidden;
-  background-color: $primary-color;
+  background-color: $backdrop-color;
 
   > .page {
     overflow-x: hidden;
@@ -66,50 +66,77 @@ html,
 
 $preview-title-banner-height: 300px;
 
+.date-container {
+  @include secondary-palette;
+  width: fit-content;
+  padding: 7px;
+
+  > .date {
+    font-weight: normal;
+    font-size: medium;
+  }
+}
+
 .preview-container {
+  border-radius: 5px;
   height: 500px;
   max-width: 800px;
   overflow: hidden;
   position: relative;
+  border: 1px solid #cccccc;
+  background-color: $primary-color;
+  // box-shadow: 50px 0px 50px -50px rgba(0, 0, 0, 0.50);
+  // -webkit-box-shadow: 50px 0px 50px -50px rgba(0, 0, 0, 0.50);
+  // -moz-box-shadow: 50px 0px 50px -50px rgba(0, 0, 0, 0.50);
 
-  > .preview-title {
+  & .preview-title {
+    padding: 10px;
     width: 100%;
     height: $preview-title-banner-height;
     position: absolute;
-    background: linear-gradient(to bottom, #f7faf9ff 0px, #f7faf9ff 50px, #f7faf900);
+    background: linear-gradient(to bottom, #f7faf9ff 0px, #f7faf9ff 100px, #f7faf900);
     top: 0px;
 
-    > .title-card {
-      @include secondary-palette;
-      align-items: center;
+    & .title-card {
+      background-color: #eeeeee;
+      color: #333333;
+      align-items: flex-start;
       width: fit-content;
       display: flex;
+      flex-direction: column;
       padding: 10px;
-      height: 50px;
-      font-weight: bolder;
-      font-size: 25px;
+      height: fit-content;
+
+      & .title {
+        font-weight: bolder;
+        font-size: 25px;
+      }
+
+      & .description {
+        font-style: italic;
+      }
     }
 
-    > .title-separator {
+    & .title-separator {
       @include separator;
     }
   }
 
-  > .preview-container-bottom-fade {
+  & .preview-container-bottom-fade {
     width: 100%;
     height: 50px;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, #49417d6b);
+    background: linear-gradient(to top, #f7faf9ff, #f7faf900);
     position: absolute;
     bottom: 0;
   }
 
-  > .separator {
+  & .separator {
     @include separator;
     position: absolute;
     bottom: 0;
   }
 
-  > .markdown {
-    padding: 10px;
+  & .markdown {
+    padding: 30px;
   }
 }
