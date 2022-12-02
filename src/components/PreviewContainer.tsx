@@ -9,28 +9,26 @@ import { StylisedMarkdown } from './StylisedMarkdown';
 export const PreviewContainer: FC = () => {
   console.log(typeof fm.attributes['date']);
   return (
-    <Container className="m-5">
+    <Container className="article-container">
       <div className="date-container">
         <div className="date">
           <FontAwesomeIcon icon={faEdit} /> {fm.attributes['date']}
         </div>
       </div>
       <div className="preview-container">
-        <div>
-          <div className="preview-title">
-            <div className="title-card">
-              <div className="title">{fm.attributes['title']}</div>
-              <div className="description">{fm.attributes['description']}</div>
-              {/* <div className="description">{fm.attributes['date']}</div> */}
-            </div>
-            {/* <div className="title-separator"></div> */}
+        <div className="preview-title">
+          <div className="title-card">
+            <div className="title">{fm.attributes['title']}</div>
+            <div className="description">{fm.attributes['description']}</div>
+            {/* <div className="description">{fm.attributes['date']}</div> */}
           </div>
-          <div className="title-fade"></div>
-          {/* TODO: dynamic import of md files */}
-          <StylisedMarkdown markdown={fm.body} />
-          <div className="preview-container-bottom-fade"></div>
-          {/* <div className="separator"></div> */}
+          {/* <div className="title-separator"></div> */}
         </div>
+        <div className="title-fade"></div>
+        {/* TODO: dynamic import of md files */}
+        <StylisedMarkdown markdown={fm.body} />
+        <div className="preview-container-bottom-fade"></div>
+        {/* <div className="separator"></div> */}
       </div>
     </Container>
   );

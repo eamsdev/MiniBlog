@@ -50,12 +50,14 @@ html,
 }
 
 .content {
+  padding: 30px;
   margin-left: $sidebar-width;
   color: $text-primary-color;
   @include basic-transition;
 
   @include media-breakpoint-down($banner-breakpoint) {
     margin-left: 0;
+    padding: 0px;
   }
 
   @include media-breakpoint-up($banner-breakpoint) {
@@ -68,12 +70,24 @@ $preview-title-banner-height: 300px;
 
 .date-container {
   @include secondary-palette;
+  border-radius: 5px;
   width: fit-content;
   padding: 7px;
 
   > .date {
     font-weight: normal;
     font-size: medium;
+  }
+}
+
+.article-container {
+  @include basic-transition;
+  & + .article-container {
+    margin-top: 30px;
+  }
+
+  @include media-breakpoint-down($banner-breakpoint) {
+    margin-top: 30px;
   }
 }
 
