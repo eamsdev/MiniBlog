@@ -3,16 +3,12 @@ title: Lorem ipsum
 description: Eiusmod tempor incididunt ut labore et dolore magna aliqua
 date: 27-11-2022
 author: Pete Eamsuwan
-readtime: 5 minutes
+readtime: 5 min
 tags:
   - Event Sourcing
   - Distributed Systems
   - Architecture
 ---
-
-## Foobar
-
-![Architecture](https://raw.githubusercontent.com/eamsdev/MiniESS/master/architecture.svg)
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
 incididunt ut labore et dolore magna aliqua. Eget nullam non nisi est sit. Gravida
@@ -24,6 +20,8 @@ non arcu risus.
 - labore et dolore magna aliqua. Eget nullam non nisi est sit. Gravida
   dictum fusce ut placerat orci nulla. Pellentesque sit amet porttitor eget dolor.
 - m dolor sit amet, consectetur adipis.
+
+![Architecture](https://raw.githubusercontent.com/eamsdev/MiniESS/master/architecture.svg)
 
 ## HTML
 

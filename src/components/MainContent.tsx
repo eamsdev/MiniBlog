@@ -1,11 +1,14 @@
 import { FC } from 'react';
-import { PreviewContainer } from './PreviewContainer';
+import { BlogPost } from './BlogPost';
+import fm from '../assets/posts/test-blog-post.md';
+import { StylisedMarkdown } from './StylisedMarkdown';
 
 export const MainContent: FC = () => {
   return (
     <div className="content">
-      <PreviewContainer />
-      <PreviewContainer />
+      <BlogPost headerData={fm.attributes}>
+        <StylisedMarkdown markdown={fm.body} />
+      </BlogPost>
     </div>
   );
 };
