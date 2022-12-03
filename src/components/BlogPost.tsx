@@ -33,8 +33,9 @@ export const BlogHeader: FC<BlogHeaderDataProps> = (props: BlogHeaderDataProps) 
       <h1 className="blog-title">{headerData['title']}</h1>
       <div className="blog-description">{headerData['description']}</div>
       <div className="blog-meta">
-        <div className="blog-author">By {headerData['author']}</div>
-        <div className="blog-date">{headerData['date']}</div>
+        <span className="collapsed">Published&nbsp;</span>
+        <span className="blog-author">by {headerData['author']}</span>
+        <span className="collapsed">&nbsp;at {headerData['date']}</span>
       </div>
     </div>
   );

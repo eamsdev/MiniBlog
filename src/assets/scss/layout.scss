@@ -25,17 +25,25 @@ hr.solid {
 
 .blog-post {
   @include primary-palette;
+  @include light-boxshadow;
   max-width: $blogpost-width;
   padding: 30px !important;
-  box-shadow: 0 2px 6px rgb(100 100 100 / 30%);
-  -webkit-box-shadow: 0 2px 6px rgb(100 100 100 / 30%);
-  -moz-box-shadow: 0 2px 6px rgb(100 100 100 / 30%);
 
   @include media-breakpoint-down($banner-breakpoint) {
     padding: 15px !important;
 
     &:first-child {
       margin-top: 20px;
+    }
+  }
+
+  &:hover {
+    .blog-header {
+      .blog-meta {
+        .collapsed {
+          max-width: 200px;
+        }
+      }
     }
   }
 
@@ -47,10 +55,18 @@ hr.solid {
     }
 
     .blog-meta {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
       font-size: small;
+      width: fit-content;
+
+      .collapsed {
+        height: 15px;
+        white-space: nowrap;
+        visibility: visible;
+        display: inline-block;
+        max-width: 0px;
+        overflow: hidden;
+        transition: max-width 0.3s ease, margin 0.3s ease;
+      }
     }
   }
 }
@@ -135,10 +151,11 @@ $preview-title-banner-height: 300px;
 }
 
 .reading-time-container {
+  @include light-boxshadow;
   background-color: #ccc;
   border-radius: 2px;
   width: fit-content;
-  padding: 5px;
+  padding: 5px 8px 5px 8px;
   font-weight: normal;
   font-size: smaller;
 
