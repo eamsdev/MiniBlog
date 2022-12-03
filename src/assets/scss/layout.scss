@@ -67,16 +67,38 @@ html,
 }
 
 $preview-title-banner-height: 300px;
+.meta-header {
+  justify-content: space-between;
+  display: flex;
+  max-width: 800px;
+}
 
 .date-container {
   @include secondary-palette;
-  border-radius: 5px;
+  border-radius: 2px;
   width: fit-content;
-  padding: 7px;
+  padding: 5px;
 
   > .date {
     font-weight: normal;
-    font-size: medium;
+    font-size: smaller;
+  }
+
+  > .reading-time {
+    font-weight: normal;
+    font-size: smaller;
+  }
+}
+
+.reading-time-container {
+  background-color: #ccc;
+  border-radius: 2px;
+  width: fit-content;
+  padding: 5px;
+
+  > .reading-time {
+    font-weight: normal;
+    font-size: smaller;
   }
 }
 
@@ -99,9 +121,24 @@ $preview-title-banner-height: 300px;
   position: relative;
   border: 1px solid #cccccc;
   background-color: $primary-color;
-  // box-shadow: 50px 0px 50px -50px rgba(0, 0, 0, 0.50);
-  // -webkit-box-shadow: 50px 0px 50px -50px rgba(0, 0, 0, 0.50);
-  // -moz-box-shadow: 50px 0px 50px -50px rgba(0, 0, 0, 0.50);
+
+  &:hover {
+    & .preview-title {
+      & .title-card {
+        height: fit-content;
+
+        & .description {
+          @include basic-transition;
+          opacity: 100%;
+        }
+
+        & .author {
+          @include basic-transition;
+          opacity: 100%;
+        }
+      }
+    }
+  }
 
   & .preview-title {
     padding: 10px;
@@ -112,14 +149,17 @@ $preview-title-banner-height: 300px;
     top: 0px;
 
     & .title-card {
-      background-color: #eeeeee;
+      overflow: hidden;
+      background-color: #ddd;
       color: #333333;
       align-items: flex-start;
       width: fit-content;
       display: flex;
       flex-direction: column;
-      padding: 10px;
-      height: fit-content;
+      padding: 5px;
+      padding-left: 10px;
+      height: 53px;
+      border-radius: 3px;
 
       & .title {
         font-weight: bolder;
@@ -127,7 +167,13 @@ $preview-title-banner-height: 300px;
       }
 
       & .description {
+        opacity: 0%;
+      }
+
+      & .author {
         font-style: italic;
+        font-size: small;
+        opacity: 0%;
       }
     }
 
@@ -138,8 +184,8 @@ $preview-title-banner-height: 300px;
 
   & .preview-container-bottom-fade {
     width: 100%;
-    height: 50px;
-    background: linear-gradient(to top, #f7faf9ff, #f7faf900);
+    height: 80px;
+    background: linear-gradient(to top, #f7faf9ff, #f7faf9ff 20px, #f7faf900);
     position: absolute;
     bottom: 0;
   }

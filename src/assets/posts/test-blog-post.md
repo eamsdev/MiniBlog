@@ -2,7 +2,8 @@
 title: Lorem ipsum
 description: Eiusmod tempor incididunt ut labore et dolore magna aliqua
 date: 27-11-2022
-Author: Pete Eamsuwan
+author: Pete Eamsuwan
+readtime: 5 minutes
 tags:
   - Event Sourcing
   - Distributed Systems
