@@ -6,12 +6,17 @@
       background-position: center;
       background-color: white;
       height: 280px;
-      border: 5px solid #e6e6e6;
+      border: 7px solid #e6e6e6;
       width: 100%;
       border-radius: 50%;
       background-image: url(../img/profilephoto.jpg);
       background-size: cover;
       background-repeat: no-repeat;
+      @include basic-transition;
+
+      &:hover {
+        border: 1px solid #e6e6e6;
+      }
     }
 
     .name {
