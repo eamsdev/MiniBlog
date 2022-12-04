@@ -1,5 +1,5 @@
 $sidebar-width: 300px;
-$blogpost-width: 1100px;
+$blogpost-width: 1300px;
 $navbar-height: 40px;
 $banner-breakpoint: lg;
 
@@ -57,6 +57,9 @@ hr.solid {
     .blog-meta {
       font-size: small;
       width: fit-content;
+      .blog-date {
+        font-style: italic;
+      }
 
       .collapsed {
         height: 15px;
