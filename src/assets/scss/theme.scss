@@ -1,5 +1,5 @@
 $primary-color: #ffffff;
-$secondary-color: #1E73BE;
+$secondary-color: #1e73be;
 $tertiary-color: #0dc04c;
 $backdrop-color: #e6e6e6;
 
@@ -17,7 +17,7 @@ $text-secondary-color: #f7faf9;
 }
 
 @mixin light-boxshadow {
-  box-shadow: 0 2px 6px rgb(100 100 100 / 30%);
-  -webkit-box-shadow: 0 2px 6px rgb(100 100 100 / 30%);
-  -moz-box-shadow: 0 2px 6px rgb(100 100 100 / 30%);
+  box-shadow: 0 2px 6px rgb(100 100 100 / 70%);
+  -webkit-box-shadow: 0 2px 6px rgb(100 100 100 / 70%);
+  -moz-box-shadow: 0 2px 6px rgb(100 100 100 / 70%);
 }

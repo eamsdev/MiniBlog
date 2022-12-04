@@ -97,6 +97,7 @@ hr.solid {
   height: 100%;
   width: $sidebar-width;
 
+  @include light-boxshadow;
   @include secondary-palette;
   @include basic-transition;
   @include media-breakpoint-down($banner-breakpoint) {
