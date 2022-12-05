@@ -16,6 +16,7 @@ html,
 
   > .page {
     overflow-x: hidden;
+    position: relative;
   }
 }
 
@@ -84,12 +85,17 @@ hr.solid {
 }
 
 .navbar {
+  z-index: 2;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
   @include secondary-palette;
   @include basic-transition;
-  @include media-breakpoint-up($banner-breakpoint) {
-    transform: translateY(-$navbar-height);
-    -webkit-transform: translateY(-$navbar-height);
-  }
+  // @include media-breakpoint-up($banner-breakpoint) {
+  //   transform: translateY(-$navbar-height);
+  //   -webkit-transform: translateY(-$navbar-height);
+  // }
 }
 
 .sidebar {
@@ -124,10 +130,10 @@ hr.solid {
     padding: 10px;
   }
 
-  @include media-breakpoint-up($banner-breakpoint) {
-    transform: translateY(-$navbar-height);
-    -webkit-transform: translateY(-$navbar-height);
-  }
+  // @include media-breakpoint-up($banner-breakpoint) {
+  //   transform: translateY(-$navbar-height);
+  //   -webkit-transform: translateY(-$navbar-height);
+  // }
 }
 
 $preview-title-banner-height: 300px;

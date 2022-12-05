@@ -1,0 +1,19 @@
+.nav-arrow-container {
+  .nav-arrow {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    border: 4px solid #ffffff;
+    transform: translateY(32px);
+    @include basic-transition;
+
+    .icon {
+      font-size: 20px;
+      color: $secondary-color;
+    }
+
+    @include media-breakpoint-up($banner-breakpoint) {
+      opacity: 0%;
+    }
+  }
+}
