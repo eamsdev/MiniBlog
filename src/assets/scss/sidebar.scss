@@ -1,11 +1,16 @@
-.sidebar {
+.profile {
   color: #e6e6e6;
+  .photo-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 
-  .profile {
     .photo {
       background-position: center;
       background-color: white;
       height: 280px;
+      width: 280px !important;
       border: 7px solid #e6e6e6;
       width: 100%;
       border-radius: 50%;
@@ -18,45 +23,45 @@
         border: 1px solid #e6e6e6;
       }
     }
+  }
 
-    .name {
-      font-size: 30px;
-      font-weight: bold;
-      text-align: center;
+  .name {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
 
-      .highlight {
-        color: $tertiary-color;
+    .highlight {
+      color: $tertiary-color;
+    }
+  }
+
+  .title {
+    text-align: center;
+    font-weight: 500;
+  }
+
+  .social-media {
+    font-size: 20px;
+    text-align: center;
+    a.icon {
+      color: #e6e6e6 !important;
+      text-decoration: none;
+      &:hover {
+        transform: scale(1.5);
+      }
+      & + .icon {
+        margin-left: 5px;
       }
     }
+  }
 
-    .title {
-      text-align: center;
-      font-weight: 500;
-    }
+  .skills {
+    margin-top: 0px;
+    text-align: center;
+    font-style: italic;
+  }
 
-    .social-media {
-      font-size: 20px;
-      text-align: center;
-      a.icon {
-        color: #e6e6e6 !important;
-        text-decoration: none;
-        &:hover {
-          transform: scale(1.5);
-        }
-        & + .icon {
-          margin-left: 5px;
-        }
-      }
-    }
-
-    .skills {
-      margin-top: 0px;
-      text-align: center;
-      font-style: italic;
-    }
-
-    .description {
-      text-align: center;
-    }
+  .description {
+    text-align: center;
   }
 }
