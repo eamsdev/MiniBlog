@@ -53,7 +53,7 @@ export class BlogPostModel {
       .runSync(pipeline.parse(rawContent))
       .children.find((child) => child.type == 'yaml').data.parsedValue as HeaderData;
 
-    const body = rawContent.replace(/---(.|\n)*?---/, ''); // strip off frontmatter
+    const body = rawContent.replace(/---(.|\n|\r)*?---/, ''); // strip off frontmatter
     console.log(body);
     return new BlogPostModel(attributes, body);
   }

@@ -9,6 +9,27 @@ $banner-breakpoint: lg;
   background-color: #49417d4b;
 }
 
+body {
+  overflow-y: overlay;
+}
+
+::-webkit-scrollbar {
+  width: 6px !important;
+  height: 6px !important;
+}
+
+body ::-webkit-scrollbar-thumb {
+  background-color: hsla(0, 0%, 100%, 0.16);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-track {
+  background: hsla(0, 0%, 100%, 0.1);
+}
+
 html,
 #root {
   overflow-x: hidden;
@@ -92,10 +113,6 @@ hr.solid {
 
   @include secondary-palette;
   @include basic-transition;
-  // @include media-breakpoint-up($banner-breakpoint) {
-  //   transform: translateY(-$navbar-height);
-  //   -webkit-transform: translateY(-$navbar-height);
-  // }
 }
 
 .sidebar {
