@@ -4,6 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import { CodeProps } from 'react-markdown/lib/ast-to-react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import remarkGfm from 'remark-gfm';
 
 export const StylisedMarkdown: FC<{ markdown: string }> = (props) => {
   const { markdown } = props;
@@ -11,6 +12,7 @@ export const StylisedMarkdown: FC<{ markdown: string }> = (props) => {
     <ReactMarkdown
       className="markdown"
       children={markdown}
+      remarkPlugins={[remarkGfm]}
       components={{
         // https://github.com/remarkjs/react-markdown#use-custom-components-syntax-highlight
         // https://github.com/react-syntax-highlighter/react-syntax-highlighter/issues/489#issuecomment-1316278858
