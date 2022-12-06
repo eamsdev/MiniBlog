@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { BlogPost } from './BlogPost';
-import fm from '../assets/posts/test-blog-post.md';
+// import fm from '../assets/posts/test-blog-post.md';
 import { StylisedMarkdown } from './StylisedMarkdown';
 import styled from 'styled-components';
 import { rootStore } from '../stores/RootStore';
@@ -29,9 +29,11 @@ const StyledContentContainer = styled.div<ContentProps>`
 export const MainContent: FC = observer(() => {
   return (
     <StyledContentContainer navbarActive={rootStore.uiStore.showNavbar} className="content">
-      <BlogPost headerData={fm.attributes}>
-        <StylisedMarkdown markdown={fm.body} />
-      </BlogPost>
+      {rootStore.blogPostStore.blogPosts.map((x) => (
+        <BlogPost key={x.attributes.title as string} headerData={x.attributes}>
+          <StylisedMarkdown markdown={x.body} />
+        </BlogPost>
+      ))}
     </StyledContentContainer>
   );
 });
