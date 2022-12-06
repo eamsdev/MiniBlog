@@ -24,7 +24,6 @@ export class BlogPostStore {
 
     runInAction(() => {
       this.blogPosts = blogPosts;
-      console.log(blogPosts);
     });
   }
 
@@ -54,7 +53,6 @@ export class BlogPostModel {
       .children.find((child) => child.type == 'yaml').data.parsedValue as HeaderData;
 
     const body = rawContent.replace(/---(.|\n|\r)*?---/, ''); // strip off frontmatter
-    console.log(body);
     return new BlogPostModel(attributes, body);
   }
 }

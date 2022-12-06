@@ -12,6 +12,10 @@
       color: $secondary-color;
     }
 
+    &:active {
+      @include light-boxshadow;
+    }
+
     @include media-breakpoint-up($banner-breakpoint) {
       opacity: 0%;
     }

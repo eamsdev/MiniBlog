@@ -7,7 +7,6 @@ import { faClockFour, faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import { StylisedMarkdown } from './StylisedMarkdown';
 
 export const PreviewContainer: FC = () => {
-  console.log(typeof fm.attributes['date']);
   return (
     <Container className="article-container">
       <div className="meta-header">
