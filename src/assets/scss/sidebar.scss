@@ -1,6 +1,8 @@
 .profile {
   overflow: hidden;
   color: #e6e6e6;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+  
   .profile-collapse {
     transition: max-height 0.3s ease-in-out;
     -webkit-transition: max-height 0.3s ease-in-out;
@@ -36,6 +38,7 @@
       font-size: 30px;
       font-weight: bold;
       text-align: center;
+      text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 
       .highlight {
         color: $tertiary-color;
