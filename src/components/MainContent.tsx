@@ -12,19 +12,20 @@ type ContentProps = {
 
 const StyledContentContainer = styled.div<ContentProps>`
   @media (min-width: 992px) {
-    transform: translateY(-505px);
-    -webkit-transform: translateY(-505px);
-  }
-
-  @media (max-width: 991.98px) {
-    // this is bootstrap large (lg) breakpoint
-    // cant reference boostrap media query here zzzz.
-
-    transform: ${(props) => (props.navbarActive ? 'translateY(0px)' : 'translateY(-451px)')};
-    -webkit-transform: ${(props) =>
-      props.navbarActive ? 'translateY(0px)' : 'translateY(-451px)'};
+    // transform: translateY(-505px);
+    // -webkit-transform: translateY(-505px);
   }
 `;
+
+// @media (max-width: 991.98px) {
+// this is bootstrap large (lg) breakpoint
+// cant reference boostrap media query here zzzz.
+
+//   transform: ${(props) => (props.navbarActive ? 'translateY(0px)' : 'translateY(-451px)')};
+//   -webkit-transform: ${(props) =>
+//     props.navbarActive ? 'translateY(0px)' : 'translateY(-451px)'};
+//}
+//`;
 
 export const MainContent: FC = observer(() => {
   return (

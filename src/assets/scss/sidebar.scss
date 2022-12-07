@@ -1,68 +1,79 @@
 .profile {
+  overflow: hidden;
   color: #e6e6e6;
-  .photo-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+  .profile-collapse {
+    transition: max-height 0.3s ease-in-out;
+    -webkit-transition: max-height 0.3s ease-in-out;
 
-    .photo {
-      background-position: center;
-      background-color: white;
-      height: 280px;
-      width: 280px !important;
-      border: 7px solid #e6e6e6;
-      width: 100%;
-      border-radius: 50%;
-      background-image: url(../img/profilephoto.jpg);
-      background-size: cover;
-      background-repeat: no-repeat;
-      @include basic-transition;
-      @include light-boxshadow;
+    .photo-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
 
-      &:hover {
-        border: 1px solid #e6e6e6;
+      .photo {
+        background-position: center;
+        background-color: white;
+        min-width: 280px;
+        min-height: 280px;
+        width: auto;
+        height: auto;
+        border: 7px solid #e6e6e6;
+        border-radius: 50%;
+        background-image: url(../img/profilephoto.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        @include basic-transition;
+        @include light-boxshadow;
+
+        &:hover {
+          border: 1px solid #e6e6e6;
+        }
       }
     }
-  }
 
-  .name {
-    font-size: 30px;
-    font-weight: bold;
-    text-align: center;
+    .name {
+      font-size: 30px;
+      font-weight: bold;
+      text-align: center;
 
-    .highlight {
-      color: $tertiary-color;
-    }
-  }
-
-  .title {
-    text-align: center;
-    font-weight: 500;
-  }
-
-  .social-media {
-    font-size: 20px;
-    text-align: center;
-    a.icon {
-      color: #e6e6e6 !important;
-      text-decoration: none;
-      &:hover {
-        transform: scale(1.5);
-      }
-      & + .icon {
-        margin-left: 5px;
+      .highlight {
+        color: $tertiary-color;
       }
     }
-  }
 
-  .skills {
-    margin-top: 0px;
-    text-align: center;
-    font-style: italic;
-  }
+    .title {
+      text-align: center;
+      font-weight: 500;
+    }
 
-  .description {
-    text-align: center;
+    .social-media {
+      font-size: 20px;
+      text-align: center;
+
+      a.icon {
+        color: #e6e6e6 !important;
+        text-decoration: none;
+        @include fast-transition;
+
+        &:hover {
+          transform: scale(1.5);
+        }
+
+        & + .icon {
+          margin-left: 5px;
+        }
+      }
+    }
+
+    .skills {
+      margin-top: 0px;
+      text-align: center;
+      font-style: italic;
+    }
+
+    .description {
+      text-align: center;
+    }
   }
 }
