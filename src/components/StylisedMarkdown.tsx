@@ -15,7 +15,6 @@ export const StylisedMarkdown: FC<{ markdown: string }> = (props) => {
       remarkPlugins={[remarkGfm]}
       components={{
         // https://github.com/remarkjs/react-markdown#use-custom-components-syntax-highlight
-        // https://github.com/react-syntax-highlighter/react-syntax-highlighter/issues/489#issuecomment-1316278858
         code: (props) => <CodeBlock {...props} />,
       }}
     />
@@ -23,6 +22,7 @@ export const StylisedMarkdown: FC<{ markdown: string }> = (props) => {
 };
 
 const CodeBlock: FC<CodeProps> = ({ className, children, ...props }: CodeProps) => {
+  // https://github.com/react-syntax-highlighter/react-syntax-highlighter/issues/489#issuecomment-1316278858
   const match = /language-(\w+)/.exec(className || '');
   return (
     <SyntaxHighlighter

@@ -8,7 +8,7 @@ export const BlogPost: FC<PropsWithChildren<BlogHeaderDataProps>> = (
   props: PropsWithChildren<BlogHeaderDataProps>,
 ) => {
   return (
-    <Container>
+    <Container className="blog-post-container">
       <div className="reading-time-container">
         <FontAwesomeIcon icon={faClockFour} />
         <span className="collapsed">Time to read</span>

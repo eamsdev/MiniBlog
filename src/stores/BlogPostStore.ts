@@ -48,6 +48,9 @@ export class BlogPostModel {
       .use(parseFrontMatter)
       .use(remarkGfm);
 
+    // "parse" will parse markdown content into a syntax tree
+    // "runSync" will run transformers on the syntax tree (in this case to get the frontmatter)
+    // read more: https://braincoke.fr/blog/2020/03/an-introduction-to-unified-and-remark/#plugins
     const attributes = pipeline
       .runSync(pipeline.parse(rawContent))
       .children.find((child) => child.type == 'yaml').data.parsedValue as HeaderData;
