@@ -1,6 +1,7 @@
 // shared config (dev and prod)
 const { resolve } = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Mode = require('frontmatter-markdown-loader/mode');
 
 module.exports = {
   entry: './index.tsx',
@@ -33,11 +34,9 @@ module.exports = {
       },
       {
         test: /\.md$/,
-        use: {
-          loader: 'file-loader',
-          options: {
-            name: '[name].[ext]',
-          },
+        loader: 'frontmatter-markdown-loader',
+        options: {
+          mode: [Mode.BODY],
         },
       },
     ],

@@ -2,6 +2,7 @@ $sidebar-width: 337px;
 $blogpost-width: 1300px;
 $navbar-height: 451px;
 $banner-breakpoint: lg;
+$preview-title-banner-height: 300px;
 
 @mixin separator {
   width: 100%;
@@ -71,13 +72,10 @@ hr.solid {
 
   @include light-boxshadow;
   @include secondary-palette;
-  // @include basic-transition;
   @include media-breakpoint-down($banner-breakpoint) {
     position: relative;
     height: fit-content;
     width: 100%;
-    //   transform: translateX(-$sidebar-width);
-    //   -webkit-transform: translateX(-$sidebar-width);
   }
 }
 
@@ -88,7 +86,6 @@ hr.solid {
   display: flex;
   flex-direction: column;
   align-items: center;
-  //@include basic-transition;
 
   .container {
     max-width: $blogpost-width;
@@ -98,14 +95,8 @@ hr.solid {
     margin-left: 0;
     padding: 10px;
   }
-
-  // @include media-breakpoint-up($banner-breakpoint) {
-  //   transform: translateY(-$navbar-height);
-  //   -webkit-transform: translateY(-$navbar-height);
-  // }
 }
 
-$preview-title-banner-height: 300px;
 .meta-header {
   justify-content: space-between;
   display: flex;
