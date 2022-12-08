@@ -26,6 +26,7 @@
     "@types/react-syntax-highlighter": "^15.5.5",
     "@types/styled-components": "^5.1.26",
     "@types/uuid": "^8.3.4",
+    "@types/webpack-env": "^1.18.0",
     "@typescript-eslint/eslint-plugin": "^5.30.6",
     "@typescript-eslint/parser": "^5.30.6",
     "babel-loader": "^8.2.5",
