@@ -10,7 +10,7 @@ export const BlogPost: FC<PropsWithChildren<BlogFrontMatterProps>> = (
   return (
     <Container className="blog-post-container">
       <div className="reading-time-container">
-        <FontAwesomeIcon icon={faClockFour} />
+        <i className="icon fa fa-clock-o" />
         <span className="collapsed">Time to read</span>
         <span className="reading-time"> {props.frontMatter.readtime}</span>
       </div>

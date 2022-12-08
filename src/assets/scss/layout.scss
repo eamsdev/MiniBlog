@@ -135,10 +135,19 @@ hr.solid {
     padding: 5px 8px 5px 8px;
     font-weight: normal;
     font-size: smaller;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .icon {
+      font-size: 20px;
+      display: inline-block;
+      text-align: center;
+      vertical-align: bottom;
+    }
 
     .collapsed {
-      margin-left: 4px;
-      height: 15px;
+      padding-left: 4px;
       white-space: nowrap;
       visibility: visible;
       display: inline-block;
@@ -154,6 +163,7 @@ hr.solid {
 
       .reading-time {
         font-weight: bold;
+        margin-left: 4px;
       }
     }
   }
