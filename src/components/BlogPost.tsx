@@ -1,5 +1,3 @@
-import { faClockFour } from '@fortawesome/free-regular-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FC, PropsWithChildren } from 'react';
 import { Container } from 'react-bootstrap';
 import { FrontMatterSchema } from 'stores/BlogPostStore';
