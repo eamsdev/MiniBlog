@@ -1,4 +1,4 @@
-import { observable, makeObservable, runInAction, computed, values } from 'mobx';
+import { observable, makeObservable, runInAction } from 'mobx';
 
 const markdownContext = require.context('../assets/posts', false, /\.md$/);
 
