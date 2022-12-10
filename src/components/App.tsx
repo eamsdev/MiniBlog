@@ -1,11 +1,11 @@
-import { MainContent } from './MainContent';
+import { Content } from './Content';
 import { Sidebar } from './Sidebar';
 
 export const App = () => {
   return (
     <div className="page">
       <Sidebar />
-      <MainContent />
+      <Content />
     </div>
   );
 };

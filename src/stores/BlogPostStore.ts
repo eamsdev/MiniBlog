@@ -1,4 +1,4 @@
-import { observable, makeObservable, runInAction } from 'mobx';
+import { observable, makeObservable, runInAction, computed, values } from 'mobx';
 
 const markdownContext = require.context('../assets/posts', false, /\.md$/);
 
@@ -16,7 +16,7 @@ export class BlogPostStore {
     const markdownModules: BlogPostModel[] = getModules(markdownContext);
 
     runInAction(() => {
-      this.blogPosts = markdownModules;
+      this.blogPosts = markdownModules.map((x) => new BlogPostModel(x.attributes, x.body));
     });
   }
 }
@@ -28,6 +28,14 @@ export class BlogPostModel {
   constructor(attributes: FrontMatterSchema, body: string) {
     this.body = body;
     this.attributes = attributes;
+    this.matches.bind(this.matches);
+  }
+
+  matches(searchString: string): boolean {
+    return (
+      this.attributes.title.includes(searchString) ||
+      this.attributes.description.includes(searchString)
+    );
   }
 }
 
