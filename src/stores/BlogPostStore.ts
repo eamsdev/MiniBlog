@@ -1,13 +1,27 @@
-import { observable, makeObservable, runInAction, toJS } from 'mobx';
+import { observable, makeObservable, runInAction, toJS, computed } from 'mobx';
 
 const markdownContext = require.context('../assets/posts', false, /\.md$/);
 
 export class BlogPostStore {
+  itemsPerPage = 1;
   @observable blogPosts: BlogPostModel[] = [];
 
   constructor() {
     makeObservable(this);
     this.loadPosts();
+  }
+
+  @computed
+  get pageCount() {
+    if (this.blogPosts.length <= this.itemsPerPage) return 0;
+
+    return Math.ceil(this.blogPosts.length / this.itemsPerPage);
+  }
+
+  getItemsAtPage(pageNumber: number) {
+    const startingIndex = pageNumber * this.itemsPerPage;
+    const endingIndex = startingIndex + this.itemsPerPage;
+    return this.blogPosts.slice(startingIndex, endingIndex).map((x) => toJS(x));
   }
 
   getBlogPostById(id: string) {

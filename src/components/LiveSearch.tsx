@@ -49,7 +49,7 @@ export const LiveSearch: FC = observer(() => {
                   key={x.title}
                   className="result"
                   onClick={() => {
-                    router.navigate('blogs.article', { id: x.reference }, { reload: true });
+                    router.navigate('article', { id: x.reference }, { reload: true });
                     liveSearchStore.clearSearch();
                   }}
                 >

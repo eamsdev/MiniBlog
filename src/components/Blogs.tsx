@@ -4,11 +4,15 @@ import { StylisedMarkdown } from './StylisedMarkdown';
 import { rootStore } from '../stores/RootStore';
 import { observer } from 'mobx-react';
 import { LiveSearch } from './LiveSearch';
-import { useRouteNode } from 'react-router5';
+import { useRoute, useRouteNode } from 'react-router5';
+import ReactPaginate from 'react-paginate';
 
 export const Blogs: FC = observer(() => {
+  const { router } = useRoute();
   const { route } = useRouteNode('');
   const articleId = route.params.id;
+  const pageNumber = route.params.page;
+  console.log(pageNumber);
   const blogPost = rootStore.blogPostStore.getBlogPostById(articleId);
   return (
     <>
@@ -18,11 +22,37 @@ export const Blogs: FC = observer(() => {
           <StylisedMarkdown markdown={blogPost.body} />
         </BlogPost>
       ) : (
-        rootStore.blogPostStore.blogPosts.map((x) => (
-          <BlogPost key={x.attributes.title as string} frontMatter={x.attributes}>
-            <StylisedMarkdown markdown={x.body} />
-          </BlogPost>
-        ))
+        <>
+          <nav>
+            <ReactPaginate
+              className="pagination"
+              pageClassName="page-item"
+              pageLinkClassName="page-link"
+              previousClassName="page-item"
+              previousLinkClassName="page-link"
+              nextClassName="page-item"
+              nextLinkClassName="page-link"
+              breakLabel="..."
+              breakClassName="page-item"
+              breakLinkClassName="page-link"
+              containerClassName="pagination"
+              activeClassName="active"
+              nextLabel="next"
+              onPageChange={(evt) => {
+                router.navigate('blogs', { page: evt.selected }, { reload: true });
+              }}
+              pageRangeDisplayed={5}
+              pageCount={rootStore.blogPostStore.pageCount}
+              previousLabel="previous"
+              renderOnZeroPageCount={null}
+            />
+          </nav>
+          {rootStore.blogPostStore.getItemsAtPage(pageNumber).map((x) => (
+            <BlogPost key={x.attributes.title as string} frontMatter={x.attributes}>
+              <StylisedMarkdown markdown={x.body} />
+            </BlogPost>
+          ))}
+        </>
       )}
     </>
   );

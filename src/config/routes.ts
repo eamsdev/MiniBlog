@@ -2,13 +2,13 @@ import createRouter from 'router5';
 import browserPlugin from 'router5-plugin-browser';
 
 const routes = [
-  { name: 'blogs', path: '/blogs' },
-  { name: 'blogs.article', path: '/:id' },
+  { name: 'blogs', path: '/blogs/page/:page' },
+  { name: 'article', path: '/article/:id' },
   { name: 'about', path: '/about' },
 ];
 
 const configureRouter = () => {
-  const router = createRouter(routes, { defaultRoute: 'blogs' });
+  const router = createRouter(routes, { defaultRoute: 'blogs', defaultParams: { page: 0 } });
   router.usePlugin(
     browserPlugin({
       useHash: true,

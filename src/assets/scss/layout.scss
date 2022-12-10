@@ -199,8 +199,28 @@ hr.solid {
   flex-direction: column;
   align-items: center;
 
+  .pagination {
+    li {
+      a {
+        box-shadow: none !important;
+      }
+    }
+
+    li:not(.disabled) {
+      a {
+        color: $secondary-color;
+      }
+
+      &.active {
+        a {
+          @include secondary-palette;
+        }
+      }
+    }
+  }
+
   .live-search {
-    z-index: 1;
+    z-index: 4;
     overflow: visible;
     padding: 12px;
     max-width: $blogpost-width;
