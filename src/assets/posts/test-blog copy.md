@@ -1,4 +1,5 @@
 ---
+id: lorem-ipsum-1
 title: Lorem ipsum 1
 description: Eiusmod tempor incididunt ut labore et dolore magna aliqua
 date: 27-11-2022

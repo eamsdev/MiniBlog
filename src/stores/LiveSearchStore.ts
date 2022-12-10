@@ -33,7 +33,7 @@ export class LiveSearchStore {
         return {
           title: x.attributes.title,
           description: x.attributes.description,
-          reference: 'todo',
+          reference: x.attributes.id,
         };
       });
   }

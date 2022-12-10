@@ -1,4 +1,4 @@
-import { observable, makeObservable, runInAction } from 'mobx';
+import { observable, makeObservable, runInAction, toJS } from 'mobx';
 
 const markdownContext = require.context('../assets/posts', false, /\.md$/);
 
@@ -8,6 +8,10 @@ export class BlogPostStore {
   constructor() {
     makeObservable(this);
     this.loadPosts();
+  }
+
+  getBlogPostById(id: string) {
+    return this.blogPosts.filter((x) => x.attributes.id == id).map((x) => toJS(x))[0];
   }
 
   private async loadPosts() {
@@ -40,6 +44,7 @@ export class BlogPostModel {
 }
 
 export type FrontMatterSchema = {
+  id: string | undefined;
   title: string | undefined;
   description: string | undefined;
   date: string | undefined;

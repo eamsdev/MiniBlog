@@ -2,8 +2,10 @@ import TextInput from '../components-library/TextInput';
 import { observer } from 'mobx-react';
 import { FC, useEffect, useRef } from 'react';
 import { rootStore } from '../stores/RootStore';
+import { useRoute } from 'react-router5';
 
 export const LiveSearch: FC = observer(() => {
+  const { router } = useRoute();
   const liveSearchStore = rootStore.liveSearchStore;
   const wrapperRef = useRef(null);
   const handleClickOutside = (event) => {
@@ -43,13 +45,20 @@ export const LiveSearch: FC = observer(() => {
           <>
             {liveSearchStore.matches.length > 0 ? (
               liveSearchStore.matches.map((x) => (
-                <div key={x.title} className="result">
+                <li
+                  key={x.title}
+                  className="result"
+                  onClick={() => {
+                    router.navigate('blogs.article', { id: x.reference }, { reload: true });
+                    liveSearchStore.clearSearch();
+                  }}
+                >
                   <i className="icon fa fa-file-o" aria-hidden="true" />
                   <div className="card">
                     <div className="title">{x.title}</div>
                     <div className="description">{x.description}</div>
                   </div>
-                </div>
+                </li>
               ))
             ) : (
               <>No match found...</>

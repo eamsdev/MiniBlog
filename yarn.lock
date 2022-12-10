@@ -10875,6 +10875,13 @@ react-refresh@^0.14.0:
   resolved "https://registry.npmjs.org/react-refresh/-/react-refresh-0.14.0.tgz"
   integrity sha512-wViHqhAd8OHeLS/IRMJjTSDHF3U9eWi62F/MledQGPdJGDhodXJ9PBLNGr6WWL7qlH12Mt3TyTpbS+hGXMjCzQ==
 
+react-router5@^8.0.1:
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/react-router5/-/react-router5-8.0.1.tgz#18fdde01b2ac36854b0129fa4e0d4b35ddb4ef7f"
+  integrity sha512-jdkhOql49DOjeF+O77mSfnyOyrXPpQKpSi/TdrDkS9lGrzeJWtgxpUEglHLaIhzrMOGhmqr6vosoh4dtExkzMQ==
+  dependencies:
+    router5-transition-path "^8.0.1"
+
 react-syntax-highlighter@^15.5.0:
   version "15.5.0"
   resolved "https://registry.npmjs.org/react-syntax-highlighter/-/react-syntax-highlighter-15.5.0.tgz"
@@ -11363,7 +11370,7 @@ route-node@4.1.1:
 
 router5-plugin-browser@^8.0.1:
   version "8.0.1"
-  resolved "https://registry.npmjs.org/router5-plugin-browser/-/router5-plugin-browser-8.0.1.tgz"
+  resolved "https://registry.yarnpkg.com/router5-plugin-browser/-/router5-plugin-browser-8.0.1.tgz#30a15fc59ed4d59020587cfc5452b5443b1a3290"
   integrity sha512-RuArnalkREtQj0ROD1RnITWwL+Fl8rbkFspDxRTt3aFG9k5bPOE0HfJRvGsd4TY9Je/kW3hvntvFXSx8Bl745w==
 
 router5-transition-path@^8.0.1:

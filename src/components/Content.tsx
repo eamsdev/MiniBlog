@@ -2,18 +2,25 @@ import { FC } from 'react';
 import { BlogPost } from './BlogPost';
 import { StylisedMarkdown } from './StylisedMarkdown';
 import { rootStore } from '../stores/RootStore';
+import { useRouteNode } from 'react-router5';
 import { observer } from 'mobx-react';
 import { LiveSearch } from './LiveSearch';
+import { Blogs } from './Blogs';
+import { AboutMe } from './AboutMe';
 
 export const Content: FC = observer(() => {
-  return (
-    <div className="content">
-      <LiveSearch />
-      {rootStore.blogPostStore.blogPosts.map((x) => (
-        <BlogPost key={x.attributes.title as string} frontMatter={x.attributes}>
-          <StylisedMarkdown markdown={x.body} />
-        </BlogPost>
-      ))}
-    </div>
-  );
+  let component = <Blogs />;
+  const { route } = useRouteNode('');
+
+  console.log(route.name);
+  switch (route.name.split('.')[0]) {
+    case 'about':
+      component = <AboutMe />;
+      break;
+    default:
+      component = <Blogs />;
+      break;
+  }
+
+  return <div className="content">{component}</div>;
 });
