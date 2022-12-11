@@ -7,6 +7,7 @@ import { LiveSearch } from './LiveSearch';
 import { useRoute, useRouteNode } from 'react-router5';
 import { PaginationWrapper } from './PaginationWrapper';
 import { TransitionWrapper } from '../components-library/TransitionWrapper';
+import { Container } from 'react-bootstrap';
 
 export const Blogs: FC = observer(() => {
   const { router } = useRoute();
@@ -22,9 +23,11 @@ export const Blogs: FC = observer(() => {
         <>
           <LiveSearch />
           <TransitionWrapper transitionKey={itemsKey}>
-            <BlogPost key={blogPost.attributes.title as string} frontMatter={blogPost.attributes}>
-              <StylisedMarkdown markdown={blogPost.body} />
-            </BlogPost>
+            <Container className="p-0 m-0">
+              <BlogPost key={blogPost.attributes.title as string} frontMatter={blogPost.attributes}>
+                <StylisedMarkdown markdown={blogPost.body} />
+              </BlogPost>
+            </Container>
           </TransitionWrapper>
         </>
       ) : (
@@ -37,13 +40,13 @@ export const Blogs: FC = observer(() => {
           pageCount={rootStore.blogPostStore.pageCount}
         >
           <TransitionWrapper transitionKey={itemsKey}>
-            <div>
+            <Container className="p-0 m-0">
               {rootStore.blogPostStore.getItemsAtPage(pageNumber).map((x) => (
                 <BlogPost key={x.attributes.title as string} frontMatter={x.attributes}>
                   <StylisedMarkdown markdown={x.body} />
                 </BlogPost>
               ))}
-            </div>
+            </Container>
           </TransitionWrapper>
         </PaginationWrapper>
       )}
