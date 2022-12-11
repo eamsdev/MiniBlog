@@ -1,5 +1,6 @@
 import { observer } from 'mobx-react';
 import { FC, PropsWithChildren } from 'react';
+import { Button } from 'react-bootstrap';
 import ReactPaginate from 'react-paginate';
 import { LiveSearch } from './LiveSearch';
 
@@ -13,7 +14,18 @@ export const PaginationWrapper: FC<PropsWithChildren<PaginationProps>> = observe
   return (
     <>
       <div className="top-pagination d-flex justify-content-between flex-wrap w-100">
-        <LiveSearch />
+        <div className="top-pagination-search d-flex justify-content-flex-start align-items-center flex-nowrap">
+          <Button
+            variant="primary"
+            size="lg"
+            onClick={() => {
+              props.onPageSelected(0);
+            }}
+          >
+            <i className="icon fa fa-home" />
+          </Button>
+          <LiveSearch />
+        </div>
         <Pagination {...props} />
       </div>
       {props.children}
@@ -41,7 +53,7 @@ const Pagination: FC<PaginationProps> = observer((props: PaginationProps) => {
       activeClassName="active"
       nextLabel="Next"
       onPageChange={(evt) => props.onPageSelected(evt.selected)}
-      pageRangeDisplayed={5}
+      pageRangeDisplayed={3}
       pageCount={props.pageCount}
       previousLabel="Previous"
       renderOnZeroPageCount={null}

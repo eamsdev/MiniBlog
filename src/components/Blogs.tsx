@@ -7,7 +7,7 @@ import { LiveSearch } from './LiveSearch';
 import { useRoute, useRouteNode } from 'react-router5';
 import { PaginationWrapper } from './PaginationWrapper';
 import { TransitionWrapper } from '../components-library/TransitionWrapper';
-import { Container } from 'react-bootstrap';
+import { Button, Container } from 'react-bootstrap';
 
 export const Blogs: FC = observer(() => {
   const { router } = useRoute();
@@ -21,7 +21,22 @@ export const Blogs: FC = observer(() => {
     <>
       {!!blogPost ? (
         <>
-          <LiveSearch />
+          {/* TODO: REFACTOR */}
+          <div className="top-search-container d-flex justify-content-flex-start w-100 flex-nowrap">
+            <div className="top-search d-flex justify-content-flex-start flex-nowrap w-100">
+              <Button
+                variant="primary"
+                size="lg"
+                onClick={() => {
+                  router.navigate('blogs', { page: 0 }, { reload: true });
+                  rootStore.blogPostStore.selectPage(0);
+                }}
+              >
+                <i className="icon fa fa-home" />
+              </Button>
+              <LiveSearch />
+            </div>
+          </div>
           <TransitionWrapper transitionKey={itemsKey}>
             <Container className="p-0 m-0">
               <BlogPost key={blogPost.attributes.title as string} frontMatter={blogPost.attributes}>
