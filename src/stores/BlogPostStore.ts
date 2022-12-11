@@ -1,14 +1,20 @@
-import { observable, makeObservable, runInAction, toJS, computed } from 'mobx';
+import { observable, makeObservable, runInAction, toJS, computed, action } from 'mobx';
 
 const markdownContext = require.context('../assets/posts', false, /\.md$/);
 
 export class BlogPostStore {
   itemsPerPage = 1;
+  @observable currentPage = 0;
   @observable blogPosts: BlogPostModel[] = [];
 
   constructor() {
     makeObservable(this);
     this.loadPosts();
+  }
+
+  @action
+  selectPage(pageNumber: number) {
+    this.currentPage = pageNumber;
   }
 
   @computed

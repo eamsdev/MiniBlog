@@ -6,6 +6,7 @@ import { observer } from 'mobx-react';
 import { LiveSearch } from './LiveSearch';
 import { useRoute, useRouteNode } from 'react-router5';
 import ReactPaginate from 'react-paginate';
+import { PaginationWrapper } from './PaginationWrapper';
 
 export const Blogs: FC = observer(() => {
   const { router } = useRoute();
@@ -16,43 +17,28 @@ export const Blogs: FC = observer(() => {
   const blogPost = rootStore.blogPostStore.getBlogPostById(articleId);
   return (
     <>
-      <LiveSearch />
       {!!blogPost ? (
-        <BlogPost key={blogPost.attributes.title as string} frontMatter={blogPost.attributes}>
-          <StylisedMarkdown markdown={blogPost.body} />
-        </BlogPost>
-      ) : (
         <>
-          <nav>
-            <ReactPaginate
-              className="pagination"
-              pageClassName="page-item"
-              pageLinkClassName="page-link"
-              previousClassName="page-item"
-              previousLinkClassName="page-link"
-              nextClassName="page-item"
-              nextLinkClassName="page-link"
-              breakLabel="..."
-              breakClassName="page-item"
-              breakLinkClassName="page-link"
-              containerClassName="pagination"
-              activeClassName="active"
-              nextLabel="next"
-              onPageChange={(evt) => {
-                router.navigate('blogs', { page: evt.selected }, { reload: true });
-              }}
-              pageRangeDisplayed={5}
-              pageCount={rootStore.blogPostStore.pageCount}
-              previousLabel="previous"
-              renderOnZeroPageCount={null}
-            />
-          </nav>
+          <LiveSearch />
+          <BlogPost key={blogPost.attributes.title as string} frontMatter={blogPost.attributes}>
+            <StylisedMarkdown markdown={blogPost.body} />
+          </BlogPost>
+        </>
+      ) : (
+        <PaginationWrapper
+          onPageSelected={(pageNumber) => {
+            router.navigate('blogs', { page: pageNumber }, { reload: true });
+            rootStore.blogPostStore.selectPage(pageNumber);
+          }}
+          currentPage={rootStore.blogPostStore.currentPage}
+          pageCount={rootStore.blogPostStore.pageCount}
+        >
           {rootStore.blogPostStore.getItemsAtPage(pageNumber).map((x) => (
             <BlogPost key={x.attributes.title as string} frontMatter={x.attributes}>
               <StylisedMarkdown markdown={x.body} />
             </BlogPost>
           ))}
-        </>
+        </PaginationWrapper>
       )}
     </>
   );

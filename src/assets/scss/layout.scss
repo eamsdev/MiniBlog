@@ -199,7 +199,27 @@ hr.solid {
   flex-direction: column;
   align-items: center;
 
+  .top-pagination {
+    max-width: 1300px;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    & + .blog-post-container {
+      margin-top: 20px;
+    }
+  }
+
+  .bottom-pagination {
+    max-width: 1300px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
   .pagination {
+    line-height: 30px;
+    align-items: center;
+    margin: 0;
+
     li {
       a {
         box-shadow: none !important;
@@ -222,14 +242,11 @@ hr.solid {
   .live-search {
     z-index: 4;
     overflow: visible;
-    padding: 12px;
-    max-width: $blogpost-width;
     width: 80%;
     height: 73px;
-
-    & + .blog-post-container {
-      margin-top: 20px;
-    }
+    width: 50%;
+    padding-top: 12px;
+    margin-right: 20px;
 
     .results {
       padding: 12px;
@@ -289,6 +306,12 @@ hr.solid {
     }
 
     @include media-breakpoint-down($banner-breakpoint) {
+      margin-right: 0;
+      width: 80%;
+    }
+
+    @include media-breakpoint-down(sm) {
+      width: 100%;
     }
   }
 
@@ -330,6 +353,10 @@ hr.solid {
   @include basic-transition;
 
   & + .blog-post-container {
+    margin-top: 40px;
+  }
+
+  & + .bottom-pagination {
     margin-top: 40px;
   }
 
