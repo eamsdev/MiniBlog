@@ -203,16 +203,13 @@ hr.solid {
     max-width: 1300px;
     padding-left: 20px;
     padding-right: 20px;
-
-    & + .blog-post-container {
-      margin-top: 20px;
-    }
   }
 
   .bottom-pagination {
     max-width: 1300px;
     padding-left: 20px;
     padding-right: 20px;
+    margin-top: 40px;
   }
 
   .pagination {
@@ -351,14 +348,7 @@ hr.solid {
 
 .blog-post-container {
   @include basic-transition;
-
-  & + .blog-post-container {
-    margin-top: 40px;
-  }
-
-  & + .bottom-pagination {
-    margin-top: 40px;
-  }
+  margin-top: 40px;
 
   .reading-time-container {
     @include light-boxshadow;

@@ -5,24 +5,27 @@ import { rootStore } from '../stores/RootStore';
 import { observer } from 'mobx-react';
 import { LiveSearch } from './LiveSearch';
 import { useRoute, useRouteNode } from 'react-router5';
-import ReactPaginate from 'react-paginate';
 import { PaginationWrapper } from './PaginationWrapper';
+import { TransitionWrapper } from '../components-library/TransitionWrapper';
 
 export const Blogs: FC = observer(() => {
   const { router } = useRoute();
   const { route } = useRouteNode('');
   const articleId = route.params.id;
   const pageNumber = route.params.page;
-  console.log(pageNumber);
   const blogPost = rootStore.blogPostStore.getBlogPostById(articleId);
+  const itemsAtPage = rootStore.blogPostStore.getItemsAtPage(pageNumber);
+  const itemsKey = itemsAtPage[0]?.attributes.id ?? blogPost.attributes.id;
   return (
     <>
       {!!blogPost ? (
         <>
           <LiveSearch />
-          <BlogPost key={blogPost.attributes.title as string} frontMatter={blogPost.attributes}>
-            <StylisedMarkdown markdown={blogPost.body} />
-          </BlogPost>
+          <TransitionWrapper transitionKey={itemsKey}>
+            <BlogPost key={blogPost.attributes.title as string} frontMatter={blogPost.attributes}>
+              <StylisedMarkdown markdown={blogPost.body} />
+            </BlogPost>
+          </TransitionWrapper>
         </>
       ) : (
         <PaginationWrapper
@@ -33,11 +36,15 @@ export const Blogs: FC = observer(() => {
           currentPage={rootStore.blogPostStore.currentPage}
           pageCount={rootStore.blogPostStore.pageCount}
         >
-          {rootStore.blogPostStore.getItemsAtPage(pageNumber).map((x) => (
-            <BlogPost key={x.attributes.title as string} frontMatter={x.attributes}>
-              <StylisedMarkdown markdown={x.body} />
-            </BlogPost>
-          ))}
+          <TransitionWrapper transitionKey={itemsKey}>
+            <div>
+              {rootStore.blogPostStore.getItemsAtPage(pageNumber).map((x) => (
+                <BlogPost key={x.attributes.title as string} frontMatter={x.attributes}>
+                  <StylisedMarkdown markdown={x.body} />
+                </BlogPost>
+              ))}
+            </div>
+          </TransitionWrapper>
         </PaginationWrapper>
       )}
     </>
