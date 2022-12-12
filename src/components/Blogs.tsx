@@ -3,68 +3,60 @@ import { BlogPost } from './BlogPost';
 import { StylisedMarkdown } from './StylisedMarkdown';
 import { rootStore } from '../stores/RootStore';
 import { observer } from 'mobx-react';
-import { LiveSearch } from './LiveSearch';
 import { useRoute, useRouteNode } from 'react-router5';
-import { PaginationWrapper } from './PaginationWrapper';
-import { TransitionWrapper } from '../components-library/TransitionWrapper';
-import { Button, Container } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
+import { ContentType, ContentWrapper } from './ContentWrapper';
 
 export const Blogs: FC = observer(() => {
   const { router } = useRoute();
   const { route } = useRouteNode('');
   const articleId = route.params.id;
   const pageNumber = route.params.page;
-  const blogPost = rootStore.blogPostStore.getBlogPostById(articleId);
-  const itemsAtPage = rootStore.blogPostStore.getItemsAtPage(pageNumber);
-  const itemsKey = itemsAtPage[0]?.attributes.id ?? blogPost.attributes.id;
+
+  let content = undefined;
+  let itemsKey = undefined;
+  const contentType =
+    route.params.id != undefined ? ContentType.NAVIGATION : ContentType.PAGINATION;
+
+  if (contentType == ContentType.NAVIGATION) {
+    const blogPost = rootStore.blogPostStore.getBlogPostById(articleId);
+    itemsKey = blogPost.attributes.id;
+    content = (
+      <BlogPost key={blogPost.attributes.title as string} frontMatter={blogPost.attributes}>
+        <StylisedMarkdown markdown={blogPost.body} />
+      </BlogPost>
+    );
+  } else {
+    const itemsAtPage = rootStore.blogPostStore.getItemsAtPage(pageNumber);
+    itemsKey = itemsAtPage[0]?.attributes.id;
+    content = (
+      <Container className="p-0 m-0">
+        {itemsAtPage.map((x) => (
+          <BlogPost key={x.attributes.title as string} frontMatter={x.attributes}>
+            <StylisedMarkdown markdown={x.body} />
+          </BlogPost>
+        ))}
+      </Container>
+    );
+  }
+
   return (
-    <>
-      {!!blogPost ? (
-        <>
-          {/* TODO: REFACTOR */}
-          <div className="top-search-container d-flex justify-content-flex-start w-100 flex-nowrap">
-            <div className="top-search d-flex justify-content-flex-start flex-nowrap w-100">
-              <Button
-                variant="primary"
-                size="lg"
-                onClick={() => {
-                  router.navigate('blogs', { page: 0 }, { reload: true });
-                  rootStore.blogPostStore.selectPage(0);
-                }}
-              >
-                <i className="icon fa fa-home" />
-              </Button>
-              <LiveSearch />
-            </div>
-          </div>
-          <TransitionWrapper transitionKey={itemsKey}>
-            <Container className="p-0 m-0">
-              <BlogPost key={blogPost.attributes.title as string} frontMatter={blogPost.attributes}>
-                <StylisedMarkdown markdown={blogPost.body} />
-              </BlogPost>
-            </Container>
-          </TransitionWrapper>
-        </>
-      ) : (
-        <PaginationWrapper
-          onPageSelected={(pageNumber) => {
-            router.navigate('blogs', { page: pageNumber }, { reload: true });
-            rootStore.blogPostStore.selectPage(pageNumber);
-          }}
-          currentPage={rootStore.blogPostStore.currentPage}
-          pageCount={rootStore.blogPostStore.pageCount}
-        >
-          <TransitionWrapper transitionKey={itemsKey}>
-            <Container className="p-0 m-0">
-              {rootStore.blogPostStore.getItemsAtPage(pageNumber).map((x) => (
-                <BlogPost key={x.attributes.title as string} frontMatter={x.attributes}>
-                  <StylisedMarkdown markdown={x.body} />
-                </BlogPost>
-              ))}
-            </Container>
-          </TransitionWrapper>
-        </PaginationWrapper>
-      )}
-    </>
+    <ContentWrapper
+      onPageSelected={(pageNumber) => {
+        router.navigate('blogs', { page: pageNumber }, { reload: true });
+        rootStore.blogPostStore.selectPage(pageNumber);
+      }}
+      pageCount={rootStore.blogPostStore.pageCount}
+      currentPage={rootStore.blogPostStore.currentPage}
+      onNewerBlogPost={() => {}} // TODO: Implement
+      hasNewerBlogPost={false} // TODO: Implement
+      onOlderBlogPost={() => {}} // TODO: Implement
+      hasOlderBlogPost={false} // TODO: Implement
+      blogPostDate={'01-01-1973'} // TODO: Implement
+      type={contentType}
+      transitionKey={itemsKey}
+    >
+      {content}
+    </ContentWrapper>
   );
 });
