@@ -19,7 +19,16 @@ export type ContentWrapperProps = PaginationProps &
 export const ContentWrapper: FC<PropsWithChildren<ContentWrapperProps>> = observer(
   (props: PropsWithChildren<ContentWrapperProps>) => {
     const navigationComponent =
-      props.type == 'pagination' ? <Pagination {...props} /> : <BlogPostNavigation {...props} />;
+      props.type == 'pagination' ? (
+        <TransitionWrapper transitionKey={props.type}>
+          <Pagination {...props} />
+        </TransitionWrapper>
+      ) : (
+        <TransitionWrapper transitionKey={props.type}>
+          <BlogPostNavigation {...props} />
+        </TransitionWrapper>
+      );
+
     return (
       <>
         <div className="top-pagination d-flex justify-content-between flex-wrap w-100">
@@ -59,15 +68,27 @@ type BlogPostNavigationProps = {
 const BlogPostNavigation: FC<BlogPostNavigationProps> = observer(
   (props: BlogPostNavigationProps) => {
     return (
-      <ButtonGroup>
-        <Button disabled={!props.hasNewerBlogPost} onClick={() => props.onNewerBlogPost}>
-          Newer Article
-        </Button>
-        <Button disabled={true}>{props.blogPostDate}</Button>
-        <Button disabled={!props.hasOlderBlogPost} onClick={() => props.onOlderBlogPost}>
-          Older Article
-        </Button>
-      </ButtonGroup>
+      <div className="d-flex align-items-center">
+        <ButtonGroup>
+          <Button
+            variant="light"
+            disabled={!props.hasNewerBlogPost}
+            onClick={() => props.onNewerBlogPost}
+          >
+            Newer Article
+          </Button>
+          <Button variant="light" disabled={true}>
+            {props.blogPostDate}
+          </Button>
+          <Button
+            variant="light"
+            disabled={!props.hasOlderBlogPost}
+            onClick={() => props.onOlderBlogPost}
+          >
+            Older Article
+          </Button>
+        </ButtonGroup>
+      </div>
     );
   },
 );

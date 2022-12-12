@@ -49,9 +49,9 @@ export const Blogs: FC = observer(() => {
       pageCount={rootStore.blogPostStore.pageCount}
       currentPage={rootStore.blogPostStore.currentPage}
       onNewerBlogPost={() => {}} // TODO: Implement
-      hasNewerBlogPost={false} // TODO: Implement
+      hasNewerBlogPost={true} // TODO: Implement
       onOlderBlogPost={() => {}} // TODO: Implement
-      hasOlderBlogPost={false} // TODO: Implement
+      hasOlderBlogPost={true} // TODO: Implement
       blogPostDate={'01-01-1973'} // TODO: Implement
       type={contentType}
       transitionKey={itemsKey}
