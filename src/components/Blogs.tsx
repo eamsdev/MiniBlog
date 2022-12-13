@@ -15,11 +15,18 @@ export const Blogs: FC = observer(() => {
 
   let content = undefined;
   let itemsKey = undefined;
+  let newerPostId: string | undefined = undefined;
+  let olderPostId: string | undefined = undefined;
+  let blogPostDate: string | undefined = undefined;
   const contentType =
     route.params.id != undefined ? ContentType.NAVIGATION : ContentType.PAGINATION;
 
   if (contentType == ContentType.NAVIGATION) {
-    const blogPost = rootStore.blogPostStore.getBlogPostById(articleId);
+    const navigatableBlogPostModel = rootStore.blogPostStore.getBlogPostById(articleId);
+    const blogPost = navigatableBlogPostModel.currentPost;
+    newerPostId = navigatableBlogPostModel.newerPostId;
+    olderPostId = navigatableBlogPostModel.olderPostId;
+    blogPostDate = navigatableBlogPostModel.currentPost.attributes.date;
     itemsKey = blogPost.attributes.id;
     content = (
       <BlogPost key={blogPost.attributes.title as string} frontMatter={blogPost.attributes}>
@@ -48,11 +55,19 @@ export const Blogs: FC = observer(() => {
       }}
       pageCount={rootStore.blogPostStore.pageCount}
       currentPage={rootStore.blogPostStore.currentPage}
-      onNewerBlogPost={() => {}} // TODO: Implement
-      hasNewerBlogPost={true} // TODO: Implement
-      onOlderBlogPost={() => {}} // TODO: Implement
-      hasOlderBlogPost={true} // TODO: Implement
-      blogPostDate={'01-01-1973'} // TODO: Implement
+      onNewerBlogPost={() => {
+        console.log('clicked newer post');
+        console.log(newerPostId);
+        router.navigate('article', { id: newerPostId }, { reload: true });
+      }}
+      hasNewerBlogPost={!!newerPostId}
+      onOlderBlogPost={() => {
+        console.log('clickedolderr post');
+        console.log(olderPostId);
+        router.navigate('article', { id: olderPostId }, { reload: true });
+      }}
+      hasOlderBlogPost={!!olderPostId}
+      blogPostDate={blogPostDate}
       type={contentType}
       transitionKey={itemsKey}
     >

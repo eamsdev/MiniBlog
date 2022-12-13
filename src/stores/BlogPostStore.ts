@@ -30,8 +30,19 @@ export class BlogPostStore {
     return this.blogPosts.slice(startingIndex, endingIndex).map((x) => toJS(x));
   }
 
-  getBlogPostById(id: string) {
-    return this.blogPosts.filter((x) => x.attributes.id == id).map((x) => toJS(x))[0];
+  getBlogPostById(id: string): NavigatableBLogPostModel {
+    const currentPostIndex = this.blogPosts.findIndex((x) => x.attributes.id == id);
+    return {
+      currentPost: toJS(this.blogPosts[currentPostIndex]),
+      newerPostId:
+        currentPostIndex == 0
+          ? undefined
+          : toJS(this.blogPosts[currentPostIndex - 1]).attributes.id,
+      olderPostId:
+        currentPostIndex == this.blogPosts.length - 1
+          ? undefined
+          : toJS(this.blogPosts[currentPostIndex + 1]).attributes.id,
+    };
   }
 
   private async loadPosts() {
@@ -44,6 +55,12 @@ export class BlogPostStore {
     });
   }
 }
+
+export type NavigatableBLogPostModel = {
+  currentPost: BlogPostModel;
+  newerPostId?: string;
+  olderPostId?: string;
+};
 
 export class BlogPostModel {
   readonly attributes: FrontMatterSchema;

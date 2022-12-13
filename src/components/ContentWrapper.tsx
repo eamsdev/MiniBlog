@@ -72,7 +72,7 @@ const BlogPostNavigation: FC<BlogPostNavigationProps> = observer(
           <Button
             variant="light"
             disabled={!props.hasNewerBlogPost}
-            onClick={() => props.onNewerBlogPost}
+            onClick={() => props.onNewerBlogPost()}
           >
             Newer Article
           </Button>
@@ -82,7 +82,7 @@ const BlogPostNavigation: FC<BlogPostNavigationProps> = observer(
           <Button
             variant="light"
             disabled={!props.hasOlderBlogPost}
-            onClick={() => props.onOlderBlogPost}
+            onClick={() => props.onOlderBlogPost()}
           >
             Older Article
           </Button>
