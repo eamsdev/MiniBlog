@@ -201,23 +201,23 @@ hr.solid {
 
   .top-pagination {
     max-width: 1300px;
-    padding-left: 20px;
-    padding-right: 20px;
+    row-gap: 10px;
+    // padding-left: 20px;
+    // padding-right: 20px;
 
     .top-pagination-search {
-      width: 600px;
+      // width: 600px;
     }
   }
 
   .bottom-pagination {
     max-width: 1300px;
-    padding-left: 20px;
-    padding-right: 20px;
+    // padding-left: 20px;
+    // padding-right: 20px;
     margin-top: 40px;
   }
 
   .pagination {
-    line-height: 30px;
     align-items: center;
     margin: 0;
     -webkit-user-select: none;
@@ -254,12 +254,8 @@ hr.solid {
     }
   }
 
-  div + .live-search {
-    margin-left: 10px;
-  }
-
   button + .live-search {
-    margin-left: 10px;
+    margin-left: 5px;
   }
 
   .live-search {
@@ -267,8 +263,17 @@ hr.solid {
     overflow: visible;
     height: 73px;
     width: 100%;
-    padding-top: 12px;
     margin-right: 20px;
+    display: flex;
+    height: fit-content;
+
+    input {
+      width: 400px;
+
+      @include media-breakpoint-down(sm) {
+        width: 300px;
+      }
+    }
 
     .results {
       padding: 12px;

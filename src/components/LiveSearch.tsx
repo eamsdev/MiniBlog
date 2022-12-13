@@ -31,18 +31,17 @@ export const LiveSearch: FC = observer(() => {
 
   return (
     <div ref={wrapperRef} className="live-search">
-      <TextInput
-        size={'lg'}
-        isInvalid={false}
-        isValid={false}
-        disabled={false}
-        placeholder={'Search for content...'}
-        onChanged={(value: string) => liveSearchStore.updateSearchString(value)}
-        value={liveSearchStore.searchString}
-      />
-      {liveSearchStore.searchString && (
-        <div className="results">
-          <>
+      <div style={{ height: '38px' }}>
+        <TextInput
+          isInvalid={false}
+          isValid={false}
+          disabled={false}
+          placeholder={'Search for content...'}
+          onChanged={(value: string) => liveSearchStore.updateSearchString(value)}
+          value={liveSearchStore.searchString}
+        />
+        {liveSearchStore.searchString && (
+          <div className="results">
             {liveSearchStore.matches.length > 0 ? (
               liveSearchStore.matches.map((x) => (
                 <li
@@ -66,9 +65,9 @@ export const LiveSearch: FC = observer(() => {
             {liveSearchStore.matches.length > 0 ? (
               <div className="hint">Press Escape key to exit.</div>
             ) : null}
-          </>
-        </div>
-      )}
+          </div>
+        )}
+      </div>
     </div>
   );
 });

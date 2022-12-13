@@ -8,7 +8,6 @@ export const Content: FC = observer(() => {
   let component = <Blogs />;
   const { route } = useRouteNode('');
 
-  console.log(route.name);
   switch (route.name.split('.')[0]) {
     case 'about':
       component = <AboutMe />;
