@@ -48,9 +48,7 @@ export const ContentWrapper: FC<PropsWithChildren<ContentWrapperProps>> = observ
         <TransitionWrapper {...props}>
           <Container className="p-0 m-0">{props.children}</Container>
         </TransitionWrapper>
-        <div className="bottom-pagination d-flex justify-content-end w-100">
-          {navigationComponent}
-        </div>
+        <div className="bottom-pagination d-flex w-100">{navigationComponent}</div>
       </>
     );
   },
@@ -59,7 +57,7 @@ export const ContentWrapper: FC<PropsWithChildren<ContentWrapperProps>> = observ
 type BlogPostNavigationProps = {
   onNewerBlogPost: () => void;
   hasNewerBlogPost: boolean;
-  onOlderBlogPost: (page: number) => void;
+  onOlderBlogPost: () => void;
   hasOlderBlogPost: boolean;
   blogPostDate: string;
 };
@@ -115,7 +113,8 @@ const Pagination: FC<PaginationProps> = observer((props: PaginationProps) => {
       activeClassName="active"
       nextLabel="Next"
       onPageChange={(evt) => props.onPageSelected(evt.selected)}
-      pageRangeDisplayed={3}
+      marginPagesDisplayed={1}
+      pageRangeDisplayed={0}
       pageCount={props.pageCount}
       previousLabel="Previous"
       renderOnZeroPageCount={null}

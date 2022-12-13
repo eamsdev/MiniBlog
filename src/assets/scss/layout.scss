@@ -204,6 +204,16 @@ hr.solid {
     row-gap: 10px;
     padding-left: 12px;
     padding-right: 12px;
+
+    .top-pagination-search {
+      // width: fit-content;
+    }
+
+    @media (max-width: 600px) {
+      flex-direction: column;
+      align-content: center;
+      align-items: center;
+    }
   }
 
   .bottom-pagination {
@@ -211,6 +221,11 @@ hr.solid {
     padding-left: 12px;
     padding-right: 12px;
     margin-top: 40px;
+    justify-content: end;
+
+    @media (max-width: 552px) {
+      justify-content: center;
+    }
   }
 
   .pagination {
@@ -271,6 +286,7 @@ hr.solid {
       padding: 12px;
       background-color: #e6e6e6;
       border-radius: 5px;
+      margin-right: 5px;
       @include light-boxshadow;
 
       .hint {
