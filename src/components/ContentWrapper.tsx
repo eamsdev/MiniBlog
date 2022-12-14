@@ -101,7 +101,7 @@ export type PaginationProps = {
 const Pagination: FC<PaginationProps> = observer((props: PaginationProps) => {
   return (
     <ReactPaginate
-      className="pagination align-items-center m-0"
+      className="pagination user-select-none align-items-center m-0"
       pageClassName="page-item"
       pageLinkClassName="page-link"
       previousClassName="page-item"

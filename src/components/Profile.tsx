@@ -32,25 +32,21 @@ export const Profile: FC = observer(() => {
               <span>EAMS</span>
               <span>UWAN</span>
             </div>
-            <div className="title text-center">Fullstack Software Engineer</div>
+            <div className="title fw-bolder text-center">Fullstack Software Engineer</div>
             <div className="fst-italic text-center mt-0">React | Typescript | .Net | Sql</div>
-            <div className="social-media text-center">
+            <div className="social-media text-center fs-5">
               <span>
                 <a
                   href="https://github.com/eamsdev"
-                  className="icon fa fa-github-square text-decoration-none"
+                  className="icon fa fa-github-square"
                   title="See some of my work"
                 />
                 <a
                   href="https://www.linkedin.com/in/pete-e-339708117/"
-                  className="icon fa fa-linkedin-square text-decoration-none"
+                  className="icon fa fa-linkedin-square"
                   title="Lets connect"
                 />
-                <a
-                  href="https://eams.dev"
-                  className="icon fa fa-globe text-decoration-none"
-                  title="My landing page"
-                />
+                <a href="https://eams.dev" className="icon fa fa-globe" title="My landing page" />
               </span>
             </div>
           </div>

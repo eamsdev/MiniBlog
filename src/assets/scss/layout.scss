@@ -68,7 +68,7 @@ hr.solid {
   }
 
   .profile {
-    color: #e6e6e6;
+    color: $backdrop-color;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 
     .profile-collapse {
@@ -81,7 +81,7 @@ hr.solid {
           background-color: white;
           min-width: 280px;
           min-height: 280px;
-          border: 7px solid #e6e6e6;
+          border: 7px solid $backdrop-color;
           background-image: url(../img/profilephoto.jpg);
           background-size: cover;
           background-repeat: no-repeat;
@@ -89,7 +89,7 @@ hr.solid {
           @include light-boxshadow;
 
           &:hover {
-            border: 1px solid #e6e6e6;
+            border: 1px solid $backdrop-color;
           }
         }
       }
@@ -102,15 +102,10 @@ hr.solid {
         }
       }
 
-      .title {
-        font-weight: 500;
-      }
-
       .social-media {
-        font-size: 20px;
-
         a.icon {
-          color: #e6e6e6 !important;
+          color: $backdrop-color;
+          text-decoration: none;
           @include fast-transition;
 
           &:hover {
@@ -129,13 +124,11 @@ hr.solid {
     .nav-arrow {
       width: 50px;
       height: 50px;
-      border: 4px solid #ffffff;
       transform: translateY(24px);
       transition: box-shadow 0.3s ease-in-out;
       -webkit-transition: box-shadow 0.3s ease-in-out;
 
       .icon {
-        font-size: 20px;
         color: $secondary-color;
       }
 
@@ -163,11 +156,8 @@ hr.solid {
     max-width: $blogpost-width;
   }
 
+  // TODO move this
   .pagination {
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-
     li {
       a {
         box-shadow: none !important;
@@ -187,6 +177,7 @@ hr.solid {
     }
   }
 
+  // TODO move this
   .live-search {
     z-index: 4;
 
@@ -195,7 +186,7 @@ hr.solid {
     }
 
     .results {
-      background-color: #e6e6e6;
+      background-color: $backdrop-color;
       @include light-boxshadow;
 
       .hint {
@@ -226,58 +217,55 @@ hr.solid {
   }
 }
 
-.blog-post-container {
-  @include basic-transition;
+// TODO move this
+.reading-time-container {
+  @include light-boxshadow;
+  background-color: #ccc;
+  width: fit-content;
 
-  .reading-time-container {
-    @include light-boxshadow;
-    background-color: #ccc;
-    width: fit-content;
+  .collapsed {
+    white-space: nowrap;
+    max-width: 0px;
+    transition: max-width 0.3s ease, margin 0.3s ease;
+  }
 
+  &:hover {
     .collapsed {
-      white-space: nowrap;
-      max-width: 0px;
-      transition: max-width 0.3s ease, margin 0.3s ease;
+      max-width: 100px;
     }
 
-    &:hover {
-      .collapsed {
-        max-width: 100px;
-      }
+    .reading-time {
+      font-weight: bold;
+      margin-left: 4px;
+    }
+  }
+}
 
-      .reading-time {
-        font-weight: bold;
-        margin-left: 4px;
+.blog-post {
+  @include primary-palette;
+  @include light-boxshadow;
+  max-width: $blogpost-width;
+
+  &:hover {
+    .blog-header {
+      .blog-meta {
+        .collapsed {
+          max-width: 200px;
+        }
       }
     }
   }
 
-  .blog-post {
-    @include primary-palette;
-    @include light-boxshadow;
-    max-width: $blogpost-width;
+  .blog-header {
+    color: #333;
 
-    &:hover {
-      .blog-header {
-        .blog-meta {
-          .collapsed {
-            max-width: 200px;
-          }
-        }
-      }
-    }
+    .blog-meta {
+      width: fit-content;
 
-    .blog-header {
-      color: #333;
-
-      .blog-meta {
-        width: fit-content;
-
-        .collapsed {
-          white-space: nowrap;
-          max-width: 0px;
-          transition: max-width 0.3s ease, margin 0.3s ease;
-        }
+      .collapsed {
+        white-space: nowrap;
+        max-width: 0px;
+        transition: max-width 0.3s ease, margin 0.3s ease;
       }
     }
   }
