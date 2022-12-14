@@ -17,5 +17,7 @@ export const Content: FC = observer(() => {
       break;
   }
 
-  return <div className="content">{component}</div>;
+  return (
+    <div className="content p-lg-4 p-2 mt-lg-0 mt-4 d-flex flex-column align-items-center">{component}</div>
+  );
 });

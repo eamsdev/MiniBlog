@@ -38,8 +38,11 @@ html,
 
   > .page {
     overflow-x: hidden;
-    position: relative;
   }
+}
+
+.fs-7 {
+  font-size: small;
 }
 
 hr.solid {
@@ -55,31 +58,16 @@ hr.solid {
   }
 }
 
-.navbar {
-  z-index: 2;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-
-  @include secondary-palette;
-  @include basic-transition;
-}
-
 .sidebar {
-  position: fixed;
-  height: 100%;
   width: $sidebar-width;
 
   @include light-boxshadow;
   @include secondary-palette;
   @include media-breakpoint-down($banner-breakpoint) {
-    position: relative;
-    height: fit-content;
     width: 100%;
   }
 
   .profile {
-    overflow: hidden;
     color: #e6e6e6;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 
@@ -88,20 +76,12 @@ hr.solid {
       -webkit-transition: max-height 0.3s ease-in-out;
 
       .photo-container {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-
         .photo {
           background-position: center;
           background-color: white;
           min-width: 280px;
           min-height: 280px;
-          width: auto;
-          height: auto;
           border: 7px solid #e6e6e6;
-          border-radius: 50%;
           background-image: url(../img/profilephoto.jpg);
           background-size: cover;
           background-repeat: no-repeat;
@@ -115,9 +95,6 @@ hr.solid {
       }
 
       .name {
-        font-size: 30px;
-        font-weight: bold;
-        text-align: center;
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 
         .highlight {
@@ -126,17 +103,14 @@ hr.solid {
       }
 
       .title {
-        text-align: center;
         font-weight: 500;
       }
 
       .social-media {
         font-size: 20px;
-        text-align: center;
 
         a.icon {
           color: #e6e6e6 !important;
-          text-decoration: none;
           @include fast-transition;
 
           &:hover {
@@ -148,26 +122,11 @@ hr.solid {
           }
         }
       }
-
-      .skills {
-        margin-top: 0px;
-        text-align: center;
-        font-style: italic;
-      }
-
-      .description {
-        text-align: center;
-      }
     }
   }
 
   .nav-arrow-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-
     .nav-arrow {
-      border-radius: 50%;
       width: 50px;
       height: 50px;
       border: 4px solid #ffffff;
@@ -192,45 +151,19 @@ hr.solid {
 }
 
 .content {
-  padding: 30px;
   margin-left: $sidebar-width;
   color: $text-primary-color;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 
   .top-pagination {
-    max-width: 1300px;
+    max-width: $blogpost-width;
     row-gap: 10px;
-    padding-left: 12px;
-    padding-right: 12px;
-
-    .top-pagination-search {
-      // width: fit-content;
-    }
-
-    @media (max-width: 600px) {
-      flex-direction: column;
-      align-content: center;
-      align-items: center;
-    }
   }
 
   .bottom-pagination {
-    max-width: 1300px;
-    padding-left: 12px;
-    padding-right: 12px;
-    margin-top: 40px;
-    justify-content: end;
-
-    @media (max-width: 552px) {
-      justify-content: center;
-    }
+    max-width: $blogpost-width;
   }
 
   .pagination {
-    align-items: center;
-    margin: 0;
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
@@ -254,57 +187,24 @@ hr.solid {
     }
   }
 
-  .top-search-container {
-    max-width: 1300px;
-
-    .top-search {
-      max-width: 700px;
-      padding-left: 20px;
-      padding-right: 20px;
-      align-items: center;
-    }
-  }
-
-  button + .live-search {
-    margin-left: 5px;
-  }
-
   .live-search {
     z-index: 4;
-    overflow: visible;
-    height: 73px;
-    width: 100%;
-    display: flex;
-    height: fit-content;
 
     input {
       width: auto;
     }
 
     .results {
-      position: absolute;
-      padding: 12px;
       background-color: #e6e6e6;
-      border-radius: 5px;
-      margin-right: 5px;
       @include light-boxshadow;
 
       .hint {
         color: #969faf;
-        font-style: italic;
-        margin-top: 12px;
       }
 
       .result {
         cursor: pointer;
         background-color: #ffffff;
-        border-radius: 5px;
-        padding: 12px;
-        height: auto;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-items: flex-start;
 
         &:hover {
           @include secondary-palette;
@@ -313,41 +213,8 @@ hr.solid {
             @include secondary-palette;
           }
         }
-
-        & + .result {
-          margin-top: 12px;
-        }
-
-        .icon {
-          font-size: 30px;
-
-          & + .card {
-            margin-left: 12px;
-          }
-        }
-
-        .card {
-          border: none;
-          .title {
-            font-weight: bold;
-            font-size: medium;
-          }
-          .description {
-            font-style: italic;
-            font-size: small;
-          }
-        }
       }
     }
-
-    @include media-breakpoint-down($banner-breakpoint) {
-      margin-right: 0;
-      // width: 80%;
-    }
-
-    // @include media-breakpoint-down(sm) {
-    //   width: 100%;
-    // }
   }
 
   .container {
@@ -356,64 +223,20 @@ hr.solid {
 
   @include media-breakpoint-down($banner-breakpoint) {
     margin-left: 0;
-    margin-top: 15px;
-    padding: 10px;
-  }
-}
-
-.meta-header {
-  justify-content: space-between;
-  display: flex;
-  max-width: 800px;
-}
-
-.date-container {
-  @include secondary-palette;
-  border-radius: 2px;
-  width: fit-content;
-  padding: 5px;
-
-  > .date {
-    font-weight: normal;
-    font-size: smaller;
-  }
-
-  > .reading-time {
-    font-weight: normal;
-    font-size: smaller;
   }
 }
 
 .blog-post-container {
   @include basic-transition;
-  margin-top: 40px;
 
   .reading-time-container {
     @include light-boxshadow;
     background-color: #ccc;
-    border-radius: 2px;
     width: fit-content;
-    padding: 5px 8px 5px 8px;
-    font-weight: normal;
-    font-size: smaller;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    .icon {
-      font-size: 20px;
-      display: inline-block;
-      text-align: center;
-      vertical-align: bottom;
-    }
 
     .collapsed {
-      padding-left: 4px;
       white-space: nowrap;
-      visibility: visible;
-      display: inline-block;
       max-width: 0px;
-      overflow: hidden;
       transition: max-width 0.3s ease, margin 0.3s ease;
     }
 
@@ -433,15 +256,6 @@ hr.solid {
     @include primary-palette;
     @include light-boxshadow;
     max-width: $blogpost-width;
-    padding: 30px !important;
-
-    @include media-breakpoint-down($banner-breakpoint) {
-      padding: 15px !important;
-
-      &:first-child {
-        margin-top: 20px;
-      }
-    }
 
     &:hover {
       .blog-header {
@@ -456,115 +270,15 @@ hr.solid {
     .blog-header {
       color: #333;
 
-      .blog-description {
-        font-style: italic;
-      }
-
       .blog-meta {
-        font-size: small;
         width: fit-content;
-        .blog-date {
-          font-style: italic;
-        }
 
         .collapsed {
-          height: 15px;
           white-space: nowrap;
-          visibility: visible;
-          display: inline-block;
           max-width: 0px;
-          overflow: hidden;
           transition: max-width 0.3s ease, margin 0.3s ease;
         }
       }
     }
-  }
-}
-
-.preview-container {
-  border-radius: 5px;
-  height: 500px;
-  max-width: 800px;
-  overflow: hidden;
-  position: relative;
-  border: 1px solid #cccccc;
-  background-color: $primary-color;
-
-  &:hover {
-    & .preview-title {
-      & .title-card {
-        height: fit-content;
-
-        & .description {
-          @include basic-transition;
-          opacity: 100%;
-        }
-
-        & .author {
-          @include basic-transition;
-          opacity: 100%;
-        }
-      }
-    }
-  }
-
-  & .preview-title {
-    padding: 10px;
-    width: 100%;
-    height: $preview-title-banner-height;
-    position: absolute;
-    background: linear-gradient(to bottom, #f7faf9ff 0px, #f7faf9ff 100px, #f7faf900);
-    top: 0px;
-
-    & .title-card {
-      overflow: hidden;
-      background-color: #ddd;
-      color: #333333;
-      align-items: flex-start;
-      width: fit-content;
-      display: flex;
-      flex-direction: column;
-      padding: 5px;
-      padding-left: 10px;
-      height: 53px;
-      border-radius: 3px;
-
-      & .title {
-        font-weight: bolder;
-        font-size: 25px;
-      }
-
-      & .description {
-        opacity: 0%;
-      }
-
-      & .author {
-        font-style: italic;
-        font-size: small;
-        opacity: 0%;
-      }
-    }
-
-    & .title-separator {
-      @include separator;
-    }
-  }
-
-  & .preview-container-bottom-fade {
-    width: 100%;
-    height: 80px;
-    background: linear-gradient(to top, #f7faf9ff, #f7faf9ff 20px, #f7faf900);
-    position: absolute;
-    bottom: 0;
-  }
-
-  & .separator {
-    @include separator;
-    position: absolute;
-    bottom: 0;
-  }
-
-  & .markdown {
-    padding: 30px;
   }
 }

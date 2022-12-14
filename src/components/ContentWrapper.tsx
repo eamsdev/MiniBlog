@@ -31,8 +31,8 @@ export const ContentWrapper: FC<PropsWithChildren<ContentWrapperProps>> = observ
 
     return (
       <>
-        <div className="top-pagination d-flex justify-content-between flex-wrap w-100">
-          <div className="top-pagination-search d-flex justify-content-flex-start align-items-center flex-nowrap">
+        <div className="top-pagination px-2 d-flex flex-md-row flex-column justify-content-between flex-wrap w-100 align-content-center align-items-center">
+          <div className="d-flex justify-content-flex-start align-items-center flex-nowrap">
             <Button
               variant="primary"
               onClick={() => {
@@ -48,7 +48,9 @@ export const ContentWrapper: FC<PropsWithChildren<ContentWrapperProps>> = observ
         <TransitionWrapper {...props}>
           <Container className="p-0 m-0">{props.children}</Container>
         </TransitionWrapper>
-        <div className="bottom-pagination d-flex w-100">{navigationComponent}</div>
+        <div className="bottom-pagination mt-4 px-2 d-flex w-100 justify-content-md-end justify-content-center">
+          {navigationComponent}
+        </div>
       </>
     );
   },
@@ -99,7 +101,7 @@ export type PaginationProps = {
 const Pagination: FC<PaginationProps> = observer((props: PaginationProps) => {
   return (
     <ReactPaginate
-      className="pagination"
+      className="pagination align-items-center m-0"
       pageClassName="page-item"
       pageLinkClassName="page-link"
       previousClassName="page-item"

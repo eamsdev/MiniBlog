@@ -30,7 +30,7 @@ export const LiveSearch: FC = observer(() => {
   }, []);
 
   return (
-    <div ref={wrapperRef} className="live-search">
+    <div ref={wrapperRef} className="live-search ms-1 me-lg-2 overflow-visible d-flex w-100">
       <div style={{ height: '38px' }}>
         <TextInput
           isInvalid={false}
@@ -41,21 +41,24 @@ export const LiveSearch: FC = observer(() => {
           value={liveSearchStore.searchString}
         />
         {liveSearchStore.searchString && (
-          <div className="results">
+          <div className="results mr-1 p-2 rounded position-absolute">
             {liveSearchStore.matches.length > 0 ? (
               liveSearchStore.matches.map((x) => (
                 <li
                   key={x.title}
-                  className="result"
+                  className="result p-3 mb-2 rounded h-auto d-flex flex-row alignt-items-center justify-content-start"
                   onClick={() => {
                     router.navigate('article', { id: x.reference }, { reload: true });
                     liveSearchStore.clearSearch();
                   }}
                 >
-                  <i className="icon fa fa-file-o" aria-hidden="true" />
-                  <div className="card">
-                    <div className="title">{x.title}</div>
-                    <div className="description">{x.description}</div>
+                  <i
+                    className="icon fs-1 fa fa-file-o d-flex align-items-center"
+                    aria-hidden="true"
+                  />
+                  <div className="card ms-3 border-0">
+                    <div className="fw-bold fs-6">{x.title}</div>
+                    <div className="fs-7 fst-italic text-center">{x.description}</div>
                   </div>
                 </li>
               ))
@@ -63,7 +66,7 @@ export const LiveSearch: FC = observer(() => {
               <>No match found...</>
             )}
             {liveSearchStore.matches.length > 0 ? (
-              <div className="hint">Press Escape key to exit.</div>
+              <div className="hint fst-italic">Press Escape key to exit.</div>
             ) : null}
           </div>
         )}

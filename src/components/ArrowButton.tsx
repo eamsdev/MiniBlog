@@ -8,8 +8,8 @@ export type ArrowButtonProps = {
 export const ArrowButton: FC<ArrowButtonProps> = (props: ArrowButtonProps) => {
   const { direction, onClick } = props;
   return (
-    <div className="nav-arrow-container">
-      <button className="nav-arrow" onClick={() => onClick()}>
+    <div className="nav-arrow-container d-flex flex-row justify-content-center">
+      <button className="nav-arrow rounded-circle" onClick={() => onClick()}>
         {direction == 'up' ? (
           <div className="icon fa fa-arrow-up" />
         ) : (
