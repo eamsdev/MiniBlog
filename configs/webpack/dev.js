@@ -7,4 +7,10 @@ module.exports = merge(commonConfig, {
   mode: 'development',
   devtool: 'cheap-module-source-map',
   plugins: [new ReactRefreshPlugin()],
+  devServer: {
+    historyApiFallback: true,
+  },
+  output: {
+    publicPath: '/',
+  },
 });

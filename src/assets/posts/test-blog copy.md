@@ -22,7 +22,7 @@ non arcu risus.
   dictum fusce ut placerat orci nulla. Pellentesque sit amet porttitor eget dolor.
 - m dolor sit amet, consectetur adipis.
 
-![Architecture](https://raw.githubusercontent.com/eamsdev/MiniESS/master/architecture.svg)
+![Architecture](https://raw.githubusercontent.com/eamsdev/MiniESS/master/architecture.png)
 
 ## HTML
 

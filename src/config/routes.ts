@@ -8,10 +8,14 @@ const routes = [
 ];
 
 const configureRouter = () => {
-  const router = createRouter(routes, { defaultRoute: 'blogs', defaultParams: { page: 0 } });
+  const router = createRouter(routes, {
+    defaultRoute: 'blogs',
+    defaultParams: { page: 0 },
+    queryParamsMode: 'loose',
+  });
   router.usePlugin(
     browserPlugin({
-      useHash: true,
+      useHash: false,
     }),
   );
   return router;

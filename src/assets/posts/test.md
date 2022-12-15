@@ -2,7 +2,7 @@
 id: lorem-ipsum-4
 title: Lorem ipsum 4
 description: Eiusmod tempor incididunt ut labore et dolore magna aliqua
-date: 27-11-2022
+date: 07-06-2022
 author: Pete Eamsuwan
 readtime: 5 min
 tags:
@@ -22,7 +22,7 @@ non arcu risus.
   dictum fusce ut placerat orci nulla. Pellentesque sit amet porttitor eget dolor.
 - m dolor sit amet, consectetur adipis.
 
-![Architecture](https://raw.githubusercontent.com/eamsdev/MiniESS/master/architecture.svg)
+![Architecture](https://raw.githubusercontent.com/eamsdev/MiniESS/master/architecture.png)
 
 ## HTML
 
