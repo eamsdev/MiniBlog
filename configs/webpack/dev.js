@@ -7,6 +7,7 @@ module.exports = merge(commonConfig, {
   mode: 'development',
   devtool: 'cheap-module-source-map',
   plugins: [new ReactRefreshPlugin()],
+  // https://burnedikt.com/webpack-dev-server-and-routing/
   devServer: {
     historyApiFallback: true,
   },
