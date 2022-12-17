@@ -34,7 +34,7 @@ export const ContentWrapper: FC<PropsWithChildren<ContentWrapperProps>> = observ
         <div className="top-pagination px-2 d-flex flex-md-row flex-column justify-content-between flex-wrap w-100 align-content-center align-items-center">
           <div className="d-flex justify-content-flex-start align-items-center flex-nowrap">
             <Button
-              variant="primary"
+              className="btn btn-primary"
               onClick={() => {
                 props.onPageSelected(0);
               }}
@@ -67,27 +67,23 @@ type BlogPostNavigationProps = {
 const BlogPostNavigation: FC<BlogPostNavigationProps> = observer(
   (props: BlogPostNavigationProps) => {
     return (
-      <div className="d-flex align-items-center">
-        <ButtonGroup>
-          <Button
-            variant="light"
-            disabled={!props.hasNewerBlogPost}
-            onClick={() => props.onNewerBlogPost()}
-          >
-            Newer Article
-          </Button>
-          <Button variant="light" disabled={true}>
-            {props.blogPostDate}
-          </Button>
-          <Button
-            variant="light"
-            disabled={!props.hasOlderBlogPost}
-            onClick={() => props.onOlderBlogPost()}
-          >
-            Older Article
-          </Button>
-        </ButtonGroup>
-      </div>
+      <ButtonGroup className="d-flex align-items-center">
+        <Button
+          variant="light"
+          disabled={!props.hasNewerBlogPost}
+          onClick={() => props.onNewerBlogPost()}
+        >
+          Newer Article
+        </Button>
+        <div className="btn btn-light disabled">{props.blogPostDate}</div>
+        <Button
+          variant="light"
+          disabled={!props.hasOlderBlogPost}
+          onClick={() => props.onOlderBlogPost()}
+        >
+          Older Article
+        </Button>
+      </ButtonGroup>
     );
   },
 );

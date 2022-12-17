@@ -15,7 +15,7 @@ const configureRouter = () => {
   });
   router.usePlugin(
     browserPlugin({
-      useHash: false,
+      useHash: false, // Hash routing is evil
     }),
   );
   return router;

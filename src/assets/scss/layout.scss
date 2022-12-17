@@ -36,7 +36,7 @@ html,
   overflow-x: hidden;
   background-color: $backdrop-color;
 
-  > .page {
+  > div {
     overflow-x: hidden;
   }
 }
@@ -58,7 +58,7 @@ hr.solid {
   }
 }
 
-.sidebar {
+aside {
   width: $sidebar-width;
 
   @include light-boxshadow;
@@ -70,51 +70,48 @@ hr.solid {
   .profile {
     color: $backdrop-color;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    transition: max-height 0.3s ease-in-out;
+    -webkit-transition: max-height 0.3s ease-in-out;
 
-    .profile-collapse {
-      transition: max-height 0.3s ease-in-out;
-      -webkit-transition: max-height 0.3s ease-in-out;
+    picture {
+      .photo {
+        background-position: center;
+        background-color: white;
+        min-width: 280px;
+        min-height: 280px;
+        border: 7px solid $backdrop-color;
+        background-image: url(../img/profilephoto.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        @include basic-transition;
+        @include light-boxshadow;
 
-      .photo-container {
-        .photo {
-          background-position: center;
-          background-color: white;
-          min-width: 280px;
-          min-height: 280px;
-          border: 7px solid $backdrop-color;
-          background-image: url(../img/profilephoto.jpg);
-          background-size: cover;
-          background-repeat: no-repeat;
-          @include basic-transition;
-          @include light-boxshadow;
-
-          &:hover {
-            border: 1px solid $backdrop-color;
-          }
+        &:hover {
+          border: 1px solid $backdrop-color;
         }
       }
+    }
 
-      .name {
-        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    .name {
+      text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 
-        .highlight {
-          color: $tertiary-color;
-        }
+      .highlight {
+        color: $tertiary-color;
       }
+    }
 
-      .social-media {
-        a.icon {
-          color: $backdrop-color;
-          text-decoration: none;
-          @include fast-transition;
+    .social-media {
+      a.icon {
+        color: $backdrop-color;
+        text-decoration: none;
+        @include fast-transition;
 
-          &:hover {
-            transform: scale(1.5);
-          }
+        &:hover {
+          transform: scale(1.5);
+        }
 
-          & + .icon {
-            margin-left: 5px;
-          }
+        & + .icon {
+          margin-left: 5px;
         }
       }
     }
@@ -143,7 +140,7 @@ hr.solid {
   }
 }
 
-.content {
+main {
   margin-left: $sidebar-width;
   color: $text-primary-color;
 
@@ -156,14 +153,7 @@ hr.solid {
     max-width: $blogpost-width;
   }
 
-  // TODO move this
   .pagination {
-    li {
-      a {
-        box-shadow: none !important;
-      }
-    }
-
     li:not(.disabled) {
       a {
         color: $secondary-color;
@@ -177,7 +167,6 @@ hr.solid {
     }
   }
 
-  // TODO move this
   .live-search {
     z-index: 4;
 
@@ -217,7 +206,6 @@ hr.solid {
   }
 }
 
-// TODO move this
 .reading-time-container {
   @include light-boxshadow;
   background-color: #ccc;
@@ -247,22 +235,26 @@ hr.solid {
   max-width: $blogpost-width;
 
   &:hover {
-    .blog-header {
-      .blog-meta {
-        .collapsed {
+    header {
+      p.blog-meta {
+        span.collapsed {
           max-width: 200px;
         }
       }
     }
   }
 
-  .blog-header {
+  header {
     color: #333;
 
-    .blog-meta {
+    p {
+      margin-bottom: 0;
+    }
+
+    p.blog-meta {
       width: fit-content;
 
-      .collapsed {
+      span.collapsed {
         white-space: nowrap;
         max-width: 0px;
         transition: max-width 0.3s ease, margin 0.3s ease;

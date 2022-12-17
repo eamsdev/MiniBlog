@@ -6,13 +6,13 @@ import { Profile } from './Profile';
 
 export const Sidebar: FC = observer(() => {
   return (
-    <div className="sidebar position-relative position-lg-fixed  h-100">
+    <aside className=" position-relative position-lg-fixed  h-100">
       <Profile />
       <ArrowButton
         onClick={() => rootStore.uiStore.toggleShowNavbar()}
         direction={rootStore.uiStore.showNavbar ? 'up' : 'down'}
       />
-    </div>
+    </aside>
   );
 });
 

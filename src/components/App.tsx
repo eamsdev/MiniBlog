@@ -3,7 +3,7 @@ import { Sidebar } from './Sidebar';
 
 export const App = () => {
   return (
-    <div className="page position-relative">
+    <div className="position-relative">
       <Sidebar />
       <Content />
     </div>

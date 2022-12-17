@@ -55,21 +55,13 @@ export const Blogs: FC = observer(() => {
       }}
       pageCount={rootStore.blogPostStore.pageCount}
       currentPage={rootStore.blogPostStore.currentPage}
-      onNewerBlogPost={() => {
-        console.log('clicked newer post');
-        console.log(newerPostId);
-        router.navigate('article', { id: newerPostId }, { reload: true });
-      }}
+      onNewerBlogPost={() => router.navigate('article', { id: newerPostId }, { reload: true })}
       hasNewerBlogPost={!!newerPostId}
-      onOlderBlogPost={() => {
-        console.log('clickedolderr post');
-        console.log(olderPostId);
-        router.navigate('article', { id: olderPostId }, { reload: true });
-      }}
+      onOlderBlogPost={() => router.navigate('article', { id: olderPostId }, { reload: true })}
       hasOlderBlogPost={!!olderPostId}
       blogPostDate={blogPostDate}
       type={contentType}
-      transitionKey={itemsKey}
+      transitionKey={contentType + '-' + itemsKey}
     >
       {content}
     </ContentWrapper>
