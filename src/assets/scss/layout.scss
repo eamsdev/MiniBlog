@@ -67,6 +67,35 @@ aside {
     width: 100%;
   }
 
+  nav {
+    .dash {
+      &::after {
+        content: '';
+        width: 0px;
+        height: 0px;
+        background-color: $backdrop-color;
+        border-radius: 10px;
+        margin-left: 8px;
+        margin-right: 8px;
+      }
+    }
+    a {
+      color: $backdrop-color;
+      @include fast-transition;
+
+      &:hover {
+        color: $backdrop-color;
+        transform: scale(1.2);
+      }
+    }
+  }
+
+  div hr {
+    border-top: 2px solid #e6e6e6;
+    opacity: 50%;
+    width: 200px;
+  }
+
   .profile {
     color: $backdrop-color;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
@@ -74,15 +103,8 @@ aside {
     -webkit-transition: max-height 0.3s ease-in-out;
 
     picture {
-      .photo {
-        background-position: center;
-        background-color: white;
-        min-width: 280px;
-        min-height: 280px;
+      img {
         border: 7px solid $backdrop-color;
-        background-image: url(../img/profilephoto.jpg);
-        background-size: cover;
-        background-repeat: no-repeat;
         @include basic-transition;
         @include light-boxshadow;
 
@@ -101,16 +123,15 @@ aside {
     }
 
     .social-media {
-      a.icon {
+      a {
         color: $backdrop-color;
-        text-decoration: none;
         @include fast-transition;
 
         &:hover {
           transform: scale(1.5);
         }
 
-        & + .icon {
+        & + a {
           margin-left: 5px;
         }
       }

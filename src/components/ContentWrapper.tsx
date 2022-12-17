@@ -34,7 +34,7 @@ export const ContentWrapper: FC<PropsWithChildren<ContentWrapperProps>> = observ
         <div className="top-pagination px-2 d-flex flex-md-row flex-column justify-content-between flex-wrap w-100 align-content-center align-items-center">
           <div className="d-flex justify-content-flex-start align-items-center flex-nowrap">
             <Button
-              className="btn btn-primary"
+              variant="primary"
               onClick={() => {
                 props.onPageSelected(0);
               }}
