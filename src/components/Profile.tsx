@@ -22,25 +22,25 @@ export const Profile: FC = observer(() => {
       showNavbar={rootStore.uiStore.showNavbar}
       className="container profile overflow-hidden d-flex flex-column justify-content-between h-100"
     >
-      <Stack gap={3} className="p-3">
+      <Stack gap={1} className="p-3">
         <Header />
         <Separator />
         <Nav />
         <Separator />
       </Stack>
-      <footer className="fs-7 text-center mb-4">Copyright ©️ eams.dev 2022</footer>
+      <footer className="fs-7 text-center mb-4">eams.dev 2022</footer>
     </StyledProfileContainer>
   );
 });
 
 const Nav: FC = () => {
   return (
-    <nav className="d-flex flex-column fs-4 justify-content-center align-items-center">
+    <nav className="d-flex flex-column fs-5 justify-content-center align-items-center">
       <a href="/blogs/page/0" className="pe-auto text-decoration-none" title="Blogs">
-        <i className="icon fa fa-rss" /> Blog
+        <i className="icon fa fa-book" /> Blog
       </a>
       <a href="/about" className="pe-auto text-decoration-none" title="Home">
-        <i className="icon fa fa-user" /> About Me
+        <i className="icon fa fa-user" /> About me
       </a>
     </nav>
   );
@@ -84,11 +84,6 @@ const Header: FC = () => {
             href="https://www.linkedin.com/in/pete-e-339708117/"
             className="icon fa fa-linkedin-square text-decoration-none"
             title="Lets connect"
-          />
-          <a
-            href="https://eams.dev"
-            className="icon fa fa-globe text-decoration-none"
-            title="My landing page"
           />
         </span>
       </p>
