@@ -58,7 +58,7 @@ export const LiveSearch: FC = observer(() => {
                   />
                   <div className="card ms-3 border-0">
                     <div className="fw-bold fs-6">{x.title}</div>
-                    <div className="fs-7 fst-italic text-center">{x.description}</div>
+                    <div className="fs-7 fst-italic">{x.description}</div>
                   </div>
                 </li>
               ))

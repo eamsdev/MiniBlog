@@ -29,9 +29,11 @@ export const Blogs: FC = observer(() => {
     blogPostDate = navigatableBlogPostModel.currentPost.attributes.date;
     itemsKey = blogPost.attributes.id;
     content = (
-      <BlogPost key={blogPost.attributes.title as string} frontMatter={blogPost.attributes}>
-        <StylisedMarkdown markdown={blogPost.body} />
-      </BlogPost>
+      <Container className="p-0 m-0">
+        <BlogPost key={blogPost.attributes.title as string} frontMatter={blogPost.attributes}>
+          <StylisedMarkdown markdown={blogPost.body} />
+        </BlogPost>
+      </Container>
     );
   } else {
     const itemsAtPage = rootStore.blogPostStore.getItemsAtPage(pageNumber);

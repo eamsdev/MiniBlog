@@ -3,7 +3,7 @@ import { observable, makeObservable, runInAction, toJS, computed, action } from 
 const markdownContext = require.context('../assets/posts', false, /\.md$/);
 
 export class BlogPostStore {
-  itemsPerPage = 1;
+  itemsPerPage = 2;
   @observable currentPage = 0;
   @observable blogPosts: BlogPostModel[] = [];
 

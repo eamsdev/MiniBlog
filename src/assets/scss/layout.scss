@@ -165,13 +165,9 @@ main {
   margin-left: $sidebar-width;
   color: $text-primary-color;
 
-  .top-pagination {
+  nav {
     max-width: $blogpost-width;
     row-gap: 10px;
-  }
-
-  .bottom-pagination {
-    max-width: $blogpost-width;
   }
 
   .pagination {

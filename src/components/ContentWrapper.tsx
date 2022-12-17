@@ -31,7 +31,7 @@ export const ContentWrapper: FC<PropsWithChildren<ContentWrapperProps>> = observ
 
     return (
       <>
-        <div className="top-pagination px-2 d-flex flex-md-row flex-column justify-content-between flex-wrap w-100 align-content-center align-items-center">
+        <nav className="px-2 d-flex flex-md-row flex-column justify-content-between flex-wrap w-100 align-content-center align-items-center">
           <div className="d-flex justify-content-flex-start align-items-center flex-nowrap">
             <Button
               variant="primary"
@@ -44,13 +44,11 @@ export const ContentWrapper: FC<PropsWithChildren<ContentWrapperProps>> = observ
             <LiveSearch />
           </div>
           {navigationComponent}
-        </div>
-        <TransitionWrapper {...props}>
-          <Container className="p-0 m-0">{props.children}</Container>
-        </TransitionWrapper>
-        <div className="bottom-pagination mt-4 px-2 d-flex w-100 justify-content-md-end justify-content-center">
+        </nav>
+        <TransitionWrapper {...props}>{props.children}</TransitionWrapper>
+        <nav className="mt-4 px-2 d-flex w-100 justify-content-md-end justify-content-center">
           {navigationComponent}
-        </div>
+        </nav>
       </>
     );
   },

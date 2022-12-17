@@ -8,7 +8,7 @@ export const BlogPost: FC<PropsWithChildren<BlogFrontMatterProps>> = (
   props: PropsWithChildren<BlogFrontMatterProps>,
 ) => {
   return (
-    <Container className="blog-post-container mt-4 px-lg-2 px-1">
+    <Container className="mt-4 px-lg-2 px-1">
       <Helmet>
         <title>{props.frontMatter.title}</title>
         <meta name="description" content={props.frontMatter.description} />
