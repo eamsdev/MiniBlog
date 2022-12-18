@@ -79,13 +79,13 @@ aside {
         margin-right: 8px;
       }
     }
+
     a {
       color: $backdrop-color;
       @include fast-transition;
 
       &:hover {
         color: $backdrop-color;
-        transform: scale(1.05);
       }
     }
   }
@@ -249,10 +249,6 @@ main {
 
 .aside-secondary {
   background-color: $gray-600;
-
-  @include media-breakpoint-down(xxl) {
-    display: none;
-  }
 }
 
 .blog-post {
