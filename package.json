@@ -71,6 +71,7 @@
     "jquery": "^3.6.1",
     "mobx": "^6.6.1",
     "mobx-react": "^7.5.2",
+    "moment": "^2.29.4",
     "popper.js": "^1.16.1",
     "react-bootstrap": "^2.5.0",
     "react-helmet": "^6.1.0",

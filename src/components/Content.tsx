@@ -3,6 +3,7 @@ import { useRouteNode } from 'react-router5';
 import { observer } from 'mobx-react';
 import { Blogs } from './Blogs';
 import { AboutMe } from './AboutMe';
+import { ArticlesSearch } from './ArticlesSearch';
 
 export const Content: FC = observer(() => {
   let component = <Blogs />;
@@ -12,13 +13,16 @@ export const Content: FC = observer(() => {
     case 'about':
       component = <AboutMe />;
       break;
+    case 'articles':
+      component = <ArticlesSearch />;
+      break;
     default:
       component = <Blogs />;
       break;
   }
 
   return (
-    <main className="p-lg-4 p-2 mt-lg-0 mt-4 d-flex flex-column align-items-center">
+    <main className="p-lg-4 p-2 mt-lg-0 mt-4 d-flex flex-column align-items-center w-100">
       {component}
     </main>
   );

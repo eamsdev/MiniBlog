@@ -85,7 +85,7 @@ aside {
 
       &:hover {
         color: $backdrop-color;
-        transform: scale(1.1);
+        transform: scale(1.05);
       }
     }
   }
@@ -155,7 +155,7 @@ aside {
       }
 
       @include media-breakpoint-up($banner-breakpoint) {
-        opacity: 0%;
+        display: none;
       }
     }
   }
@@ -243,6 +243,14 @@ main {
       font-weight: bold;
       margin-left: 4px;
     }
+  }
+}
+
+.aside-secondary {
+  background-color: $gray-600;
+
+  @include media-breakpoint-down(xxl) {
+    display: none;
   }
 }
 

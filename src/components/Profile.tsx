@@ -22,7 +22,7 @@ export const Profile: FC = observer(() => {
       showNavbar={rootStore.uiStore.showNavbar}
       className="container profile overflow-hidden d-flex flex-column justify-content-between h-100"
     >
-      <Stack gap={1} className="p-3">
+      <Stack gap={0} className="p-3">
         <Header />
         <Separator />
         <Nav />
@@ -46,7 +46,7 @@ const Nav: FC = () => {
   );
 };
 
-const Separator: FC = () => {
+export const Separator: FC = () => {
   return (
     <div className="d-flex flex-row justify-content-center">
       <hr className="rounded-pill" />

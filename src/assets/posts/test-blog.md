@@ -2,7 +2,7 @@
 id: lorem-ipsum-3
 title: Lorem ipsum 3
 description: Eiusmod tempor incididunt ut labore et dolore magna aliqua
-date: 14-18-2022
+date: 14-08-2022
 author: Pete Eamsuwan
 readtime: 5 min
 tags:

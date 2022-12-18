@@ -1,4 +1,5 @@
 import { observable, makeObservable, runInAction, toJS, computed, action } from 'mobx';
+import moment from 'moment';
 
 const markdownContext = require.context('../assets/posts', false, /\.md$/);
 
@@ -18,6 +19,46 @@ export class BlogPostStore {
   }
 
   @computed
+  get allTags() {
+    const allTags = this.blogPosts
+      .map((x) => x.attributes.tags)
+      .reduce((acccum, value) => acccum.concat(value), [])
+      .sort();
+
+    const x = this.allMonths;
+    console.log(x);
+    return [...new Set(allTags)];
+  }
+
+  @computed
+  get allTitles(): ArticleTitleModel[] {
+    return this.blogPosts.map((x) => {
+      return {
+        title: x.attributes.title,
+        id: x.attributes.id,
+      };
+    });
+  }
+
+  @computed
+  get allMonths(): ArticleDateModel[] {
+    const allDates = this.blogPosts
+      .map((x) => x.attributes.date)
+      .reduce((acccum, value) => acccum.concat(value), [])
+      .map((x) => moment(x, 'DD-MM-YYYY'))
+      .sort((a, b) => a.valueOf() - b.valueOf())
+      .reverse()
+      .map((x) => {
+        return {
+          displayDate: x.format('MMMM') + ' ' + x.year(),
+          queryString: `${1 + x.month()}-${x.year()}`,
+        };
+      });
+
+    return allDates;
+  }
+
+  @computed
   get pageCount() {
     if (this.blogPosts.length <= this.itemsPerPage) return 0;
 
@@ -30,7 +71,7 @@ export class BlogPostStore {
     return this.blogPosts.slice(startingIndex, endingIndex).map((x) => toJS(x));
   }
 
-  getBlogPostById(id: string): NavigatableBLogPostModel {
+  getBlogPostById(id: string): NavigatableBlogPostModel {
     const currentPostIndex = this.blogPosts.findIndex((x) => x.attributes.id == id);
     return {
       currentPost: toJS(this.blogPosts[currentPostIndex]),
@@ -56,7 +97,17 @@ export class BlogPostStore {
   }
 }
 
-export type NavigatableBLogPostModel = {
+export type ArticleTitleModel = {
+  title: string;
+  id: string;
+};
+
+export type ArticleDateModel = {
+  displayDate: string;
+  queryString: string;
+};
+
+export type NavigatableBlogPostModel = {
   currentPost: BlogPostModel;
   newerPostId?: string;
   olderPostId?: string;
