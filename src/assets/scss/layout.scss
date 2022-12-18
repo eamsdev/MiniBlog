@@ -164,6 +164,7 @@ aside {
 main {
   margin-left: $sidebar-width;
   color: $text-primary-color;
+  min-width: 0;
 
   nav {
     max-width: $blogpost-width;
