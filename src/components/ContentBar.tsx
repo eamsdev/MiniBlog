@@ -39,7 +39,7 @@ const ByMonths: FC = () => {
   return (
     <>
       <h5>
-        <i className="icon fa fa-calendar" /> Histories
+        <i className="icon fa fa-calendar" /> History
       </h5>
 
       <nav className="d-flex flex-column ps-3">
