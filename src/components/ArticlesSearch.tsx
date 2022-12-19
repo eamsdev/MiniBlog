@@ -14,7 +14,7 @@ export const ArticlesSearch: FC = () => {
     headerComponent = (
       <h1 className="fs-3">
         <i className="icon fa fa-calendar" />
-        {` Date: ${moment(monthAndYear[0], 'M').format('MMMM')} ${monthAndYear[1]}`}
+        {` Month: ${moment(monthAndYear[0], 'M').format('MMMM')} ${monthAndYear[1]}`}
       </h1>
     );
     blogPosts = rootStore.blogPostStore.getByDate(monthAndYear[0], monthAndYear[1]);
@@ -33,7 +33,7 @@ export const ArticlesSearch: FC = () => {
   return (
     <>
       <header className="">{headerComponent}</header>
-      <ul className="mt-4 p-0">
+      <ul style={{ maxWidth: '1300px' }} className="mt-4 p-0 w-100">
         {blogPosts.length > 0 ? (
           blogPosts.map((x) => (
             <li
@@ -48,7 +48,7 @@ export const ArticlesSearch: FC = () => {
                 <div className="border-0">
                   <p className="fw-bold fs-6 m-0">{x.attributes.title}</p>
                   <p className="fs-7 fst-italic m-0">{x.attributes.description}</p>
-                  <p className="fs-7 m-0">
+                  <p className="fs-7 m-0 mt-1">
                     {x.attributes.tags.map((x) => (
                       <span key={x} className="me-2">
                         <i className="icon fa fa-tag" /> {x}

@@ -77,12 +77,12 @@ const Header: FC = () => {
         <span>
           <a
             href="https://github.com/eamsdev"
-            className="icon fa fa-github-square text-decoration-none"
+            className="icon fa fa-github-square link-unstyled"
             title="See some of my work"
           />
           <a
             href="https://www.linkedin.com/in/pete-e-339708117/"
-            className="icon fa fa-linkedin-square text-decoration-none"
+            className="icon fa fa-linkedin-square link-unstyled"
             title="Lets connect"
           />
         </span>
