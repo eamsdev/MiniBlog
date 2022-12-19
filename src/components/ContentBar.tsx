@@ -21,9 +21,7 @@ export const ContentBar: FC = () => {
 const ByTags: FC = observer(() => {
   return (
     <>
-      <h5>
-        <i className="icon fa fa-tag" /> Tags
-      </h5>
+      <h5>Tags</h5>
       <nav className="d-flex flex-column ps-3">
         {rootStore.blogPostStore.allTags.map((x) => (
           <a href={`/articles?tag=${x}`} className="text-white fs-7 pe-auto me-1" key={x}>
@@ -38,9 +36,7 @@ const ByTags: FC = observer(() => {
 const ByMonths: FC = () => {
   return (
     <>
-      <h5>
-        <i className="icon fa fa-calendar" /> History
-      </h5>
+      <h5>History</h5>
 
       <nav className="d-flex flex-column ps-3">
         {rootStore.blogPostStore.allMonths.map((x) => (
@@ -49,7 +45,7 @@ const ByMonths: FC = () => {
             className="text-white fs-7 pe-auto me-1"
             key={x.queryString}
           >
-            <i className="icon fa fa-tag" /> {x.displayDate}
+            <i className="icon fa fa-calendar" /> {x.displayDate}
           </a>
         ))}
       </nav>
@@ -60,14 +56,12 @@ const ByMonths: FC = () => {
 const ByArticles: FC = () => {
   return (
     <>
-      <h5>
-        <i className="icon fa fa-book" /> Articles
-      </h5>
+      <h5>Articles</h5>
 
       <nav className="d-flex flex-column ps-3">
         {rootStore.blogPostStore.allTitles.map((x) => (
           <a href={`/article/${x.id}`} className="text-white fs-7 pe-auto me-1" key={x.id}>
-            <i className="icon fa fa-tag" /> {x.title}
+            <i className="icon fa fa-book" /> {x.title}
           </a>
         ))}
       </nav>

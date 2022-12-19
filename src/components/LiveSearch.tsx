@@ -41,24 +41,24 @@ export const LiveSearch: FC = observer(() => {
           value={liveSearchStore.searchString}
         />
         {liveSearchStore.searchString && (
-          <div className="results me-1 p-2 rounded position-absolute">
+          <ul className="results me-1 p-2 rounded position-absolute">
             {liveSearchStore.matches.length > 0 ? (
               liveSearchStore.matches.map((x) => (
                 <li
                   key={x.title}
-                  className="result p-3 mb-2 rounded h-auto d-flex flex-row alignt-items-center justify-content-start"
+                  className="search-result p-3 mb-2 rounded h-auto d-flex flex-row alignt-items-center justify-content-start"
                   onClick={() => {
                     router.navigate('article', { id: x.reference }, { reload: true });
                     liveSearchStore.clearSearch();
                   }}
                 >
                   <i
-                    className="icon fs-1 fa fa-file-o d-flex align-items-center"
+                    className="icon fs-2 fa fa-file-o d-flex align-items-center"
                     aria-hidden="true"
                   />
                   <div className="card ms-3 border-0">
-                    <div className="fw-bold fs-6">{x.title}</div>
-                    <div className="fs-7 fst-italic">{x.description}</div>
+                    <span className="fw-bold fs-6">{x.title}</span>
+                    <span className="fs-7 fst-italic">{x.description}</span>
                   </div>
                 </li>
               ))
@@ -68,7 +68,7 @@ export const LiveSearch: FC = observer(() => {
             {liveSearchStore.matches.length > 0 ? (
               <div className="hint fst-italic">Press Escape key to exit.</div>
             ) : null}
-          </div>
+          </ul>
         )}
       </div>
     </div>

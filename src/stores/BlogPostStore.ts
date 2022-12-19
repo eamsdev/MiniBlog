@@ -18,6 +18,18 @@ export class BlogPostStore {
     this.currentPage = pageNumber;
   }
 
+  getByDate(month: number, year: number) {
+    return this.blogPosts.filter((x) => {
+      const momentDate = moment(x.attributes.date, 'DD-MM-YYYY');
+      console.log(momentDate, momentDate.month(), momentDate.year());
+      return momentDate.month() == month && momentDate.year() == year;
+    });
+  }
+
+  getByTag(tag: string) {
+    return this.blogPosts.filter((x) => x.attributes.tags.includes(tag));
+  }
+
   @computed
   get allTags() {
     const allTags = this.blogPosts
@@ -51,7 +63,7 @@ export class BlogPostStore {
       .map((x) => {
         return {
           displayDate: x.format('MMMM') + ' ' + x.year(),
-          queryString: `${1 + x.month()}-${x.year()}`,
+          queryString: `${x.month()}-${x.year()}`,
         };
       });
 

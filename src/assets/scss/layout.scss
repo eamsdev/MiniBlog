@@ -199,19 +199,6 @@ main {
       .hint {
         color: #969faf;
       }
-
-      .result {
-        cursor: pointer;
-        background-color: #ffffff;
-
-        &:hover {
-          @include secondary-palette;
-
-          .card {
-            @include secondary-palette;
-          }
-        }
-      }
     }
   }
 
@@ -281,6 +268,26 @@ main {
         max-width: 0px;
         transition: max-width 0.3s ease, margin 0.3s ease;
       }
+    }
+  }
+}
+
+.link-unstyled,
+.link-unstyled:link,
+.link-unstyled:hover {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.search-result {
+  cursor: pointer;
+  background-color: #ffffff;
+
+  &:hover {
+    @include secondary-palette;
+
+    .card {
+      @include secondary-palette;
     }
   }
 }
