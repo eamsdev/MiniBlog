@@ -28,7 +28,6 @@ export const Profile: FC = observer(() => {
         <Nav />
         <Separator />
       </Stack>
-      <footer className="fs-7 text-center mb-4">eams.dev 2022</footer>
     </StyledProfileContainer>
   );
 });

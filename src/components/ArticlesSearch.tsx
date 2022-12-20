@@ -32,7 +32,7 @@ export const ArticlesSearch: FC = () => {
   console.log(blogPosts);
   return (
     <>
-      <header className="">{headerComponent}</header>
+      <header>{headerComponent}</header>
       <ul style={{ maxWidth: '1300px' }} className="mt-4 p-0 w-100">
         {blogPosts.length > 0 ? (
           blogPosts.map((x) => (

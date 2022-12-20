@@ -291,3 +291,7 @@ main {
     }
   }
 }
+
+footer {
+  @include light-boxshadow;
+}
