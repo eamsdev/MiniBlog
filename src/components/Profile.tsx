@@ -60,7 +60,7 @@ const Header: FC = () => {
         <img
           src={profilephoto}
           alt="Pete Eamsuwan"
-          className="rounded-circle"
+          className="rounded-circle shadow"
           width="280px"
           height="280px"
         />

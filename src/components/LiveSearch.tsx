@@ -41,7 +41,7 @@ export const LiveSearch: FC = observer(() => {
           value={liveSearchStore.searchString}
         />
         {liveSearchStore.searchString && (
-          <ul className="results me-1 p-2 rounded position-absolute">
+          <ul className="results me-1 p-2 rounded position-absolute shadow">
             {liveSearchStore.matches.length > 0 ? (
               liveSearchStore.matches.map((x) => (
                 <li

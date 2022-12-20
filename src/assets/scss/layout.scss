@@ -61,7 +61,6 @@ hr.solid {
 aside {
   width: $sidebar-width;
 
-  @include light-boxshadow;
   @include secondary-palette;
   @include media-breakpoint-down($banner-breakpoint) {
     width: 100%;
@@ -106,7 +105,6 @@ aside {
       img {
         border: 7px solid $backdrop-color;
         @include basic-transition;
-        @include light-boxshadow;
 
         &:hover {
           border: 1px solid $backdrop-color;
@@ -150,10 +148,6 @@ aside {
         color: $secondary-color;
       }
 
-      &:hover {
-        @include light-boxshadow;
-      }
-
       @include media-breakpoint-up($banner-breakpoint) {
         display: none;
       }
@@ -194,7 +188,6 @@ main {
 
     .results {
       background-color: $backdrop-color;
-      @include light-boxshadow;
 
       .hint {
         color: #969faf;
@@ -212,7 +205,6 @@ main {
 }
 
 .reading-time-container {
-  @include light-boxshadow;
   background-color: #ccc;
   width: fit-content;
 
@@ -240,7 +232,6 @@ main {
 
 .blog-post {
   @include primary-palette;
-  @include light-boxshadow;
   max-width: $blogpost-width;
 
   &:hover {
@@ -290,8 +281,4 @@ main {
       @include secondary-palette;
     }
   }
-}
-
-footer {
-  @include light-boxshadow;
 }

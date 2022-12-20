@@ -6,7 +6,7 @@ import { rootStore } from '../stores/RootStore';
 
 export const ContentBar: FC = () => {
   return (
-    <aside className="aside-secondary p-0 text-white min-vh-100 d-none d-xl-block">
+    <aside className="aside-secondary p-0 text-white min-vh-100 d-none d-xl-block shadow">
       <Stack gap={0} className="p-3">
         <ByTags />
         <Separator />

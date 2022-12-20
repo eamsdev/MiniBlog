@@ -16,6 +16,7 @@ const TextInput: FC<TextInputProps> = (props: TextInputProps) => {
   return (
     <Form.Control
       type="text"
+      className="shadow-sm"
       {...(size ? { size: size } : {})}
       disabled={disabled}
       isValid={isValid}

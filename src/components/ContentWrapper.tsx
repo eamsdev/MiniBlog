@@ -34,6 +34,7 @@ export const ContentWrapper: FC<PropsWithChildren<ContentWrapperProps>> = observ
         <nav className="px-2 d-flex flex-md-row flex-column justify-content-between flex-wrap w-100 align-content-center align-items-center">
           <div className="d-flex justify-content-flex-start align-items-center flex-nowrap">
             <Button
+              className="shadow-sm"
               variant="primary"
               onClick={() => {
                 props.onPageSelected(0);
@@ -95,7 +96,7 @@ export type PaginationProps = {
 const Pagination: FC<PaginationProps> = observer((props: PaginationProps) => {
   return (
     <ReactPaginate
-      className="pagination user-select-none align-items-center m-0"
+      className="pagination shadow-sm user-select-none align-items-center m-0"
       pageClassName="page-item"
       pageLinkClassName="page-link"
       previousClassName="page-item"

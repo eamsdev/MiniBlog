@@ -3,7 +3,7 @@ import { FC } from 'react';
 
 export const AboutMe: FC = observer(() => {
   return (
-    <div id="about" className="w-100 p-2 p-l-3" style={{ maxWidth: '900px' }}>
+    <div id="about" className="w-100 p-3 rounded shadow-sm bg-light" style={{ maxWidth: '900px' }}>
       <header className="d-flex flex-column align-items-center justify-content-center">
         <h1 className="fs-3">Welcome ✋!</h1>
         <hr className="w-100" />
@@ -13,7 +13,7 @@ export const AboutMe: FC = observer(() => {
           Welcome to my software development blog! My name is Pete and I am a Software Engineer
           based in Melbourne. I have a strong background in .NET, C#, React, AWS, and SQL Server,
           and have experience working on a variety of projects ranging from web applications to
-          backend systems.
+          backend systems that power medical devices.
         </p>
         <p>
           I am drawn to the field of software development because of its constantly evolving nature

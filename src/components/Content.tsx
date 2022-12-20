@@ -22,7 +22,7 @@ export const Content: FC = observer(() => {
   }
 
   return (
-    <main className="p-lg-4 p-2 mt-lg-0 mt-4 d-flex flex-column align-items-center w-100">
+    <main className="min-vh-100 p-lg-4 p-2 pb-4 mt-lg-0 mt-4 d-flex flex-column align-items-center w-100">
       {component}
     </main>
   );

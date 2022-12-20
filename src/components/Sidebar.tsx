@@ -6,7 +6,7 @@ import { Profile } from './Profile';
 
 export const Sidebar: FC = observer(() => {
   return (
-    <aside className="position-relative position-lg-fixed  h-100">
+    <aside className="position-relative position-lg-fixed shadow h-100">
       <Profile />
       <ArrowButton
         onClick={() => rootStore.uiStore.toggleShowNavbar()}

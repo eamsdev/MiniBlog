@@ -11,7 +11,7 @@ export const App = () => {
         <ContentBar />
       </div>
       <footer
-        className="w-100 d-flex flex-row align-items-center justify-content-center position-relative"
+        className="navbar fixed-bottom w-100 d-flex flex-row align-items-center justify-content-center position-relative shadow-sm"
         style={{ height: '40px', backgroundColor: '#535353', color: '#dee2e6' }}
       >
         <a href="https://github.com/eamsdev" className="fs-6 text-center m-0 link-unstyled">
