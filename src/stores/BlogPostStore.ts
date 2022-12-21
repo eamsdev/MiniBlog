@@ -21,7 +21,6 @@ export class BlogPostStore {
   getByDate(month: number, year: number) {
     return this.blogPosts.filter((x) => {
       const momentDate = moment(x.attributes.date, 'DD-MM-YYYY');
-      console.log(momentDate, momentDate.month(), momentDate.year());
       return momentDate.month() == month && momentDate.year() == year;
     });
   }
@@ -37,8 +36,6 @@ export class BlogPostStore {
       .reduce((acccum, value) => acccum.concat(value), [])
       .sort();
 
-    const x = this.allMonths;
-    console.log(x);
     return [...new Set(allTags)];
   }
 

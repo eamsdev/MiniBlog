@@ -18,7 +18,6 @@ export const ArticlesSearch: FC = () => {
       </h1>
     );
     blogPosts = rootStore.blogPostStore.getByDate(monthAndYear[0], monthAndYear[1]);
-    console.log(blogPosts);
   } else if (!!route.params.tag) {
     headerComponent = (
       <h1 className="fs-3">
@@ -29,7 +28,6 @@ export const ArticlesSearch: FC = () => {
     blogPosts = rootStore.blogPostStore.getByTag(route.params.tag);
   }
 
-  console.log(blogPosts);
   return (
     <>
       <header>{headerComponent}</header>
