@@ -4,12 +4,6 @@ $navbar-height: 451px;
 $banner-breakpoint: lg;
 $preview-title-banner-height: 300px;
 
-@mixin separator {
-  width: 100%;
-  height: 2px;
-  background-color: #49417d4b;
-}
-
 body {
   overflow: overlay;
 }
@@ -34,7 +28,7 @@ body ::-webkit-scrollbar-thumb {
 html,
 #root {
   overflow-x: hidden;
-  background-color: $backdrop-color;
+  @include theme-aware('background-color', 'color-backdrop');
 
   > div {
     overflow-x: hidden;
@@ -46,7 +40,7 @@ html,
 }
 
 hr.solid {
-  border-top: 2px solid #777;
+  border-top: 2px solid;
 }
 
 .markdown > p {
@@ -60,70 +54,57 @@ hr.solid {
 
 aside {
   width: $sidebar-width;
+  @include theme-aware('color', 'color-text-hightlight');
+  @include theme-aware('background-color', 'color-hightlight');
 
-  @include secondary-palette;
   @include media-breakpoint-down($banner-breakpoint) {
     width: 100%;
   }
 
   nav {
-    .dash {
-      &::after {
-        content: '';
-        width: 0px;
-        height: 0px;
-        background-color: $backdrop-color;
-        border-radius: 10px;
-        margin-left: 8px;
-        margin-right: 8px;
-      }
-    }
-
     a {
-      color: $backdrop-color;
+      color: inherit;
       @include fast-transition;
 
       &:hover {
-        color: $backdrop-color;
+        color: inherit;
       }
     }
   }
 
   div hr {
-    border-top: 2px solid #e6e6e6;
+    border-top: 2px solid;
     opacity: 50%;
     width: 200px;
   }
 
   .profile {
-    color: $backdrop-color;
+    @include theme-aware('color', 'color-backdrop');
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     transition: max-height 0.3s ease-in-out;
     -webkit-transition: max-height 0.3s ease-in-out;
 
     picture {
       img {
-        border: 7px solid $backdrop-color;
+        border: 7px solid;
         @include basic-transition;
+        @include theme-aware('border-color', 'color-backdrop');
 
         &:hover {
-          border: 1px solid $backdrop-color;
+          border: 1px solid;
+          @include theme-aware('border-color', 'color-backdrop');
         }
       }
     }
 
     .name {
       text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
-
-      .highlight {
-        color: $tertiary-color;
-      }
     }
 
     .social-media {
       a {
-        color: $backdrop-color;
         @include fast-transition;
+        @include theme-aware('color', 'color-backdrop');
 
         &:hover {
           transform: scale(1.5);
@@ -145,7 +126,7 @@ aside {
       -webkit-transition: box-shadow 0.3s ease-in-out;
 
       .icon {
-        color: $secondary-color;
+        @include theme-aware('color', 'color-hightlight');
       }
 
       @include media-breakpoint-up($banner-breakpoint) {
@@ -156,9 +137,9 @@ aside {
 }
 
 main {
-  margin-left: $sidebar-width;
-  color: $text-primary-color;
   min-width: 0;
+  margin-left: $sidebar-width;
+  @include theme-aware('color', 'color-text');
 
   nav {
     max-width: $blogpost-width;
@@ -168,12 +149,13 @@ main {
   .pagination {
     li:not(.disabled) {
       a {
-        color: $secondary-color;
+        @include theme-aware('color', 'color-hightlight');
       }
 
       &.active {
         a {
-          @include secondary-palette;
+          @include theme-aware('color', 'color-text-hightlight');
+          @include theme-aware('background-color', 'color-hightlight');
         }
       }
     }
@@ -187,10 +169,10 @@ main {
     }
 
     .results {
-      background-color: $backdrop-color;
+      @include theme-aware('background-color', 'color-results-background');
 
       .hint {
-        color: #969faf;
+        @include theme-aware('color-results-hint', 'color-results-background');
       }
     }
   }
@@ -205,7 +187,7 @@ main {
 }
 
 .reading-time-container {
-  background-color: #ccc;
+  @include theme-aware('background-color', 'color-readingtime-background');
   width: fit-content;
 
   .collapsed {
@@ -227,11 +209,12 @@ main {
 }
 
 .aside-secondary {
-  background-color: $gray-600;
+  @include theme-aware('background-color', 'color-aside-secondary');
 }
 
-.blog-post {
-  @include primary-palette;
+article {
+  @include theme-aware('color', 'color-text');
+  @include theme-aware('background-color', 'color-card');
   max-width: $blogpost-width;
 
   &:hover {
@@ -245,8 +228,6 @@ main {
   }
 
   header {
-    color: #333;
-
     p {
       margin-bottom: 0;
     }
@@ -272,13 +253,30 @@ main {
 
 .search-result {
   cursor: pointer;
-  background-color: #ffffff;
+  @include theme-aware('background-color', 'color-card');
 
   &:hover {
-    @include secondary-palette;
+    @include theme-aware('color', 'color-text-hightlight');
+    @include theme-aware('background-color', 'color-hightlight');
 
     .card {
-      @include secondary-palette;
+      @include theme-aware('color', 'color-text-hightlight');
+      @include theme-aware('background-color', 'color-hightlight');
     }
   }
+}
+
+.mt-btwn {
+  &:first-child {
+    margin-top: $spacer * 2;
+  }
+
+  & + .mt-btwn {
+    margin-top: $spacer * 4;
+  }
+}
+
+footer {
+  @include theme-aware('color', 'color-footer-text');
+  @include theme-aware('background-color', 'color-footer-background');
 }

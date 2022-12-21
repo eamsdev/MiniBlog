@@ -24,8 +24,8 @@ export const AboutMe: FC = observer(() => {
           In this blog, I detail the challenges I have faced in my software development journey and
           how I have approached and solved them. While I am not currently looking for new job
           opportunities, I am always open to connecting with others in the industry and sharing my
-          experiences and insights. If you have any questions or would like to connect, please don't
-          hesitate to reach out.
+          experiences and insights. If you have any questions or would like to connect, please
+          don&#39;t hesitate to reach out.
         </p>
         <p>Thanks for visiting my blog, and I hope you find my content helpful and informative.</p>
       </section>

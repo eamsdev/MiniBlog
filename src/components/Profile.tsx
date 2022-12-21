@@ -4,6 +4,7 @@ import { rootStore } from '../stores/RootStore';
 import styled from 'styled-components';
 import { observer } from 'mobx-react';
 import profilephoto from '../assets/img/profilephoto.jpg';
+import { ThemeToggle } from '../components-library/ThemeToggle';
 
 type StyledProfileContainerProps = {
   showNavbar: boolean;
@@ -27,6 +28,7 @@ export const Profile: FC = observer(() => {
         <Separator />
         <Nav />
         <Separator />
+        <ThemeToggle />
       </Stack>
     </StyledProfileContainer>
   );

@@ -8,7 +8,7 @@ export const BlogPost: FC<PropsWithChildren<BlogFrontMatterProps>> = (
   props: PropsWithChildren<BlogFrontMatterProps>,
 ) => {
   return (
-    <Container className="mt-4 px-lg-2 px-1">
+    <Container className="px-lg-2 px-1 mt-btwn">
       <Helmet>
         <title>{props.frontMatter.title}</title>
         <meta name="description" content={props.frontMatter.description} />
@@ -18,7 +18,7 @@ export const BlogPost: FC<PropsWithChildren<BlogFrontMatterProps>> = (
         <span className="collapsed ps-1 d-inline-block overflow-hidden visible">Time to read</span>
         <span className="reading-time"> {props.frontMatter.readtime}</span>
       </div>
-      <article className="blog-post shadow-sm p-lg-4 p-3">
+      <article className="shadow-sm p-lg-4 p-3">
         <BlogHeader {...props} />
         <hr className="solid" />
         {props.children && props.children}
