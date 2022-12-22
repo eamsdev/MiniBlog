@@ -13,16 +13,12 @@ body {
   height: 6px !important;
 }
 
-body ::-webkit-scrollbar-thumb {
-  background-color: #ffffff26;
-}
-
 ::-webkit-scrollbar-thumb {
-  background-color: #00000033;
+  background-color: #ffffff89;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0000001a;
+  background: #0000008f;
 }
 
 html,
@@ -153,6 +149,12 @@ main {
         }
       }
     }
+
+    li.disabled {
+      a {
+        @include theme-aware-important('color', 'color-text-disabled');
+      }
+    }
   }
 
   .live-search {
@@ -252,13 +254,7 @@ article {
   }
 
   &:hover {
-    @include theme-aware('color', 'color-text-highlight');
-    @include theme-aware('background-color', 'color-highlight');
-
-    .card {
-      color: inherit;
-      background-color: inherit;
-    }
+    text-decoration: underline;
   }
 }
 
@@ -309,5 +305,28 @@ button {
       @include theme-aware-important('border-color', 'color-highlight');
       @include theme-aware-important('background-color', 'color-highlight');
     }
+
+    &.btn-light {
+      @include theme-aware('border-color', 'color-backdrop');
+      @include theme-aware('background-color', 'color-card');
+
+      &:disabled {
+        @include theme-aware-important('color', 'color-text-disabled');
+      }
+    }
   }
+}
+
+.date {
+  &.btn {
+    &.btn-light {
+      @include theme-aware('border-color', 'color-backdrop');
+      @include theme-aware('background-color', 'color-card');
+      cursor: auto;
+    }
+  }
+}
+
+.theme-toggle {
+  @include theme-aware-important('background-color', 'color-toggle');
 }

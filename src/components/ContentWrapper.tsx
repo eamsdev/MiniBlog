@@ -73,7 +73,7 @@ const BlogPostNavigation: FC<BlogPostNavigationProps> = observer(
         >
           Newer Article
         </Button>
-        <div className="btn btn-light disabled">{props.blogPostDate}</div>
+        <div className="date btn btn-light">{props.blogPostDate}</div>
         <Button
           variant="light"
           disabled={!props.hasOlderBlogPost}
