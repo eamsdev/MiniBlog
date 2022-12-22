@@ -5,7 +5,7 @@ export const ThemeToggle: FC = observer(() => {
   return (
     <div className="d-flex align-items-center justify-content-center">
       <button
-        className="shadow border-0 bg-dark d-inline fit-content rounded-pill px-2 position-relative"
+        className="border-0 bg-dark d-inline fit-content rounded-pill px-2 position-relative"
         style={{ cursor: 'pointer' }}
         onClick={() => rootStore.themeStore.toggleTheme()}
       >

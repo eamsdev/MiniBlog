@@ -54,8 +54,8 @@ hr.solid {
 
 aside {
   width: $sidebar-width;
-  @include theme-aware('color', 'color-text-hightlight');
-  @include theme-aware('background-color', 'color-hightlight');
+  @include theme-aware('color', 'color-text-highlight');
+  @include theme-aware('background-color', 'color-highlight');
   @include media-breakpoint-down($banner-breakpoint) {
     width: 100%;
   }
@@ -82,19 +82,14 @@ aside {
   }
 
   .profile {
-    text-shadow: 1px 1px 1px #0000004d;
     transition: max-height 0.3s ease-in-out;
     -webkit-transition: max-height 0.3s ease-in-out;
 
     picture {
       img {
-        border: 7px solid;
+        border: 3px solid;
         @include theme-aware('border-color', 'color-backdrop');
       }
-    }
-
-    .name {
-      text-shadow: 1px 1px 1px #0000004d;
     }
 
     .social-media {
@@ -111,7 +106,8 @@ aside {
       width: 50px;
       height: 50px;
       transform: translateY(24px);
-      @include theme-aware('color', 'color-hightlight');
+      @include theme-aware('color', 'color-highlight');
+      @include theme-aware('background-color', 'color-card');
 
       @include media-breakpoint-up($banner-breakpoint) {
         display: none;
@@ -125,6 +121,10 @@ main {
   margin-left: $sidebar-width;
   @include theme-aware('color', 'color-text');
 
+  #about {
+    @include theme-aware('background-color', 'color-card');
+  }
+
   nav {
     max-width: $blogpost-width;
     row-gap: 10px;
@@ -133,13 +133,14 @@ main {
   .pagination {
     li:not(.disabled) {
       a {
-        @include theme-aware('color', 'color-hightlight');
+        @include theme-aware('color', 'color-highlight');
+        @include theme-aware('background-color', 'color-card');
       }
 
       &.active {
         a {
-          @include theme-aware('color', 'color-text-hightlight');
-          @include theme-aware('background-color', 'color-hightlight');
+          @include theme-aware('color', 'color-text-highlight');
+          @include theme-aware('background-color', 'color-highlight');
         }
       }
     }
@@ -235,11 +236,15 @@ article {
   cursor: pointer;
   @include theme-aware('color', 'color-text');
   @include theme-aware('background-color', 'color-card');
-  @include transition-disable();
+
+  .card {
+    color: inherit;
+    background-color: inherit;
+  }
 
   &:hover {
-    @include theme-aware('color', 'color-text-hightlight');
-    @include theme-aware('background-color', 'color-hightlight');
+    @include theme-aware('color', 'color-text-highlight');
+    @include theme-aware('background-color', 'color-highlight');
 
     .card {
       color: inherit;
@@ -281,4 +286,32 @@ footer {
   &.translated {
     transform: translateX(26px);
   }
+}
+
+input {
+  @include theme-aware('background-color', 'color-card');
+}
+
+.page-item {
+  a {
+    @include theme-aware('border-color', 'color-backdrop');
+    @include theme-aware('background-color', 'color-card');
+  }
+
+  &.active a {
+    @include theme-aware('border-color', 'color-highlight');
+  }
+}
+
+button {
+  &.btn {
+    &.btn-primary {
+      @include theme-aware-important('border-color', 'color-highlight');
+      @include theme-aware-important('background-color', 'color-highlight');
+    }
+  }
+}
+
+.form-control:focus {
+  box-shadow: none;
 }
