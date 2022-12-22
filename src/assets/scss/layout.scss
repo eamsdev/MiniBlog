@@ -131,6 +131,15 @@ main {
   }
 
   .pagination {
+    a {
+      @include theme-aware('border-color', 'color-backdrop');
+      @include theme-aware('background-color', 'color-card');
+    }
+
+    &.active a {
+      @include theme-aware('border-color', 'color-highlight');
+    }
+
     li:not(.disabled) {
       a {
         @include theme-aware('color', 'color-highlight');
@@ -288,30 +297,17 @@ footer {
   }
 }
 
-input {
+input,
+input:focus {
   @include theme-aware('background-color', 'color-card');
-}
-
-.page-item {
-  a {
-    @include theme-aware('border-color', 'color-backdrop');
-    @include theme-aware('background-color', 'color-card');
-  }
-
-  &.active a {
-    @include theme-aware('border-color', 'color-highlight');
-  }
 }
 
 button {
   &.btn {
     &.btn-primary {
+      @include theme-aware-important('color', 'color-card');
       @include theme-aware-important('border-color', 'color-highlight');
       @include theme-aware-important('background-color', 'color-highlight');
     }
   }
-}
-
-.form-control:focus {
-  box-shadow: none;
 }
