@@ -1,18 +1,20 @@
 import { FC } from 'react';
-import { Form } from 'react-bootstrap';
 import { rootStore } from '../stores/RootStore';
 import { observer } from 'mobx-react';
-
 export const ThemeToggle: FC = observer(() => {
   return (
-    <Form.Group className="d-flex align-items-center justify-content-center">
-      <i className="icon fa fa-sun-o me-1 text-warning" />
-      <Form.Check
-        className="ms-1"
-        type="switch"
+    <div className="d-flex align-items-center justify-content-center">
+      <button
+        className="border-0 bg-dark d-inline fit-content rounded-pill px-2 py-1 position-relative"
+        style={{ cursor: 'pointer' }}
         onClick={() => rootStore.themeStore.toggleTheme()}
-      />
-      <i className="icon fa fa-moon-o" style={{ color: 'pink' }} />
-    </Form.Group>
+      >
+        <span>
+          <i className="icon fa fa-moon-o" style={{ color: 'pink' }} />
+          <i className="icon fa fa-sun-o text-warning ms-2" />
+          <div className={`ball ${rootStore.themeStore.isLight ? '' : 'translated'}`}></div>
+        </span>
+      </button>
+    </div>
   );
 });

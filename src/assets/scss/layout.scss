@@ -64,7 +64,6 @@ aside {
   nav {
     a {
       color: inherit;
-      @include fast-transition;
 
       &:hover {
         color: inherit;
@@ -89,11 +88,6 @@ aside {
         border: 7px solid;
         @include basic-transition;
         @include theme-aware('border-color', 'color-backdrop');
-
-        &:hover {
-          border: 1px solid;
-          @include theme-aware('border-color', 'color-backdrop');
-        }
       }
     }
 
@@ -103,12 +97,7 @@ aside {
 
     .social-media {
       a {
-        @include fast-transition;
         @include theme-aware('color', 'color-backdrop');
-
-        &:hover {
-          transform: scale(1.5);
-        }
 
         & + a {
           margin-left: 5px;
@@ -279,4 +268,24 @@ article {
 footer {
   @include theme-aware('color', 'color-footer-text');
   @include theme-aware('background-color', 'color-footer-background');
+}
+
+.fit-content {
+  width: fit-content;
+}
+
+.ball {
+  width: 23px;
+  height: 23px;
+  background-color: white;
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  border-radius: 50%;
+  transition: transform 0.05s linear;
+  -webkit-transition: transform 0.05s linear;
+
+  &.translated {
+    transform: translateX(23px);
+  }
 }

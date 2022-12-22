@@ -28,7 +28,6 @@ export const Profile: FC = observer(() => {
         <Separator />
         <Nav />
         <Separator />
-        <ThemeToggle />
       </Stack>
     </StyledProfileContainer>
   );
@@ -62,12 +61,13 @@ const Header: FC = () => {
         <img
           src={profilephoto}
           alt="Pete Eamsuwan"
-          className="rounded-circle shadow"
+          className="rounded-circle shadow mb-2"
           width="280px"
           height="280px"
         />
       </picture>
-      <h1 className="name fw-bold text-center fs-2">
+      <ThemeToggle />
+      <h1 className="name fw-bold text-center fs-2 mt-2">
         <span>PETE </span>
         <span>EAMS</span>
         <span>UWAN</span>

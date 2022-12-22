@@ -1,4 +1,4 @@
-import { action, makeObservable, observable } from 'mobx';
+import { action, computed, makeObservable, observable } from 'mobx';
 
 type Theme = 'light' | 'dark';
 
@@ -8,6 +8,11 @@ export class ThemeStore {
   constructor() {
     makeObservable(this);
     this.setTheme(this.theme);
+  }
+
+  @computed
+  get isLight() {
+    return this.theme == 'light';
   }
 
   @action
