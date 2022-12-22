@@ -1,7 +1,9 @@
 import Giscus from '@giscus/react';
+import { observer } from 'mobx-react';
 import { FC } from 'react';
+import { rootStore } from '../stores/RootStore';
 
-export const Discussion: FC = () => {
+export const Discussion: FC = observer(() => {
   return (
     <Giscus
       id="comments"
@@ -13,8 +15,8 @@ export const Discussion: FC = () => {
       reactionsEnabled="1"
       emitMetadata="1"
       inputPosition="bottom"
-      theme="light"
+      theme={rootStore.themeStore.isLight ? 'light' : 'light_high_contrast'}
       lang="en"
     />
   );
-};
+});
