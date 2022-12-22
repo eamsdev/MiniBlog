@@ -8,10 +8,10 @@ export class ThemeStore {
   constructor() {
     makeObservable(this);
 
-    const cookieTheme = this.getThemeFromCookie();
-    if (['light', 'dark'].includes(cookieTheme)) {
-      this.theme = cookieTheme as Theme;
-      this.setTheme(cookieTheme as Theme);
+    const theme = localStorage.getItem('theme');
+    if (['light', 'dark'].includes(theme)) {
+      this.theme = theme as Theme;
+      this.setTheme(theme as Theme);
     } else {
       this.setTheme(this.theme);
     }
@@ -31,13 +31,7 @@ export class ThemeStore {
   private setTheme(theme: Theme) {
     document.documentElement.className = '';
     document.documentElement.classList.add(`theme-${theme}`);
-    document.cookie = `theme=${theme};path=/`;
-  }
-
-  getThemeFromCookie() {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; theme=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
+    localStorage.setItem('theme', theme);
   }
 }
 

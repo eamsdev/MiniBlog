@@ -22,7 +22,7 @@ body ::-webkit-scrollbar-thumb {
 }
 
 ::-webkit-scrollbar-track {
-  background: #0000001A;
+  background: #0000001a;
 }
 
 html,
@@ -76,11 +76,15 @@ aside {
     width: 200px;
   }
 
+  header,
+  nav {
+    @include theme-aware('color', 'color-backdrop');
+  }
+
   .profile {
     text-shadow: 1px 1px 1px #0000004d;
     transition: max-height 0.3s ease-in-out;
     -webkit-transition: max-height 0.3s ease-in-out;
-    @include theme-aware('color', 'color-backdrop');
 
     picture {
       img {
@@ -102,15 +106,12 @@ aside {
     }
   }
 
-  .nav-arrow-container {
-    .nav-arrow {
+  .drawer {
+    button {
       width: 50px;
       height: 50px;
       transform: translateY(24px);
-
-      .icon {
-        @include theme-aware('color', 'color-hightlight');
-      }
+      @include theme-aware('color', 'color-hightlight');
 
       @include media-breakpoint-up($banner-breakpoint) {
         display: none;
