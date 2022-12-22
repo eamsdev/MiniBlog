@@ -18,7 +18,7 @@
 }
 // END: fade transition
 
-@mixin basic-transition {
-  transition: 0.3s ease-in-out;
-  -webkit-transition: 0.3s ease-in-out;
+@mixin transition-disable {
+  transition: none !important;
+  -webkit-transition: none !important;
 }

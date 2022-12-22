@@ -14,15 +14,15 @@ body {
 }
 
 body ::-webkit-scrollbar-thumb {
-  background-color: hsla(0, 0%, 100%, 0.16);
+  background-color: #ffffff26;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: #00000033;
 }
 
 ::-webkit-scrollbar-track {
-  background: hsla(0, 0%, 1%, 0.1);
+  background: #0000001A;
 }
 
 html,
@@ -56,7 +56,6 @@ aside {
   width: $sidebar-width;
   @include theme-aware('color', 'color-text-hightlight');
   @include theme-aware('background-color', 'color-hightlight');
-
   @include media-breakpoint-down($banner-breakpoint) {
     width: 100%;
   }
@@ -78,27 +77,24 @@ aside {
   }
 
   .profile {
-    @include theme-aware('color', 'color-backdrop');
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    text-shadow: 1px 1px 1px #0000004d;
     transition: max-height 0.3s ease-in-out;
     -webkit-transition: max-height 0.3s ease-in-out;
+    @include theme-aware('color', 'color-backdrop');
 
     picture {
       img {
         border: 7px solid;
-        @include basic-transition;
         @include theme-aware('border-color', 'color-backdrop');
       }
     }
 
     .name {
-      text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+      text-shadow: 1px 1px 1px #0000004d;
     }
 
     .social-media {
       a {
-        @include theme-aware('color', 'color-backdrop');
-
         & + a {
           margin-left: 5px;
         }
@@ -111,8 +107,6 @@ aside {
       width: 50px;
       height: 50px;
       transform: translateY(24px);
-      transition: box-shadow 0.3s ease-in-out;
-      -webkit-transition: box-shadow 0.3s ease-in-out;
 
       .icon {
         @include theme-aware('color', 'color-hightlight');
@@ -159,10 +153,6 @@ main {
 
     .results {
       @include theme-aware('background-color', 'color-results-background');
-
-      .hint {
-        @include theme-aware('color-results-hint', 'color-results-background');
-      }
     }
   }
 
@@ -242,15 +232,17 @@ article {
 
 .search-result {
   cursor: pointer;
+  @include theme-aware('color', 'color-text');
   @include theme-aware('background-color', 'color-card');
+  @include transition-disable();
 
   &:hover {
     @include theme-aware('color', 'color-text-hightlight');
     @include theme-aware('background-color', 'color-hightlight');
 
     .card {
-      @include theme-aware('color', 'color-text-hightlight');
-      @include theme-aware('background-color', 'color-hightlight');
+      color: inherit;
+      background-color: inherit;
     }
   }
 }
@@ -275,17 +267,17 @@ footer {
 }
 
 .ball {
-  width: 23px;
-  height: 23px;
+  width: 20px;
+  height: 20px;
   background-color: white;
   position: absolute;
-  top: 4px;
+  top: 3px;
   left: 4px;
   border-radius: 50%;
   transition: transform 0.05s linear;
   -webkit-transition: transform 0.05s linear;
 
   &.translated {
-    transform: translateX(23px);
+    transform: translateX(26px);
   }
 }
