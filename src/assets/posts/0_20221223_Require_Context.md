@@ -64,8 +64,8 @@ const markdownModules = getModules(markdownContext); // line 3
 ```
 
 _Wait!_. so how does line 2 work?
-`context.keys()`
-returns an array of strings, where each string is the relative path to a module in the context. The map function iterates over this array and uses the context function to require each module.
+
+**context.keys()** returns an array of strings, where each string is the relative path to a module in the context. The map function iterates over this array and uses the context function to require each module.
 
 So, if the context.keys() array contained the following strings:
 

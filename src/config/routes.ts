@@ -1,5 +1,6 @@
 import createRouter from 'router5';
 import browserPlugin from 'router5-plugin-browser';
+import ReactGA from 'react-ga';
 
 const routes = [
   { name: 'blogs', path: '/blogs/page/:page' },
@@ -19,6 +20,7 @@ const configureRouter = () => {
       useHash: false, // Hash routing is evil
     }),
   );
+  router.subscribe((state) => ReactGA.pageview(state.route.path));
   return router;
 };
 
