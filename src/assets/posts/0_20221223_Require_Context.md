@@ -76,9 +76,9 @@ So, if the context.keys() array contained the following strings:
 Then the context(key) expression would be equivalent to:
 
 ```ts
-const BlogPost1 from require('./assets/posts/blog_post_1.md');
-const BlogPost2 from require('./assets/posts/blog_post_2.md');
-const BlogPost3 from require('./assets/posts/blog_post_3.md');
+const BlogPost1 = require('./assets/posts/blog_post_1.md');
+const BlogPost2 = require('./assets/posts/blog_post_2.md');
+const BlogPost3 = require('./assets/posts/blog_post_3.md');
 ```
 
 The results from the getModules function will be dependent on which Webpack loader you use to load the markdown files, in my case, I am using:
