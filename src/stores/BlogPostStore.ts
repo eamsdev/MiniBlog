@@ -82,6 +82,10 @@ export class BlogPostStore {
 
   getBlogPostById(id: string): NavigatableBlogPostModel {
     const currentPostIndex = this.blogPosts.findIndex((x) => x.attributes.id == id);
+    if (currentPostIndex == -1) {
+      return undefined;
+    }
+
     return {
       currentPost: toJS(this.blogPosts[currentPostIndex]),
       newerPostId:
@@ -147,6 +151,7 @@ export type FrontMatterSchema = {
   date: string | undefined;
   author: string | undefined;
   readtime: string | undefined;
+  meta: string | undefined;
   tags: string[] | undefined;
 };
 

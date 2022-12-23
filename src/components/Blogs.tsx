@@ -23,6 +23,14 @@ export const Blogs: FC = observer(() => {
 
   if (contentType == ContentType.NAVIGATION) {
     const navigatableBlogPostModel = rootStore.blogPostStore.getBlogPostById(articleId);
+    if (navigatableBlogPostModel == undefined) {
+      return (
+        <Container className="p-0 m-0 d-flex flex-row align-items-center justify-content-center">
+          <h1>Content Not Found</h1>
+        </Container>
+      );
+    }
+
     const blogPost = navigatableBlogPostModel.currentPost;
     newerPostId = navigatableBlogPostModel.newerPostId;
     olderPostId = navigatableBlogPostModel.olderPostId;

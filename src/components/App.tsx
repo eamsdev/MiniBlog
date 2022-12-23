@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet';
 import { Content } from './Content';
 import { ContentBar } from './ContentBar';
 import { Sidebar } from './Sidebar';
@@ -5,6 +6,13 @@ import { Sidebar } from './Sidebar';
 export const App = () => {
   return (
     <>
+      <Helmet>
+        <title>Pete Eamsuwan&apos;s Developer Blog Site</title>
+        <meta
+          name="description"
+          content="Welcome to Pete Eamsuwan's developer blog! Based in Melbourne, Pete is a .NET developer with expertise in TypeScript, React, SQL Server, and AWS. On this blog, Pete shares his knowledge and experiences with these technologies, as well as insights into software development best practices."
+        />
+      </Helmet>
       <div className="d-lg-flex flex-row justify-content-between position-relative">
         <Sidebar />
         <Content />
