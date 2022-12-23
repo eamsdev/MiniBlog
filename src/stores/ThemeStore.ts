@@ -3,7 +3,7 @@ import { action, computed, makeObservable, observable } from 'mobx';
 type Theme = 'light' | 'dark';
 
 export class ThemeStore {
-  @observable theme: Theme = 'dark';
+  @observable theme: Theme = 'light';
 
   constructor() {
     makeObservable(this);

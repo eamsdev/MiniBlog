@@ -70,7 +70,7 @@ aside {
 
   header,
   nav {
-    @include theme-aware('color', 'color-backdrop');
+    @include theme-aware('color', 'color-text-highlight');
   }
 
   .profile {
@@ -80,7 +80,7 @@ aside {
     picture {
       img {
         border: 3px solid;
-        @include theme-aware('border-color', 'color-backdrop');
+        @include theme-aware('border-color', 'color-text-highlight');
       }
     }
 
@@ -98,7 +98,7 @@ aside {
       width: 50px;
       height: 50px;
       transform: translateY(24px);
-      @include theme-aware('color', 'color-highlight');
+      @include theme-aware('color', 'color-button-text');
       @include theme-aware('background-color', 'color-card');
 
       @include media-breakpoint-up($banner-breakpoint) {
@@ -124,31 +124,26 @@ main {
 
   .pagination {
     a {
-      @include theme-aware('border-color', 'color-backdrop');
-      @include theme-aware('background-color', 'color-card');
+      @include theme-aware('color', 'color-button-text');
+      @include theme-aware('border-color', 'color-button-border');
+      @include theme-aware('background-color', 'color-button');
     }
 
     &.active a {
       @include theme-aware('border-color', 'color-highlight');
     }
 
-    li:not(.disabled) {
-      a {
-        @include theme-aware('color', 'color-highlight');
-        @include theme-aware('background-color', 'color-card');
-      }
-
+    li {
       &.active {
         a {
-          @include theme-aware('color', 'color-text-highlight');
-          @include theme-aware('background-color', 'color-highlight');
+          @include theme-aware('color', 'color-button-active-text');
+          @include theme-aware('background-color', 'color-button-active');
         }
       }
-    }
-
-    li.disabled {
-      a {
-        @include theme-aware-important('color', 'color-text-disabled');
+      &.disabled {
+        a {
+          @include theme-aware-important('color', 'color-button-disabled-text');
+        }
       }
     }
   }
@@ -157,6 +152,8 @@ main {
     z-index: 4;
 
     input {
+      @include theme-aware('color', 'color-text');
+      @include theme-aware('border-color', 'color-card');
       width: auto;
     }
 
@@ -297,32 +294,34 @@ input:focus {
 button {
   &.btn {
     &.btn-primary {
-      @include theme-aware-important('color', 'color-card');
+      @include theme-aware-important('color', 'color-text-highlight');
       @include theme-aware-important('border-color', 'color-highlight');
       @include theme-aware-important('background-color', 'color-highlight');
-    }
-
-    &.btn-light {
-      @include theme-aware('border-color', 'color-backdrop');
-      @include theme-aware('background-color', 'color-card');
-
-      &:disabled {
-        @include theme-aware-important('color', 'color-text-disabled');
-      }
     }
   }
 }
 
+button,
 .date {
   &.btn {
     &.btn-light {
-      @include theme-aware('border-color', 'color-backdrop');
-      @include theme-aware('background-color', 'color-card');
+      @include theme-aware('color', 'color-button-text');
+      @include theme-aware('border-color', 'color-button-border');
+      @include theme-aware('background-color', 'color-button');
       cursor: auto;
+
+      &:disabled {
+        @include theme-aware-important('color', 'color-button-disabled-text');
+        cursor: none;
+      }
     }
   }
 }
 
 .theme-toggle {
   @include theme-aware-important('background-color', 'color-toggle');
+}
+
+nav * {
+  @include no-transition();
 }

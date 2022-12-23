@@ -15,7 +15,7 @@ export const Discussion: FC = observer(() => {
       reactionsEnabled="1"
       emitMetadata="1"
       inputPosition="bottom"
-      theme={rootStore.themeStore.isLight ? 'light' : 'light_high_contrast'}
+      theme={rootStore.themeStore.isLight ? 'light_high_contrast' : 'transparent_dark'}
       lang="en"
     />
   );
