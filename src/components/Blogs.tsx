@@ -6,6 +6,7 @@ import { observer } from 'mobx-react';
 import { useRoute, useRouteNode } from 'react-router5';
 import { Container } from 'react-bootstrap';
 import { ContentType, ContentWrapper } from './ContentWrapper';
+import { Helmet } from 'react-helmet';
 
 export const Blogs: FC = observer(() => {
   const { router } = useRoute();
@@ -38,6 +39,10 @@ export const Blogs: FC = observer(() => {
     itemsKey = blogPost.attributes.id;
     content = (
       <Container className="p-0 m-0">
+        <Helmet>
+          <title>{blogPost.attributes.title}</title>
+          <meta name="description" content={blogPost.attributes.meta} />
+        </Helmet>
         <BlogPost key={blogPost.attributes.title as string} frontMatter={blogPost.attributes}>
           <StylisedMarkdown markdown={blogPost.body} />
         </BlogPost>

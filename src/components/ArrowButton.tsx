@@ -10,7 +10,7 @@ export const ArrowButton: FC<ArrowButtonProps> = (props: ArrowButtonProps) => {
   return (
     <div className="drawer d-flex flex-row justify-content-center">
       <button
-        className="fs-4 rounded-circle border border-5 border-white"
+        className="d-flex align-items-center justify-content-center p-0 m-0 fs-5 rounded-circle border border-5 border-white"
         onClick={() => onClick()}
       >
         {direction == 'up' ? (

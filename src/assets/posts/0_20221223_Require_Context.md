@@ -73,7 +73,7 @@ So, if the context.keys() array contained the following strings:
 ['./assets/posts/blog_post_1.md', './assets/posts/blog_post_2.md', './assets/posts/blog_post_3.md'];
 ```
 
-Then the content(key) expression would be equivalent to:
+Then the context(key) expression would be equivalent to:
 
 ```ts
 const BlogPost1 from require('./assets/posts/blog_post_1.md');

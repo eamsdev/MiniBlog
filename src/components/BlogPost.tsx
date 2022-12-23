@@ -1,6 +1,5 @@
 import { FC, PropsWithChildren } from 'react';
 import { Container } from 'react-bootstrap';
-import { Helmet } from 'react-helmet';
 import { FrontMatterSchema } from 'stores/BlogPostStore';
 import { Discussion } from './Discussion';
 
@@ -9,10 +8,6 @@ export const BlogPost: FC<PropsWithChildren<BlogFrontMatterProps>> = (
 ) => {
   return (
     <Container className="px-lg-2 px-1 mt-btwn">
-      <Helmet>
-        <title>{props.frontMatter.title}</title>
-        <meta name="description" content={props.frontMatter.meta} />
-      </Helmet>
       <div className="reading-time-container rounded fs-7 d-flex flex-row align-items-center px-2 py-1">
         <i className="icon fs-5 fa fa-clock-o d-inline-block text-center align-bottom" />
         <span className="collapsed ps-1 d-inline-block overflow-hidden visible">Time to read</span>
