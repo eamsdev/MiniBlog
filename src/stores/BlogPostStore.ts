@@ -138,8 +138,8 @@ export class BlogPostModel {
 
   matches(searchString: string): boolean {
     return (
-      this.attributes.title.includes(searchString) ||
-      this.attributes.description.includes(searchString)
+      this.attributes.title.toLowerCase().includes(searchString.toLowerCase()) ||
+      this.attributes.description.toLowerCase().includes(searchString.toLowerCase())
     );
   }
 }
