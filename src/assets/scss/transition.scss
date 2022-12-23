@@ -17,13 +17,3 @@
   transition: opacity 250ms ease;
 }
 // END: fade transition
-
-@mixin transition-disable {
-  transition: none !important;
-  -webkit-transition: none !important;
-}
-
-body * {
-  transition: border-color 0.05s, background-color 0.05s, color 0.05s !important;
-  -webkit-transition: border-color 0.05s, background-color 0.05s, color 0.05s !important;
-}

@@ -21,7 +21,7 @@ export class BlogPostStore {
   getByDate(month: number, year: number) {
     return this.blogPosts.filter((x) => {
       const momentDate = moment(x.attributes.date, 'DD-MM-YYYY');
-      return momentDate.month() == month && momentDate.year() == year;
+      return momentDate.month() + 1 == month && momentDate.year() == year;
     });
   }
 
@@ -60,7 +60,7 @@ export class BlogPostStore {
       .map((x) => {
         return {
           displayDate: x.format('MMMM') + ' ' + x.year(),
-          queryString: `${x.month()}-${x.year()}`,
+          queryString: `${x.month() + 1}-${x.year()}`,
         };
       });
 

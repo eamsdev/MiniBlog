@@ -14,7 +14,7 @@ export const ArticlesSearch: FC = () => {
     headerComponent = (
       <h1 className="fs-3">
         <i className="icon fa fa-calendar" />
-        {` Month: ${moment(monthAndYear[0], 'M').format('MMMM')} ${monthAndYear[1]}`}
+        {` Month: ${moment(parseInt(monthAndYear[0]), 'M').format('MMMM')} ${monthAndYear[1]}`}
       </h1>
     );
     blogPosts = rootStore.blogPostStore.getByDate(monthAndYear[0], monthAndYear[1]);

@@ -2,7 +2,7 @@
 id: require-context
 title: Load files dynamically with Webpack
 description: Learn how to use Webpack's require.context to dynamically load markdown files for a static blog
-date: 23-11-2022
+date: 23-12-2022
 author: Pete Eamsuwan
 readtime: 5 min
 meta: In this article, we'll show you how to use Webpack's require.context function to dynamically load markdown files and make it easier to add new content to your site. With this technique, you can simply drop in new markdown files and rebuild your site without having to manually update any configuration files. Whether you're using a static site generator like Gatsby or building a custom blog platform, this tutorial will help you streamline your workflow and make it easier to manage your content.
