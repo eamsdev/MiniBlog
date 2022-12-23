@@ -2,6 +2,9 @@
 const { resolve } = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Mode = require('frontmatter-markdown-loader/mode');
+const SitemapPlugin = require('sitemap-webpack-plugin').default;
+
+const paths = ['/about', '/blogs/page/0', '/article/require-context'];
 
 module.exports = {
   entry: './index.tsx',
@@ -41,6 +44,15 @@ module.exports = {
       },
     ],
   },
-  plugins: [new HtmlWebpackPlugin({ template: 'index.html.ejs' })],
+  plugins: [
+    new HtmlWebpackPlugin({ template: 'index.html.ejs' }),
+    new SitemapPlugin({
+      base: 'https://eams.dev',
+      paths,
+      options: {
+        filename: 'map.xml',
+      },
+    }),
+  ],
   externals: ['jquery'],
 };
