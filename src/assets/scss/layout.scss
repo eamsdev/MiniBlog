@@ -63,8 +63,6 @@ aside {
   }
 
   div hr {
-    border-top: 2px solid;
-    opacity: 50%;
     width: 200px;
   }
 
@@ -80,7 +78,7 @@ aside {
     picture {
       img {
         border: 3px solid;
-        @include theme-aware('border-color', 'color-text-highlight');
+        @include theme-aware('border-color', 'color-accent-aside');
       }
     }
 
@@ -98,7 +96,7 @@ aside {
       width: 50px;
       height: 50px;
       transform: translateY(24px);
-      @include theme-aware('color', 'color-button-text');
+      @include theme-aware('color', 'color-accent-main');
       @include theme-aware('background-color', 'color-card');
 
       @include media-breakpoint-up($banner-breakpoint) {
@@ -317,4 +315,31 @@ input:focus {
 
 .gsc-comments {
   margin-right: 5px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  @include theme-aware('color', 'color-accent-main');
+}
+
+aside {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    @include theme-aware('color', 'color-accent-aside');
+  }
+
+  hr {
+    @include theme-aware('border-color', 'color-accent-aside');
+  }
+}
+
+hr {
+  opacity: 0.5;
+  @include theme-aware('color', 'color-accent-main');
 }

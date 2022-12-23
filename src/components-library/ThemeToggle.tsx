@@ -10,7 +10,7 @@ export const ThemeToggle: FC = observer(() => {
         onClick={() => rootStore.themeStore.toggleTheme()}
       >
         <span>
-          <i className="icon fa fa-moon-o" style={{ color: 'pink' }} />
+          <i className="icon fa fa-moon-o" style={{ color: 'lightgreen' }} />
           <i className="icon fa fa-sun-o text-warning ms-2" />
           <div className={`ball ${rootStore.themeStore.isLight ? '' : 'translated'}`}></div>
         </span>
