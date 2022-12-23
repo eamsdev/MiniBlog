@@ -120,29 +120,49 @@ main {
   nav {
     max-width: $blogpost-width;
     row-gap: 10px;
-  }
 
-  .pagination {
-    a {
-      @include theme-aware('color', 'color-button-text');
-      @include theme-aware('border-color', 'color-button-border');
-      @include theme-aware('background-color', 'color-button');
+    & * {
+      @include no-transition();
     }
 
-    &.active a {
-      @include theme-aware('border-color', 'color-highlight');
+    .date {
+      cursor: auto !important;
     }
 
-    li {
-      &.active {
-        a {
-          @include theme-aware('color', 'color-button-active-text');
-          @include theme-aware('background-color', 'color-button-active');
+    button,
+    .date {
+      &.btn {
+        &.btn-primary {
+          @include primary-button();
+        }
+
+        &.btn-light {
+          @include secondary-button();
+
+          &:disabled {
+            @include theme-aware-important('color', 'color-button-disabled-text');
+            cursor: none;
+          }
         }
       }
-      &.disabled {
+    }
+
+    .pagination {
+      li {
         a {
-          @include theme-aware-important('color', 'color-button-disabled-text');
+          @include secondary-button();
+        }
+
+        &.active {
+          a {
+            @include secondary-button-active();
+          }
+        }
+
+        &.disabled {
+          a {
+            @include theme-aware-important('color', 'color-button-disabled-text');
+          }
         }
       }
     }
@@ -291,37 +311,10 @@ input:focus {
   @include theme-aware('background-color', 'color-card');
 }
 
-button {
-  &.btn {
-    &.btn-primary {
-      @include theme-aware-important('color', 'color-text-highlight');
-      @include theme-aware-important('border-color', 'color-highlight');
-      @include theme-aware-important('background-color', 'color-highlight');
-    }
-  }
-}
-
-button,
-.date {
-  &.btn {
-    &.btn-light {
-      @include theme-aware('color', 'color-button-text');
-      @include theme-aware('border-color', 'color-button-border');
-      @include theme-aware('background-color', 'color-button');
-      cursor: auto;
-
-      &:disabled {
-        @include theme-aware-important('color', 'color-button-disabled-text');
-        cursor: none;
-      }
-    }
-  }
-}
-
 .theme-toggle {
-  @include theme-aware-important('background-color', 'color-toggle');
+  @include theme-aware('background-color', 'color-toggle');
 }
 
-nav * {
-  @include no-transition();
+.gsc-comments {
+  margin-right: 5px;
 }

@@ -1,5 +1,5 @@
 ---
-id: require-context
+id: require-context2
 title: Load files dynamically with Webpack
 description: Learn how to use Webpack's require.context to dynamically load markdown files for a static blog
 date: 23-12-2022
@@ -70,11 +70,7 @@ _Wait!_. so how does line 2 work?
 So, if the context.keys() array contained the following strings:
 
 ```ts
-[
-  './assets/posts/blog_post_1.md', 
-  './assets/posts/blog_post_2.md', 
-  './assets/posts/blog_post_3.md'
-];
+['./assets/posts/blog_post_1.md', './assets/posts/blog_post_2.md', './assets/posts/blog_post_3.md'];
 ```
 
 Then the context(key) expression would be equivalent to:
