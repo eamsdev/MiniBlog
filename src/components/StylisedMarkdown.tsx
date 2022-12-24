@@ -20,12 +20,16 @@ export const StylisedMarkdown: FC<{ markdown: string }> = (props) => {
   );
 };
 
-const CodeBlock: FC<CodeProps> = ({ className, children, ...props }: CodeProps) => {
+const CodeBlock: FC<CodeProps> = ({ className, inline, children, ...props }: CodeProps) => {
   // https://github.com/react-syntax-highlighter/react-syntax-highlighter/issues/489#issuecomment-1316278858
   const match = /language-(\w+)/.exec(className || '');
-  return (
+  return !inline ? (
     <SyntaxHighlighter {...props} style={dracula} language={match ? match[1] : 'language-shell'}>
       {String(children).replace(/\n$/, '')}
     </SyntaxHighlighter>
+  ) : (
+    <code className={className} {...props}>
+      {children}
+    </code>
   );
 };

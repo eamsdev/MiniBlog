@@ -5,6 +5,7 @@ export class UiStore {
 
   constructor() {
     makeObservable(this);
+    this.showNavbar = true;
   }
 
   @action.bound

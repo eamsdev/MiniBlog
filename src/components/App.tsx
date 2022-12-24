@@ -7,7 +7,7 @@ export const App = () => {
   return (
     <>
       <Helmet>
-        <title>Pete Eamsuwan&apos;s Developer Blog Site</title>
+        <title>Pete Eamsuwan&apos;s Dev Blog</title>
         <meta
           name="description"
           content="Welcome to Pete Eamsuwan's developer blog! Based in Melbourne, Pete is a .NET developer with expertise in TypeScript, React, SQL Server, and AWS. On this blog, Pete shares his knowledge and experiences with these technologies, as well as insights into software development best practices."
