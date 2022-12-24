@@ -3,7 +3,7 @@ import { Stack } from 'react-bootstrap';
 import { rootStore } from '../stores/RootStore';
 import styled from 'styled-components';
 import { observer } from 'mobx-react';
-import profilephoto from '../assets/img/profilephoto.png';
+import profilephoto from '../assets/img/profilephoto.jpg';
 import { ThemeToggle } from '../components-library/ThemeToggle';
 
 type StyledProfileContainerProps = {
