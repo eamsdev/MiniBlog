@@ -2,7 +2,9 @@ import { FC } from 'react';
 import { useRouteNode } from 'react-router5';
 import { BlogPostModel } from 'stores/BlogPostStore';
 import { rootStore } from '../stores/RootStore';
-import moment from 'moment';
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+dayjs.extend(customParseFormat);
 
 export const ArticlesSearch: FC = () => {
   const { route } = useRouteNode('');
@@ -14,7 +16,9 @@ export const ArticlesSearch: FC = () => {
     headerComponent = (
       <h1 className="fs-3">
         <i className="icon fa fa-calendar" />
-        {` Month: ${moment(parseInt(monthAndYear[0]), 'M').format('MMMM')} ${monthAndYear[1]}`}
+        {` Month: ${dayjs()
+          .month(parseInt(monthAndYear[0]) - 1)
+          .format('MMMM')} ${monthAndYear[1]}`}
       </h1>
     );
     blogPosts = rootStore.blogPostStore.getByDate(monthAndYear[0], monthAndYear[1]);

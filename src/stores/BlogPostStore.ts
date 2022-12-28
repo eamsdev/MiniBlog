@@ -1,5 +1,7 @@
 import { observable, makeObservable, runInAction, toJS, computed, action } from 'mobx';
-import moment from 'moment';
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+dayjs.extend(customParseFormat);
 
 const markdownContext = require.context('../assets/posts', false, /\.md$/);
 
@@ -20,8 +22,8 @@ export class BlogPostStore {
 
   getByDate(month: number, year: number) {
     return this.blogPosts.filter((x) => {
-      const momentDate = moment(x.attributes.date, 'DD-MM-YYYY');
-      return momentDate.month() + 1 == month && momentDate.year() == year;
+      const date = dayjs(x.attributes.date, 'DD-MM-YYYY');
+      return date.month() + 1 == month && date.year() == year;
     });
   }
 
@@ -54,7 +56,7 @@ export class BlogPostStore {
     const allDates = this.blogPosts
       .map((x) => x.attributes.date)
       .reduce((acccum, value) => acccum.concat(value), [])
-      .map((x) => moment(x, 'DD-MM-YYYY'))
+      .map((x) => dayjs(x, 'DD-MM-YYYY'))
       .sort((a, b) => a.valueOf() - b.valueOf())
       .reverse()
       .map((x) => {
