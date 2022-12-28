@@ -33,9 +33,6 @@ export const LiveSearch: FC = observer(() => {
     <div ref={wrapperRef} className="live-search ms-1 me-lg-2 overflow-visible d-flex w-100">
       <div style={{ height: '38px' }}>
         <TextInput
-          isInvalid={false}
-          isValid={false}
-          disabled={false}
           placeholder={'Search for content...'}
           onChanged={(value: string) => liveSearchStore.updateSearchString(value)}
           value={liveSearchStore.searchString}

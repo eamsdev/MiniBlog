@@ -1,7 +1,6 @@
 import { TransitionWrapper } from '../components-library/TransitionWrapper';
 import { observer } from 'mobx-react';
 import { FC, PropsWithChildren } from 'react';
-import { Button, ButtonGroup } from 'react-bootstrap';
 import ReactPaginate from 'react-paginate';
 import { LiveSearch } from './LiveSearch';
 
@@ -33,14 +32,14 @@ export const ContentWrapper: FC<PropsWithChildren<ContentWrapperProps>> = observ
       <>
         <nav className="px-2 d-flex flex-md-row flex-column justify-content-between flex-wrap w-100 align-content-center align-items-center">
           <div className="d-flex justify-content-flex-start align-items-center flex-nowrap">
-            <Button
-              variant="primary"
+            <button
+              className="btn btn-primary"
               onClick={() => {
                 props.onPageSelected(0);
               }}
             >
               <i className="icon fa fa-home" />
-            </Button>
+            </button>
             <LiveSearch />
           </div>
           {navigationComponent}
@@ -65,23 +64,23 @@ type BlogPostNavigationProps = {
 const BlogPostNavigation: FC<BlogPostNavigationProps> = observer(
   (props: BlogPostNavigationProps) => {
     return (
-      <ButtonGroup className="d-flex align-items-center">
-        <Button
-          variant="light"
+      <div className="btn-group d-flex align-items-center" role="group">
+        <button
+          className="btn btn-light"
           disabled={!props.hasNewerBlogPost}
           onClick={() => props.onNewerBlogPost()}
         >
           Newer Article
-        </Button>
+        </button>
         <div className="date btn btn-light">{props.blogPostDate}</div>
-        <Button
-          variant="light"
+        <button
+          className="btn btn-light"
           disabled={!props.hasOlderBlogPost}
           onClick={() => props.onOlderBlogPost()}
         >
           Older Article
-        </Button>
-      </ButtonGroup>
+        </button>
+      </div>
     );
   },
 );

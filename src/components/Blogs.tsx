@@ -4,7 +4,6 @@ import { StylisedMarkdown } from './StylisedMarkdown';
 import { rootStore } from '../stores/RootStore';
 import { observer } from 'mobx-react';
 import { useRoute, useRouteNode } from 'react-router5';
-import { Container } from 'react-bootstrap';
 import { ContentType, ContentWrapper } from './ContentWrapper';
 import { Helmet } from 'react-helmet';
 
@@ -26,9 +25,9 @@ export const Blogs: FC = observer(() => {
     const navigatableBlogPostModel = rootStore.blogPostStore.getBlogPostById(articleId);
     if (navigatableBlogPostModel == undefined) {
       return (
-        <Container className="p-0 m-0 d-flex flex-row align-items-center justify-content-center">
+        <div className="container p-0 m-0 d-flex flex-row align-items-center justify-content-center">
           <h1>Content Not Found</h1>
-        </Container>
+        </div>
       );
     }
 
@@ -38,7 +37,7 @@ export const Blogs: FC = observer(() => {
     blogPostDate = navigatableBlogPostModel.currentPost.attributes.date;
     itemsKey = blogPost.attributes.id;
     content = (
-      <Container className="p-0 m-0">
+      <div className="container p-0 m-0">
         <Helmet>
           <title>{blogPost.attributes.title}</title>
           <meta name="description" content={blogPost.attributes.meta} />
@@ -46,19 +45,19 @@ export const Blogs: FC = observer(() => {
         <BlogPost key={blogPost.attributes.title as string} frontMatter={blogPost.attributes}>
           <StylisedMarkdown markdown={blogPost.body} />
         </BlogPost>
-      </Container>
+      </div>
     );
   } else {
     const itemsAtPage = rootStore.blogPostStore.getItemsAtPage(pageNumber);
     itemsKey = itemsAtPage[0]?.attributes.id;
     content = (
-      <Container className="p-0 m-0">
+      <div className="container p-0 m-0">
         {itemsAtPage.map((x) => (
           <BlogPost key={x.attributes.title as string} frontMatter={x.attributes}>
             <StylisedMarkdown markdown={x.body} />
           </BlogPost>
         ))}
-      </Container>
+      </div>
     );
   }
 

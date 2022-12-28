@@ -1,25 +1,17 @@
 import { FC } from 'react';
-import Form from 'react-bootstrap/Form';
 
 type TextInputProps = {
-  isInvalid: boolean;
-  isValid: boolean;
-  disabled: boolean;
   value: string;
   placeholder?: string;
-  size?: 'sm' | 'lg';
   onChanged: (text: string) => void;
 };
 
 const TextInput: FC<TextInputProps> = (props: TextInputProps) => {
-  const { value, isValid, isInvalid, disabled, placeholder, onChanged, size } = props;
+  const { value, placeholder, onChanged } = props;
   return (
-    <Form.Control
+    <input
       type="text"
-      {...(size ? { size: size } : {})}
-      disabled={disabled}
-      isValid={isValid}
-      isInvalid={isInvalid}
+      className="form-control"
       value={value}
       placeholder={placeholder ?? '...'}
       onChange={(event) => onChanged(event.target.value)}

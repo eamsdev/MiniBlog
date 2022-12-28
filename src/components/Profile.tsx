@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Stack } from 'react-bootstrap';
 import { rootStore } from '../stores/RootStore';
 import styled from 'styled-components';
 import { observer } from 'mobx-react';
@@ -23,12 +22,12 @@ export const Profile: FC = observer(() => {
       showNavbar={rootStore.uiStore.showNavbar}
       className="container profile overflow-hidden d-flex flex-column justify-content-between h-100"
     >
-      <Stack gap={0} className="p-3">
+      <div className="vstack gap-0 p-3">
         <Header />
         <Separator />
         <Nav />
         <Separator />
-      </Stack>
+      </div>
     </StyledProfileContainer>
   );
 });

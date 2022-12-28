@@ -3,6 +3,7 @@ const { resolve } = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Mode = require('frontmatter-markdown-loader/mode');
 const SitemapPlugin = require('sitemap-webpack-plugin').default;
+const CompressionPlugin = require('compression-webpack-plugin');
 
 const paths = ['/about', '/blogs/page/0', '/article/require-context'];
 
@@ -48,6 +49,10 @@ module.exports = {
       options: {
         filename: 'map.xml',
       },
+    }),
+    new CompressionPlugin({
+      algorithm: 'gzip',
+      test: /.js$|.css$/,
     }),
   ],
   externals: ['jquery'],

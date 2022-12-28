@@ -1,19 +1,18 @@
 import { FC } from 'react';
 import { Separator } from './Profile';
-import { Stack } from 'react-bootstrap';
 import { observer } from 'mobx-react';
 import { rootStore } from '../stores/RootStore';
 
 export const ContentBar: FC = () => {
   return (
     <aside className="aside-secondary p-0 text-white min-vh-100 d-none d-xl-block">
-      <Stack gap={0} className="p-3">
+      <div className="vstack gap-0 p-3">
         <ByTags />
         <Separator />
         <ByMonths />
         <Separator />
         <ByArticles />
-      </Stack>
+      </div>
     </aside>
   );
 };

@@ -1,5 +1,4 @@
 import { FC, PropsWithChildren } from 'react';
-import { Container } from 'react-bootstrap';
 import { FrontMatterSchema } from 'stores/BlogPostStore';
 import { Discussion } from './Discussion';
 
@@ -7,7 +6,7 @@ export const BlogPost: FC<PropsWithChildren<BlogFrontMatterProps>> = (
   props: PropsWithChildren<BlogFrontMatterProps>,
 ) => {
   return (
-    <Container className="px-lg-2 px-1 mt-btwn">
+    <div className="container px-lg-2 px-1 mt-btwn">
       <div className="reading-time-container fs-7 d-flex flex-row align-items-center px-2 py-1">
         <i className="icon fs-5 fa fa-clock-o d-inline-block text-center align-bottom" />
         <span className="collapsed ps-1 d-inline-block overflow-hidden visible">Time to read</span>
@@ -20,7 +19,7 @@ export const BlogPost: FC<PropsWithChildren<BlogFrontMatterProps>> = (
         <hr className="solid" />
         <Discussion />
       </article>
-    </Container>
+    </div>
   );
 };
 
