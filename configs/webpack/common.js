@@ -4,6 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Mode = require('frontmatter-markdown-loader/mode');
 const SitemapPlugin = require('sitemap-webpack-plugin').default;
 const CompressionPlugin = require('compression-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const paths = ['/about', '/blogs/page/0', '/article/require-context'];
 
@@ -22,11 +24,11 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
         test: /\.(scss|sass)$/,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
@@ -54,6 +56,8 @@ module.exports = {
       algorithm: 'gzip',
       test: /.js$|.css$/,
     }),
+    new MiniCssExtractPlugin(),
+    new BundleAnalyzerPlugin(),
   ],
   externals: ['jquery'],
 };
