@@ -62,7 +62,7 @@ module.exports = {
       test: /.js$|.css$/,
     }),
     new MiniCssExtractPlugin(),
-    new BundleAnalyzerPlugin(),
+    // new BundleAnalyzerPlugin(),
   ],
   externals: ['jquery'],
 };
