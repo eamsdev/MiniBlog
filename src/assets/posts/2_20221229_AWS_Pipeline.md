@@ -38,7 +38,7 @@ Next, you will need to choose the source of your build. In this case, we will be
 Select the following:
 
 - Select "GitHub (Version 2)" as your source provider
-- Create a new connection to your github by clicking "Connect to Github" and Follow the prompts to allow AWS to access your GitHub repository.
+- Create a new connection to your github by clicking "Connect to Github" and follow the prompts to allow AWS to access your GitHub repository.
 - Then, choose your repository and branch name.
 - You may also want to enable the option to "Start the pipeline on source code change" so that the deployment process is automatically triggered when changes are made.
 - Leave the rest of the settings as default.
@@ -58,7 +58,7 @@ Click "Create project" to configure your new build project and configure the fol
 
 ![choose source](/post-img/aws-pipeline-3.JPG)
 
-Click continue to code pipeline, and select the project name you had just created. Leave the rest of the settings as default and click next
+Click continue to code pipeline, and select the project name you had just created. Leave the rest of the settings as default and click next.
 
 ## Configure your deployment
 
@@ -104,7 +104,7 @@ There are a few key points to note in the build configuration above:
 - Next, we build the static content using the `yarn run build` command.
 - Finally, we include all of the files in the `dist` directory as artifacts.
 
-### Alternative Build Steps
+### Alternative build steps
 
 There is one potential downside to using this configuration to deploy to an S3 bucket: outdated files will not be removed from the bucket. If you want to keep your bucket clean, you can use the following alternative build steps:
 
@@ -129,9 +129,9 @@ artifacts:
     - '**/*'
 ```
 
-This will sync the dist directory with the S3 bucket, using the `--delete` flag to remove any artifacts that are not included in the `dist` directory.
+This will sync the `dist` directory with the S3 bucket, using the `--delete` flag to remove any artifacts that are not included in the `dist` directory.
 
-To make this work, you will need to give your build step the necessary permissions to sync with your S3 bucket. To do this, navigate to the IAM console and add the following role to the role for your build step:
+To make this work, you will need to give your build step the necessary permissions to sync with your S3 bucket. To do this, navigate to the IAM console and add the following permissions to the IAM Role for your build step:
 
 ```json
 {
@@ -153,7 +153,7 @@ To make this work, you will need to give your build step the necessary permissio
 }
 ```
 
-Finally, to disable the deployment step and instead deploy manually as part of the build process, navigate to the pipeline and click "Disable transition" between the "Build" step and the "Deploy" step.
+Finally, to disable the deployment step to deploy as part of the build process, navigate to the pipeline and click "Disable transition" between the "Build" step and the "Deploy" step.
 
 That is it! I hope you find this tutorial helpful.
 

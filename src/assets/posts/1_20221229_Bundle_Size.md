@@ -2,7 +2,7 @@
 id: bundle-size
 title: Your bundle size matters
 description: Reduce your JS bundle size to improve user experience
-date: 29-12-2022
+date: 28-12-2022
 author: Pete Eamsuwan
 readtime: 6 min
 meta: Learn how to reduce your JS bundle size to improve user experience by extracting css, compress JS files using GZip, using react.lazy to break down JS bundles into chunks.
@@ -11,15 +11,15 @@ tags:
   - Webpack
 ---
 
-Webpack configuration is one of the things that I had taken for granted since I have started my web development journey (my background was in backed, so I rarely touch frontend configurations). It is something that you only have to configure once, and if you have done it correctly, you usually don't have to touch it again. It is not until I started this blog that I have started paying attention to what the configuration actually does and what impact it has on performance and user experience.
+Webpack configuration is one of the things that I had taken for granted since I started my web development journey (my background was in backend, so I rarely touch frontend configurations). It is something that you only have to configure once, and if you have done it correctly, you usually don't have to touch it again. It is not until I started this blog that I have started paying attention to what the configuration actually does and what impact it has on performance and user experience.
 
 A larger JavaScript bundle can take longer to download, which can result in a slower loading time for your application. This can be frustrating for users, and may even cause them to leave your site if it takes too long to load.
 
 Lets explore some tweaks you can easily do to your configuration to dramatically reduce your js bundle size and/or improve your website's load time.
 
-## GZip Compression
+## GZip compression
 
-The first time I built the static assets for deployment, I was presented with this message: 
+The first time I built the static assets for deployment, I was presented with this message:
 
 ```shell
 WARNING in asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).
@@ -65,7 +65,7 @@ When I used BundlePhobia to scan my package.json, it highlighted some interestin
 - moment.js size comes in at 290.4kb (minified), 72.1kb (minified + gzip)
 - react-syntax-highlighter comes in at a **whopping 1.5MB (minified)** and 496.5kb (minified + gzip)
 
-After some thoughts, I came to the following conclusion:
+After some thoughts, I came to the following conclusions:
 
 - remove react-bootstrap, because I'm already using bootstrap scss
 - changed moment.js to day.js, a lighter weight library that does pretty much the same thing
@@ -104,9 +104,9 @@ plugins: [
     ...
 ```
 
-Build your static assets, and the plugin will report out what your bloat consists of.
+Build your static assets, and the plugin will report what your bloat consists of.
 
-Initially, I was surprised to see that 35% or 124kb (minified + gzip) of the size actually came from my scss/css files! Then it hit me that I had done `@import '../../../node_modules/bootstrap/scss/bootstrap.scss';` instead of actually importing only the components that I needed. 
+Initially, I was surprised to see that 35% or 124kb (minified + gzip) of the size actually came from my scss/css files! Then it hit me that I had done `@import '../../../node_modules/bootstrap/scss/bootstrap.scss';` instead of actually importing only the components that I needed.
 
 So I went back and selectively imported only the bootstrap components that I actually needed, for example:
 
@@ -135,14 +135,14 @@ Getting better!
 
 ## Extracting CSS/Minmize CSS
 
-At this point, about 25% of the bundle size is still the css assets. Lets see if we can optimize this further
+At this point, about 25% of the bundle size is still the css assets. Lets see if we can optimize this further.
 
 ### Extracting CSS
 
 By default without any additional Webpack's configuration, CSS are automatically inlined into the bundled JS files. This has some disadvantages:
 
 - Visitors of the site may experience Flash of Unstyled Content (FOUC), due to the CSS being loaded only after the content has already been rendered (because the CSS is coupled with the JS files)
-- CSS cannot be loaded in parallel, which hurts the overal performance of the site. By keeping them separate, the browser can start rendering the page as soon as the CSS is available, rather than waiting for the entire JavaScript bundle to download and execute.
+- CSS cannot be loaded in parallel, which hurts the overall performance of the site. By keeping them separate, the browser can start rendering the page as soon as the CSS is available, rather than waiting for the entire JavaScript bundle to download and execute.
 
 Let add the CSS extractor and the CSS Minimizer plugin to our Webpack's configuration:
 
@@ -191,7 +191,7 @@ Using React.lazy, you can split your components into separate code chunks and on
 
 Without React.lazy, all of the code for all of the components would be included in the initial JavaScript bundle, even if a particular component is only used on one page. This can result in a larger bundle size and slower loading times.
 
-This is how React.laxy is being used in my application:
+This is how React.lazy is being used in my application:
 
 ```tsx
 /* eslint-disable react/no-children-prop */
@@ -220,7 +220,7 @@ export const StylisedMarkdown: FC<{ markdown: string }> = (props) => {
 };
 ```
 
-Additionally in the CodeBlock component, I'm selectively importing components (themes and langauges) that I need.
+Additionally in the CodeBlock component, I'm selectively importing components (themes and languages) that I need.
 
 ```tsx
 /* eslint-disable react/no-children-prop */
@@ -256,11 +256,11 @@ Assets:
   js/bundle.d09e9baeecc9cb712fc1.min.js (380 KiB)
 ```
 
-_Incredible, the bundle size has reduced dramatically, and the warning on the min.js.gz file has disappeared_
+_Incredible, the bundle size has reduced dramatically, and the warning on the min.js.gz file has disappeared._
 
 Inspecting the js bundle shows that the largest js file is only 118KB (minified + gzip) which is a massive improvement from the initial non gzip size of nearly 2MB and gzip size of 500Kb.
 
-If you are interested to see this working in action, please checkout the source code at [my github repo](https://github.com/eamsdev/MiniBlog).
+If you are interested in seeing this work in action, please checkout the source code at [my github repo](https://github.com/eamsdev/MiniBlog).
 
 ## Resources
 

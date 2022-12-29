@@ -23,7 +23,7 @@ This led me to consider using Webpack's require context feature.
 
 In Webpack, a context is a reference to a directory in the file system. When you create a context using require.context, you specify the directory that the context should be based on, as well as some other optional parameters.
 
-## Webpack's Require Context
+## Webpack's require.context
 
 ---
 

@@ -4,12 +4,18 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Mode = require('frontmatter-markdown-loader/mode');
 const SitemapPlugin = require('sitemap-webpack-plugin').default;
 const CompressionPlugin = require('compression-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+//const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-const paths = ['/about', '/blogs/page/0', '/article/require-context', '/article/bundle-size'];
+const paths = [
+  '/about',
+  '/blogs/page/0',
+  '/article/require-context',
+  '/article/bundle-size',
+  '/article/aws-pipeline',
+];
 
 module.exports = {
   entry: './index.tsx',
