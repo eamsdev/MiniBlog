@@ -7,8 +7,9 @@ const CompressionPlugin = require('compression-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
-const paths = ['/about', '/blogs/page/0', '/article/require-context'];
+const paths = ['/about', '/blogs/page/0', '/article/require-context', '/article/bundle-size'];
 
 module.exports = {
   entry: './index.tsx',
@@ -62,6 +63,9 @@ module.exports = {
       test: /.js$|.css$/,
     }),
     new MiniCssExtractPlugin(),
+    new CopyPlugin({
+      patterns: [{ from: '../src/assets/post-img', to: 'post-img' }],
+    }),
     // new BundleAnalyzerPlugin(),
   ],
   externals: ['jquery'],

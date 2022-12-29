@@ -11,7 +11,7 @@ tags:
   - Webpack
 ---
 
-While working on this blog, I faced a challenge. One option to add new content to the blog was to manually import each markdown file containing the blog content into a configuration file, which would then be used to render the content in the react components.
+While working on this blog, I faced a challenge. One way to add new content to the blog was to manually import each markdown file containing the blog content into a configuration file, which would then be used to render the content in the react components.
 
 However, this would require manual importing for every new blog I wanted to add, which is not ideal. Instead, I wanted a solution where I could simply drop in the markdown, rebuild, deploy, and be done.
 
@@ -99,7 +99,5 @@ Which conveniently returns the frontmatter containing all the meta-data for each
 If you are interested to see this working in action, please checkout the source code at [my github repo](https://github.com/eamsdev/MiniBlog).
 
 ## Resources
-
----
 
 - [Webpack's Require.Context Documentation](https://webpack.js.org/guides/dependency-management/#requirecontext)

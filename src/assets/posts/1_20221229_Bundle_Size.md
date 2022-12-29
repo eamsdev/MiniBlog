@@ -11,7 +11,7 @@ tags:
   - Webpack
 ---
 
-Webpack configuration is one of the things that I had taken for granted since I have started my web development journey (my background was in backed, so I rarely touch frontend configurations). It is something that you only have to configure once, and if you have done it correctly, you usually don't have to touch it again. However, it is not until I started this blog that I have started paying attention to what the configuration actually does and what impact it has on performance and user experience.
+Webpack configuration is one of the things that I had taken for granted since I have started my web development journey (my background was in backed, so I rarely touch frontend configurations). It is something that you only have to configure once, and if you have done it correctly, you usually don't have to touch it again. It is not until I started this blog that I have started paying attention to what the configuration actually does and what impact it has on performance and user experience.
 
 A larger JavaScript bundle can take longer to download, which can result in a slower loading time for your application. This can be frustrating for users, and may even cause them to leave your site if it takes too long to load.
 
@@ -220,7 +220,7 @@ export const StylisedMarkdown: FC<{ markdown: string }> = (props) => {
 };
 ```
 
-Additionally in the CodeBlock component, I'm only selectively importing components (themes and langauges) that I need.
+Additionally in the CodeBlock component, I'm selectively importing components (themes and langauges) that I need.
 
 ```tsx
 /* eslint-disable react/no-children-prop */
@@ -263,8 +263,6 @@ Inspecting the js bundle shows that the largest js file is only 118KB (minified 
 If you are interested to see this working in action, please checkout the source code at [my github repo](https://github.com/eamsdev/MiniBlog).
 
 ## Resources
-
----
 
 - [Webpack's CompressionPlugin](https://webpack.js.org/plugins/compression-webpack-plugin/)
 - [Webpack's BundleAnalyzerPlugin](https://github.com/webpack-contrib/webpack-bundle-analyzer)
