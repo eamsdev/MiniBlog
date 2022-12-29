@@ -71,7 +71,7 @@ const Header: FC = () => {
         <span>EAMS</span>
         <span>UWAN</span>
       </h1>
-      <p className="title fw-bolder text-center mb-0">Fullstack Software Engineer</p>
+      <p className="title fw-bolder text-center mb-0">Software Engineer</p>
       <p className="fst-italic text-center mb-0">React | Typescript | .Net | Sql</p>
       <p className="social-media text-center fs-5 mb-0">
         <span>
