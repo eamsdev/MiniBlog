@@ -99,10 +99,6 @@ aside {
       transform: translateY(24px);
       @include theme-aware('color', 'color-accent-main');
       @include theme-aware('background-color', 'color-card');
-
-      @include media-breakpoint-up($banner-breakpoint) {
-        display: none;
-      }
     }
   }
 }
