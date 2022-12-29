@@ -17,7 +17,7 @@ export const BlogPost: FC<PropsWithChildren<BlogFrontMatterProps>> = (
         <hr className="solid" />
         {props.children && props.children}
         <hr className="solid" />
-        <Discussion />
+        <Discussion title={props.frontMatter.title} />
       </article>
     </div>
   );

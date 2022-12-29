@@ -21,10 +21,17 @@ export class BlogPostStore {
   }
 
   getByDate(month: number, year: number) {
-    return this.blogPosts.filter((x) => {
-      const date = dayjs(x.attributes.date, 'DD-MM-YYYY');
-      return date.month() + 1 == month && date.year() == year;
-    });
+    return this.blogPosts
+      .sort(
+        (a, b) =>
+          dayjs(a.attributes.date, 'DD-MM-YYYY').valueOf() -
+          dayjs(b.attributes.date, 'DD-MM-YYYY').valueOf(),
+      )
+      .reverse()
+      .filter((x) => {
+        const date = dayjs(x.attributes.date, 'DD-MM-YYYY');
+        return date.month() + 1 == month && date.year() == year;
+      });
   }
 
   getByTag(tag: string) {
@@ -66,7 +73,16 @@ export class BlogPostStore {
         };
       });
 
-    return allDates;
+    const uniques = Object.fromEntries(allDates.map((x) => [x.displayDate, x.queryString]));
+    const allUniqueDates: ArticleDateModel[] = [];
+    for (const key in uniques) {
+      const val = uniques[key];
+      allUniqueDates.push({
+        displayDate: key,
+        queryString: val,
+      });
+    }
+    return allUniqueDates;
   }
 
   @computed
@@ -79,7 +95,15 @@ export class BlogPostStore {
   getItemsAtPage(pageNumber: number) {
     const startingIndex = pageNumber * this.itemsPerPage;
     const endingIndex = startingIndex + this.itemsPerPage;
-    return this.blogPosts.slice(startingIndex, endingIndex).map((x) => toJS(x));
+    return this.blogPosts
+      .map((x) => toJS(x))
+      .sort(
+        (a, b) =>
+          dayjs(a.attributes.date, 'DD-MM-YYYY').valueOf() -
+          dayjs(b.attributes.date, 'DD-MM-YYYY').valueOf(),
+      )
+      .reverse()
+      .slice(startingIndex, endingIndex);
   }
 
   getBlogPostById(id: string): NavigatableBlogPostModel {
@@ -90,11 +114,11 @@ export class BlogPostStore {
 
     return {
       currentPost: toJS(this.blogPosts[currentPostIndex]),
-      newerPostId:
+      olderPostId:
         currentPostIndex == 0
           ? undefined
           : toJS(this.blogPosts[currentPostIndex - 1]).attributes.id,
-      olderPostId:
+      newerPostId:
         currentPostIndex == this.blogPosts.length - 1
           ? undefined
           : toJS(this.blogPosts[currentPostIndex + 1]).attributes.id,

@@ -15,12 +15,18 @@ const configureRouter = () => {
     defaultParams: { page: 0 },
     queryParamsMode: 'loose',
   });
+
   router.usePlugin(
     browserPlugin({
       useHash: false, // Hash routing is evil
     }),
   );
-  router.subscribe((state) => ReactGA.pageview(state.route.path));
+
+  router.subscribe((state) => {
+    if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+      ReactGA.pageview(state.route.path);
+    }
+  });
   return router;
 };
 

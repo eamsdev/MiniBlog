@@ -21,7 +21,7 @@ const ByTags: FC = observer(() => {
   return (
     <>
       <h5>Tags</h5>
-      <nav className="d-flex flex-column ps-3">
+      <nav className="ps-3">
         {rootStore.blogPostStore.allTags.map((x) => (
           <a href={`/articles?tag=${x}`} className="text-white fs-7 pe-auto me-1" key={x}>
             <i className="icon fa fa-tag" /> {x}
@@ -59,7 +59,7 @@ const ByArticles: FC = () => {
 
       <nav className="d-flex flex-column ps-3">
         {rootStore.blogPostStore.allTitles.map((x) => (
-          <a href={`/article/${x.id}`} className="text-white fs-7 pe-auto me-1" key={x.id}>
+          <a href={`/article/${x.id}`} className="text-white fs-7 mb-2" key={x.id}>
             <i className="icon fa fa-book" /> {x.title}
           </a>
         ))}
