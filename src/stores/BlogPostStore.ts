@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 dayjs.extend(customParseFormat);
 
-const markdownContext = require.context('../assets/posts', false, /\.md$/, 'lazy');
+const markdownContext = require.context('../assets/posts', false, /\.md$/);
 
 export class BlogPostStore {
   itemsPerPage = 2;
@@ -18,9 +18,7 @@ export class BlogPostStore {
 
   private async loadPosts() {
     const getModules = (context: __WebpackModuleApi.RequireContext) => context.keys().map(context);
-    const markdownModules: BlogPostModel[] = (await Promise.all(
-      getModules(markdownContext),
-    )) as BlogPostModel[];
+    const markdownModules: BlogPostModel[] = getModules(markdownContext) as BlogPostModel[];
 
     runInAction(() => {
       this.blogPosts = markdownModules

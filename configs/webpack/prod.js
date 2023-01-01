@@ -74,6 +74,6 @@ module.exports = merge(commonConfig, {
       test: /.js$|.css$/,
     }),
     new MiniCssExtractPlugin(),
-    new BundleAnalyzerPlugin(),
+    // new BundleAnalyzerPlugin(),
   ],
 });
