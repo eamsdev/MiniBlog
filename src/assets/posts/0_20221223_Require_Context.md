@@ -48,7 +48,7 @@ For example, in my case I would be looking at something like this:
 
 So, instead of manually importing each components like this:
 
-```ts
+```typescript
 import BlogPost1 from './assets/posts/blog_post_1.md';
 import BlogPost2 from './assets/posts/blog_post_2.md';
 import BlogPost3 from './assets/posts/blog_post_3.md';

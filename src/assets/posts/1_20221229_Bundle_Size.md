@@ -21,7 +21,7 @@ Lets explore some tweaks you can easily do to your configuration to dramatically
 
 The first time I built the static assets for deployment, I was presented with this message:
 
-```shell
+```bash
 WARNING in asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).
 This can impact web performance.
 Assets:
@@ -45,7 +45,7 @@ plugins: [
 
 I re-ran the build, and I was presented with:
 
-```shell
+```bash
 WARNING in asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).
 This can impact web performance.
 Assets:
@@ -73,7 +73,7 @@ After some thoughts, I came to the following conclusions:
 
 After making the above changes and re-running the build, the sizes have come down to:
 
-```shell
+```bash
 WARNING in asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).
 This can impact web performance.
 Assets:
@@ -123,7 +123,7 @@ So I went back and selectively imported only the bootstrap components that I act
 
 Rerunning the bundle analyzer showed that the scss asset size went down from 125kb (minified + gzip) down to 72kb (minified + gzip).
 
-```shell
+```bash
 WARNING in asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).
 This can impact web performance.
 Assets:
@@ -173,7 +173,7 @@ plugins: [
 
 Rerunning the build and the analyzer will show that the css assets are no longer part of the bundled js, and the bundle size has been brought down to:
 
-```shell
+```bash
 WARNING in asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).
 This can impact web performance.
 Assets:
@@ -249,7 +249,7 @@ export default CodeBlock;
 
 Lets rerun the build and see the impact on the bundle size:
 
-```shell
+```bash
 WARNING in asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).
 This can impact web performance.
 Assets:
