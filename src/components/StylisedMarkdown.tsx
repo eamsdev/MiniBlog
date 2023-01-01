@@ -1,9 +1,7 @@
 /* eslint-disable react/no-children-prop */
 import { FC, Suspense } from 'react';
 import ReactMarkdown from 'react-markdown';
-import React from 'react';
-
-const CodeBlock = React.lazy(() => import('./CodeBlock'));
+import CodeBlock from './CodeBlock';
 
 export const StylisedMarkdown: FC<{ markdown: string }> = (props) => {
   const { markdown } = props;

@@ -4,9 +4,10 @@ import { BlogPostModel } from 'stores/BlogPostStore';
 import { rootStore } from '../stores/RootStore';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
+import { observer } from 'mobx-react';
 dayjs.extend(customParseFormat);
 
-export const ArticlesSearch: FC = () => {
+export const ArticlesSearch: FC = observer(() => {
   const { route } = useRouteNode('');
   let blogPosts: BlogPostModel[] = [];
   let headerComponent = undefined;
@@ -69,4 +70,4 @@ export const ArticlesSearch: FC = () => {
       </ul>
     </>
   );
-};
+});

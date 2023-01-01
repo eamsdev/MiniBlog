@@ -27,7 +27,7 @@ In Webpack, a context is a reference to a directory in the file system. When you
 
 ---
 
-Webpack's require.context function allows you to create a context in which you can use the require function to dynamically require a list of modules. This can be useful in cases where you want to require a group of modules in a directory and don't want to manually specify each module.
+Webpack's `require.context` function allows you to create a context in which you can use the require function to dynamically require a list of modules. This can be useful in cases where you want to require a group of modules in a directory and don't want to manually specify each module.
 
 The `require.context` function takes three arguments:
 
@@ -54,7 +54,7 @@ import BlogPost2 from './assets/posts/blog_post_2.md';
 import BlogPost3 from './assets/posts/blog_post_3.md';
 ```
 
-You can use `require.context(...)` to require all modules in the components directory like this:
+You can use `require.context(...)` to load all modules in the components directory like this:
 
 ```ts
 const markdownContext = require.context('../assets/posts', false, /\.md$/); // line 1
@@ -64,7 +64,7 @@ const markdownModules = getModules(markdownContext); // line 3
 
 _Wait!_ so how does line 2 work?
 
-`context.keys()` returns an array of strings, where each string is the relative path to a module in the context. The map function iterates over this array and uses the context function to require each module.
+`context.keys()` returns an array of strings, where each string is the relative path to a module in the context. The map function iterates over this array and uses the context function to load each module.
 
 So, if the `context.keys()` array contained the following strings:
 

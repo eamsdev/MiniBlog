@@ -3,16 +3,35 @@ import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 dayjs.extend(customParseFormat);
 
-const markdownContext = require.context('../assets/posts', false, /\.md$/);
+const markdownContext = require.context('../assets/posts', false, /\.md$/, 'lazy');
 
 export class BlogPostStore {
   itemsPerPage = 2;
   @observable currentPage = 0;
+  @observable isLoading = true;
   @observable blogPosts: BlogPostModel[] = [];
 
   constructor() {
     makeObservable(this);
     this.loadPosts();
+  }
+
+  private async loadPosts() {
+    const getModules = (context: __WebpackModuleApi.RequireContext) => context.keys().map(context);
+    const markdownModules: BlogPostModel[] = (await Promise.all(
+      getModules(markdownContext),
+    )) as BlogPostModel[];
+
+    runInAction(() => {
+      this.blogPosts = markdownModules
+        .map((x) => new BlogPostModel(x.attributes, x.body))
+        .sort(
+          (a, b) =>
+            dayjs(a.attributes.date, 'DD-MM-YYYY').valueOf() -
+            dayjs(b.attributes.date, 'DD-MM-YYYY').valueOf(),
+        );
+      this.isLoading = false;
+    });
   }
 
   @action
@@ -21,17 +40,10 @@ export class BlogPostStore {
   }
 
   getByDate(month: number, year: number) {
-    return this.blogPosts
-      .sort(
-        (a, b) =>
-          dayjs(a.attributes.date, 'DD-MM-YYYY').valueOf() -
-          dayjs(b.attributes.date, 'DD-MM-YYYY').valueOf(),
-      )
-      .reverse()
-      .filter((x) => {
-        const date = dayjs(x.attributes.date, 'DD-MM-YYYY');
-        return date.month() + 1 == month && date.year() == year;
-      });
+    return this.blogPosts.filter((x) => {
+      const date = dayjs(x.attributes.date, 'DD-MM-YYYY');
+      return date.month() + 1 == month && date.year() == year;
+    });
   }
 
   getByTag(tag: string) {
@@ -42,7 +54,7 @@ export class BlogPostStore {
   get allTags() {
     const allTags = this.blogPosts
       .map((x) => x.attributes.tags)
-      .reduce((acccum, value) => acccum.concat(value), [])
+      .reduce((acc, value) => acc.concat(value), [])
       .sort();
 
     return [...new Set(allTags)];
@@ -50,21 +62,21 @@ export class BlogPostStore {
 
   @computed
   get allTitles(): ArticleTitleModel[] {
-    return this.blogPosts.map((x) => {
-      return {
-        title: x.attributes.title,
-        id: x.attributes.id,
-      };
-    });
+    return this.blogPosts
+      .map((x) => {
+        return {
+          title: x.attributes.title,
+          id: x.attributes.id,
+        };
+      })
+      .reverse();
   }
 
   @computed
   get allMonths(): ArticleDateModel[] {
     const allDates = this.blogPosts
-      .map((x) => x.attributes.date)
-      .reduce((acccum, value) => acccum.concat(value), [])
-      .map((x) => dayjs(x, 'DD-MM-YYYY'))
-      .sort((a, b) => a.valueOf() - b.valueOf())
+      .map((x) => dayjs(x.attributes.date, 'DD-MM-YYYY'))
+      .reduce((acc, value) => acc.concat(value), [])
       .reverse()
       .map((x) => {
         return {
@@ -97,16 +109,11 @@ export class BlogPostStore {
     const endingIndex = startingIndex + this.itemsPerPage;
     return this.blogPosts
       .map((x) => toJS(x))
-      .sort(
-        (a, b) =>
-          dayjs(a.attributes.date, 'DD-MM-YYYY').valueOf() -
-          dayjs(b.attributes.date, 'DD-MM-YYYY').valueOf(),
-      )
       .reverse()
       .slice(startingIndex, endingIndex);
   }
 
-  getBlogPostById(id: string): NavigatableBlogPostModel {
+  getBlogPostById(id: string): NavigableBlogPostModel {
     const currentPostIndex = this.blogPosts.findIndex((x) => x.attributes.id == id);
     if (currentPostIndex == -1) {
       return undefined;
@@ -124,16 +131,6 @@ export class BlogPostStore {
           : toJS(this.blogPosts[currentPostIndex + 1]).attributes.id,
     };
   }
-
-  private async loadPosts() {
-    const getModules = (context: __WebpackModuleApi.RequireContext) =>
-      context.keys().map(context) as BlogPostModel[];
-    const markdownModules: BlogPostModel[] = getModules(markdownContext);
-
-    runInAction(() => {
-      this.blogPosts = markdownModules.map((x) => new BlogPostModel(x.attributes, x.body));
-    });
-  }
 }
 
 export type ArticleTitleModel = {
@@ -146,7 +143,7 @@ export type ArticleDateModel = {
   queryString: string;
 };
 
-export type NavigatableBlogPostModel = {
+export type NavigableBlogPostModel = {
   currentPost: BlogPostModel;
   newerPostId?: string;
   olderPostId?: string;

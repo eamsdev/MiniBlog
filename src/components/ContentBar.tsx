@@ -3,7 +3,7 @@ import { Separator } from './Profile';
 import { observer } from 'mobx-react';
 import { rootStore } from '../stores/RootStore';
 
-export const ContentBar: FC = () => {
+export const ContentBar: FC = observer(() => {
   return (
     <aside className="aside-secondary p-0 text-white min-vh-100 d-none d-xl-block">
       <div className="vstack gap-0 p-3">
@@ -15,7 +15,7 @@ export const ContentBar: FC = () => {
       </div>
     </aside>
   );
-};
+});
 
 const ByTags: FC = observer(() => {
   return (
@@ -32,7 +32,7 @@ const ByTags: FC = observer(() => {
   );
 });
 
-const ByMonths: FC = () => {
+const ByMonths: FC = observer(() => {
   return (
     <>
       <h5>History</h5>
@@ -50,9 +50,9 @@ const ByMonths: FC = () => {
       </nav>
     </>
   );
-};
+});
 
-const ByArticles: FC = () => {
+const ByArticles: FC = observer(() => {
   return (
     <>
       <h5>Articles</h5>
@@ -66,4 +66,4 @@ const ByArticles: FC = () => {
       </nav>
     </>
   );
-};
+});

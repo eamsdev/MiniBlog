@@ -15,7 +15,7 @@ Webpack configuration is one of the things that I had taken for granted since I 
 
 A larger JavaScript bundle can take longer to download, which can result in a slower loading time for your application. This can be frustrating for users, and may even cause them to leave your site if it takes too long to load.
 
-Lets explore some tweaks you can easily do to your configuration to dramatically reduce your js bundle size and/or improve your website's load time.
+Let's explore some tweaks you can easily do to your configuration to dramatically reduce your js bundle size and/or improve your website's load time.
 
 ## GZip compression
 
@@ -30,7 +30,7 @@ Assets:
 
 _OK... thats pretty big_. This led me to do some research about Gzip compression, and that's when I learned that it is uncommon for minified JS files to be served uncompressed, as modern browsers typically support Gzip compression.
 
-Lets add Gzip plugin and see how much the bundle size can be improved. In the plugins section of your webpack configuration, add the following.
+Let's add Gzip plugin and see how much the bundle size can be improved. In the plugins section of your webpack configuration, add the following.
 
 ```js
 plugins: [
@@ -83,7 +83,7 @@ Assets:
 
 Not great, not terrible.
 
-Lets see if we can do better.
+Let's see if we can do better.
 
 ## Only importing what you need
 
@@ -135,7 +135,7 @@ Getting better!
 
 ## Extracting CSS/Minmize CSS
 
-At this point, about 25% of the bundle size is still the css assets. Lets see if we can optimize this further.
+At this point, about 25% of the bundle size is still the css assets. Let's see if we can optimize this further.
 
 ### Extracting CSS
 
@@ -183,82 +183,151 @@ Assets:
 
 ## Code splitting
 
-In the previous section, I mentioned that react-syntax-highlighter was the main culprit in my js bundle being so bloated. As it turns out, I was not the only one who encountered this issue. One of the Github issues mentioned that I should be lazy loading the component.
+Webpack's code splitting feature allows you to divide your code into smaller bundles that are loaded as needed, rather than all at once when the application initially loads. This can enhance the performance of your application by shortening the initial load time, as the browser only has to load the bundles required for the initial rendering of the page, rather than the entire codebase.
 
-### What does React.lazy do?
+The feature is incredibly powerful as it also allows for a shorter load time when the website is updated, as the browser will only need to load the bundles that have been changed, rather than the whole monolithic bundle as would be the case with no code splitting. Here we will explore this concept.
 
-Using React.lazy, you can split your components into separate code chunks and only import and render them when they are needed. This means that the initial JavaScript bundle will be smaller, as it will only include the code for the components that are required for the initial rendering of the application. As the user navigates to different pages, additional code chunks can be loaded on demand, further reducing the overall bundle size and improving the performance of the application.
+Before we embark on the journey of splitting our js bundle, let's start by observing the current state of our monolithic bundle.
 
-Without React.lazy, all of the code for all of the components would be included in the initial JavaScript bundle, even if a particular component is only used on one page. This can result in a larger bundle size and slower loading times.
+![bundle before splitting](/post-img/bundle-size-0.JPG)
 
-This is how React.lazy is being used in my application:
+We can see that the bundle composes of the following:
 
-```tsx
-/* eslint-disable react/no-children-prop */
-import { FC, Suspense } from 'react';
-import ReactMarkdown from 'react-markdown';
-import React from 'react';
+- Our site's react code
+- Node modules
+- Assets (blog posts in markdown format)
 
-const CodeBlock = React.lazy(() => import('./CodeBlock'));
+All of these assets belonging in a single bundle has a certain implication; if any of the following change:
 
-export const StylisedMarkdown: FC<{ markdown: string }> = (props) => {
-  const { markdown } = props;
-  return (
-    <ReactMarkdown
-      className="markdown"
-      children={markdown}
-      components={{
-        code: (props) => (
-          <Suspense fallback={<span>loading...</span>}>
-            <CodeBlock {...props} />
-          </Suspense>
-        ),
-        pre: (props) => <>{props.children}</>,
-      }}
-    />
-  );
-};
+- The site's react code.
+- New article added.
+- Dependencies updated.
+
+Then the users' browsers will have to re-download the entire monolithic bundle, rather than just the component that has changed.
+
+### Splitting node modules
+
+It's obvious that if our site's react code has changed, we wouldn't want to make users also re-download unchanged node modules dependencies. 
+To avoid this happening, we can use Webpack's configuration called splitChunks.
+
+```js
+optimization: {
+    splitChunks: {
+      chunks: 'all',
+      maxInitialRequests: Infinity, // Split out code regardless of dependencies
+      minSize: 0, // Split out code regardless of size
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name(module) {
+            return `npm.${module.context
+              .match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1]
+              .replace('@', '')}`;
+          },
+        },
+      },
+    },
+    ...
+}
 ```
 
-Additionally in the CodeBlock component, I'm selectively importing components (themes and languages) that I need.
+Let's go through the above configuration, part by part:
 
-```tsx
-/* eslint-disable react/no-children-prop */
-import { FC } from 'react';
-import SyntaxHighlighter from 'react-syntax-highlighter/dist/esm/prism-async-light';
-import typescript from 'react-syntax-highlighter/dist/esm/languages/prism/typescript';
-import javascript from 'react-syntax-highlighter/dist/esm/languages/prism/javascript';
-import dracula from 'react-syntax-highlighter/dist/esm/styles/prism/dracula';
-
-SyntaxHighlighter.registerLanguage('typescript', typescript);
-SyntaxHighlighter.registerLanguage('javascript', javascript);
-
-const CodeBlock: FC<{ className?; inline?; children? }> = ({ className, inline, children }) => {
-  const match = /language-(\w+)/.exec(className || '');
-  return !inline ? (
-    <SyntaxHighlighter style={dracula} language={match ? match[1] : 'language-shell'}>
-      {String(children).replace(/\n$/, '')}
-    </SyntaxHighlighter>
-  ) : (
-    <code className={className}>{children}</code>
-  );
-};
-
-export default CodeBlock;
+```js
+optimization: {
+    splitChunks: {
+      chunks: 'all',
+      ...
+    }
+  ...
+  }
 ```
 
-Lets rerun the build and see the impact on the bundle size:
+Providing `all` to the `optimization.splitChunks.chunks` will mean that webpack will split chunks regardless of whether they are asynchronous or synchronous dependencies. By default, only asynchronous dependencies are split.
 
-```bash
-WARNING in asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).
-This can impact web performance.
-Assets:
-  js/bundle.d09e9baeecc9cb712fc1.min.js (380 KiB)
+```js
+      ...
+      maxInitialRequests: Infinity,
+      ...
 ```
 
-_Incredible, the bundle size has reduced dramatically, and the warning on the min.js.gz file has disappeared._
+`maxInitialRequests` describes the upper limit of how many modules use the dependency. We raise this limit to ensure all of our third party modules are split into chunks.
 
-Inspecting the js bundle shows that the largest js file is only 118KB (minified + gzip) which is a massive improvement from the initial non gzip size of nearly 2MB and gzip size of 500Kb.
+```js
+      ...
+      minSize: 10000,
+      ...
+```
+
+`minSize` describes the lower bound of the dependency size to be split. We lower this limit to ensure more of our third party modules are split into chunks.
+
+```js
+      ...
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name(module) {
+            return `npm.${module.context
+              .match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1]
+              .replace('@', '')}`;
+          },
+        },
+      },
+      ...
+```
+
+`cacheGroups` is where we configure Webpack to split code into chunks.
+
+The `vendor` cache group is a predefined cache group in webpack that is used to create a chunk for all of the modules in the `node_modules` directory, as well as any other modules that are shared between multiple entry points.
+
+We provide the Regex for the `node_modules` directory in the `test` argument and extract the `name` of the module using the second Regex. Doing this will split the dependencies of our static site into chunks, for each of our node modules dependencies.
+
+With this new configuration added, rerunning the bundle analyzer gives us the following result.
+
+![bundle before splitting](/post-img/bundle-size-1.JPG)
+
+**_Nice!_** We can see that our bundles are no longer monolithic, the larger dependencies are broken up into chunks, and the smaller ones are grouped into larger chunks to reduce HTTP overhead.
+
+### Splitting volatile components
+
+Splitting out volatile components in your bundle can help improve subsequent load time for your site, as the browsers will only need to load the updated components, not the unchanged cached components.
+
+Let's observe the main bundle where our react code resides.
+
+![bundle before splitting](/post-img/bundle-size-2.JPG)
+
+Here we see that our blog posts (markdown files) are part of the main bundle. Because this is a blog application, these posts are the most volatile components of the system.
+
+The rest of the system:
+
+- Search functionality
+- Menu
+- Navigation
+- Banner
+- State management
+
+Will not change nearly as often as new blog posts are being added. Hence it makes sense for these blog posts to be split from the main bundle, so when a new blog post is added, the browser will only need to load the new post, and retrieve any other components from the cache.
+
+Luckily, Webpack 5 automatically splits out any async dependencies into their own chunks. In additional, the `require.context` feature covered in the previous article also supports `lazy` aka. asynchronous loading of modules, thus we can change the following code to asynchronously load the markdown posts:
+
+```ts
+const markdownContext = require.context('../assets/posts', false, /\.md$/, 'lazy');
+...
+const getModules = (context: __WebpackModuleApi.RequireContext) => context.keys().map(context);
+  const markdownModules: BlogPostModel[] = (await Promise.all(
+    getModules(markdownContext),
+  )) as BlogPostModel[];
+```
+
+## Results
+
+Let's rerun the bundle analyzer and the build to see the impact:
+
+![bundle before splitting](/post-img/bundle-size-3.JPG)
+
+We can see that the markdown files have been split out into their own bundles and running the build has shown that the warning on the file size has totally disappeared! **_Nice!_**
+
+Inspecting the js bundle shows that the largest js file is only 14.55KB (minified + gzip, mobx dependency) which is a massive improvement from the initial non gzip size of nearly 2MB and gzip size of 500Kb.
 
 If you are interested in seeing this work in action, please checkout the source code at [my github repo](https://github.com/eamsdev/MiniBlog).
 
@@ -268,4 +337,3 @@ If you are interested in seeing this work in action, please checkout the source 
 - [Webpack's BundleAnalyzerPlugin](https://github.com/webpack-contrib/webpack-bundle-analyzer)
 - [Webpack's MiniCssExtractPlugin](https://webpack.js.org/plugins/mini-css-extract-plugin/)
 - [Webpack's CssMinimizerPlugin](https://webpack.js.org/plugins/css-minimizer-webpack-plugin/)
-- [React Lazy: Code Splitting](https://reactjs.org/docs/code-splitting.html)
