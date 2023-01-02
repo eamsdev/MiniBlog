@@ -4,8 +4,8 @@ title: Your bundle size matters
 description: Reduce your JS bundle size to improve user experience
 date: 28-12-2022
 author: Pete Eamsuwan
-readtime: 6 min
-meta: Learn how to reduce your JS bundle size to improve user experience by extracting css, compress JS files using GZip, using react.lazy to break down JS bundles into chunks.
+readtime: 15 min
+# meta: Learn how to reduce your JS bundle size to improve user experience by extracting css, compress JS files using GZip, using react.lazy to break down JS bundles into chunks.
 tags:
   - React
   - Webpack

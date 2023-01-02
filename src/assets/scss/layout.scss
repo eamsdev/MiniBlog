@@ -217,29 +217,9 @@ article {
   @include theme-aware('background-color', 'color-card');
   max-width: $blogpost-width;
 
-  &:hover {
-    header {
-      p.blog-meta {
-        span.collapsed {
-          max-width: 200px;
-        }
-      }
-    }
-  }
-
   header {
     p {
       margin-bottom: 0;
-    }
-
-    p.blog-meta {
-      width: fit-content;
-
-      span.collapsed {
-        white-space: nowrap;
-        max-width: 0px;
-        transition: max-width 0.3s ease, margin 0.3s ease;
-      }
     }
   }
 }
@@ -351,5 +331,18 @@ hr {
     border-radius: 6px;
     @include theme-aware('color', 'color-code');
     @include theme-aware('background-color', 'color-background-code');
+  }
+}
+
+.fa-circle-o-notch {
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

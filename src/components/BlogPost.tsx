@@ -33,13 +33,10 @@ export const BlogHeader: FC<BlogFrontMatterProps> = (props: BlogFrontMatterProps
     <header>
       <h1>{headerData.title}</h1>
       <p className="fst-italic">{headerData.description}</p>
-      <p className="blog-meta d-flex fs-7">
-        <span className="collapsed d-inline-block overflow-hidden visible">Published&nbsp;</span>
-        <span className="blog-author">by {headerData.author}</span>
-        <span className="blog-date collapsed d-inline-block overflow-hidden visible">
-          &nbsp;at {headerData.date}
-        </span>
-      </p>
+      <span className="blog-meta d-flex fs-7">
+        Published&nbsp;by&nbsp;{headerData.author}
+        &nbsp;at {headerData.date}
+      </span>
     </header>
   );
 };
