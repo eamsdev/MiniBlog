@@ -1,6 +1,6 @@
 # MiniBlog
 
-Work In Progress, watch this space
+My personal dev blog, check it out at [eams.dev](https://eams.dev/)
 
 ## Getting Started
 
