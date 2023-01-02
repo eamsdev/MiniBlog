@@ -312,9 +312,9 @@ Luckily, Webpack 5 automatically splits out any async dependencies into their ow
 const markdownContext = require.context('../assets/posts', false, /\.md$/, 'lazy');
 ...
 const getModules = (context: __WebpackModuleApi.RequireContext) => context.keys().map(context);
-  const markdownModules: BlogPostModel[] = (await Promise.all(
-    getModules(markdownContext),
-  )) as BlogPostModel[];
+const markdownModules: BlogPostModel[] = (await Promise.all(
+  getModules(markdownContext),
+)) as BlogPostModel[];
 ```
 
 ### Alternative to splitting out volatile components, using webpack's cacheGroups
