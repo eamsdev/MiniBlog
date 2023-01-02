@@ -53,7 +53,7 @@ export const LiveSearch: FC = observer(() => {
                     className="icon fs-2 fa fa-file-o d-flex align-items-center"
                     aria-hidden="true"
                   />
-                  <div className="card ms-3 border-0">
+                  <div className="d-flex flex-column card ms-3 border-0">
                     <span className="fw-bold fs-6">{x.title}</span>
                     <span className="fs-7 fst-italic">{x.description}</span>
                   </div>
