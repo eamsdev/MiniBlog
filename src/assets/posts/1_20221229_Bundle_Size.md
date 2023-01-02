@@ -63,13 +63,11 @@ When I used BundlePhobia to scan my package.json, it highlighted some interestin
 
 - react-bootstrap size comes in at 113.7kb (minified), 36.7kb (minified + gzip)
 - moment.js size comes in at 290.4kb (minified), 72.1kb (minified + gzip)
-- react-syntax-highlighter comes in at a **whopping 1.5MB (minified)** and 496.5kb (minified + gzip)
 
 After some thoughts, I came to the following conclusions:
 
 - remove react-bootstrap, because I'm already using bootstrap scss
 - changed moment.js to day.js, a lighter weight library that does pretty much the same thing
-- I'm not going to deal with react-syntax-highlighter yet; we will address it in the "Code Splitting" section of this article.
 
 After making the above changes and re-running the build, the sizes have come down to:
 
