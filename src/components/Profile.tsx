@@ -2,7 +2,6 @@ import { FC } from 'react';
 import { rootStore } from '../stores/RootStore';
 import styled from 'styled-components';
 import { observer } from 'mobx-react';
-import profilephoto from '../assets/img/profilephoto.jpg';
 import { ThemeToggle } from '../components-library/ThemeToggle';
 
 type StyledProfileContainerProps = {
@@ -58,7 +57,7 @@ const Header: FC = () => {
     <header>
       <picture className="d-flex flex-row alignt-items-center justify-content-center mb-3">
         <img
-          src={profilephoto}
+          src="/profilePhoto.webp"
           alt="Pete Eamsuwan"
           className="rounded-circle mb-2"
           width="280px"
