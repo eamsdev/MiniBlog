@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react';
 import { FC } from 'react';
 
-export const AboutMe: FC = observer(() => {
+const AboutMe: FC = observer(() => {
   return (
     <div id="about" className="w-100 p-3 rounded" style={{ maxWidth: '900px' }}>
       <header className="d-flex flex-column align-items-center justify-content-center">
@@ -32,3 +32,5 @@ export const AboutMe: FC = observer(() => {
     </div>
   );
 });
+
+export default AboutMe;

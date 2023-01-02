@@ -7,7 +7,7 @@ import { useRoute, useRouteNode } from 'react-router5';
 import { ContentType, ContentWrapper } from './ContentWrapper';
 import { Helmet } from 'react-helmet';
 
-export const Blogs: FC = observer(() => {
+const Blogs: FC = observer(() => {
   const { router } = useRoute();
   const { route } = useRouteNode('');
   const articleId = route.params.id;
@@ -22,8 +22,8 @@ export const Blogs: FC = observer(() => {
     route.params.id != undefined ? ContentType.NAVIGATION : ContentType.PAGINATION;
 
   if (contentType == ContentType.NAVIGATION) {
-    const navigatableBlogPostModel = rootStore.blogPostStore.getBlogPostById(articleId);
-    if (navigatableBlogPostModel == undefined) {
+    const navigableBlogPostModel = rootStore.blogPostStore.getBlogPostById(articleId);
+    if (navigableBlogPostModel == undefined) {
       return (
         <div className="container p-0 m-0 d-flex flex-row align-items-center justify-content-center">
           <h1>Content Not Found</h1>
@@ -31,10 +31,10 @@ export const Blogs: FC = observer(() => {
       );
     }
 
-    const blogPost = navigatableBlogPostModel.currentPost;
-    newerPostId = navigatableBlogPostModel.newerPostId;
-    olderPostId = navigatableBlogPostModel.olderPostId;
-    blogPostDate = navigatableBlogPostModel.currentPost.attributes.date;
+    const blogPost = navigableBlogPostModel.currentPost;
+    newerPostId = navigableBlogPostModel.newerPostId;
+    olderPostId = navigableBlogPostModel.olderPostId;
+    blogPostDate = navigableBlogPostModel.currentPost.attributes.date;
     itemsKey = blogPost.attributes.id;
     content = (
       <div className="container p-0 m-0">
@@ -81,3 +81,5 @@ export const Blogs: FC = observer(() => {
     </ContentWrapper>
   );
 });
+
+export default Blogs;

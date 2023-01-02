@@ -43,6 +43,16 @@ module.exports = merge(commonConfig, {
       maxInitialRequests: Infinity,
       minSize: 10000,
       cacheGroups: {
+        posts: {
+          minSize: 0,
+          test: /assets[\\/]posts[\\/](.+)\.md/,
+          name(module) {
+            return `${module.resource
+              .match(/(.*)assets[\\/]posts[\\/]([^\\/]+)\.md$/)[2]
+              .replace('_', '')}`;
+          },
+          chunks: 'all',
+        },
         vendor: {
           test: /[\\/]node_modules[\\/]/,
           name(module) {
@@ -74,6 +84,6 @@ module.exports = merge(commonConfig, {
       test: /.js$|.css$/,
     }),
     new MiniCssExtractPlugin(),
-    // new BundleAnalyzerPlugin(),
+    new BundleAnalyzerPlugin(),
   ],
 });

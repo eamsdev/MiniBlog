@@ -133,7 +133,7 @@ Assets:
 
 Getting better!
 
-## Extracting CSS/Minmize CSS
+## Extracting CSS/Minimize CSS
 
 At this point, about 25% of the bundle size is still the css assets. Let's see if we can optimize this further.
 
@@ -207,15 +207,15 @@ Then the users' browsers will have to re-download the entire monolithic bundle, 
 
 ### Splitting node modules
 
-It's obvious that if our site's react code has changed, we wouldn't want to make users also re-download unchanged node modules dependencies. 
+It's obvious that if our site's react code has changed, we wouldn't want to make users also re-download unchanged node modules dependencies.
 To avoid this happening, we can use Webpack's configuration called splitChunks.
 
 ```js
 optimization: {
     splitChunks: {
       chunks: 'all',
-      maxInitialRequests: Infinity, // Split out code regardless of dependencies
-      minSize: 0, // Split out code regardless of size
+      maxInitialRequests: Infinity, 
+      minSize: 10000, 
       cacheGroups: {
         vendor: {
           test: /[\\/]node_modules[\\/]/,
@@ -319,6 +319,38 @@ const getModules = (context: __WebpackModuleApi.RequireContext) => context.keys(
   )) as BlogPostModel[];
 ```
 
+### Alternative to splitting out volatile components, using webpack's cacheGroups
+
+In the previous section, we learned about splitting out components by asynchronously loading them at runtime. However, managing async components can be challenging from a user experience perspective, as it may be necessary to display a loading spinner or message while the content is being loaded.
+
+An alternative approach to optimizing performance on subsequent visits is to use webpack's `cacheGroups` feature. By adding an additional `cacheGroup` to our webpack configuration, we can tell webpack to split our content into chunks, even when they are synchronously called.
+
+Here's an example of how to do this in the webpack configuration:
+
+```js
+optimization: {
+    splitChunks: {
+      ...
+      cacheGroups: {
+        posts: {
+          minSize: 0,
+          test: /assets[\\/]posts[\\/](.+)\.md/,
+          name(module) {
+            return `${module.resource
+              .match(/(.*)assets[\\/]posts[\\/]([^\\/]+)\.md$/)[2]
+              .replace('_', '')}`;
+          },
+          chunks: 'all',
+        },
+        ...
+      },
+    },
+    ...
+  },
+```
+
+With this configuration, we have created a new cacheGroup called `posts` and configured it to always create chunks regardless of size (`minSize: 0`). The regular expression provided matches our markdown blog posts and extracts their names, so each post will be cached and chunkified separately.
+
 ## Results
 
 Let's rerun the bundle analyzer and the build to see the impact:
@@ -337,3 +369,4 @@ If you are interested in seeing this work in action, please checkout the source 
 - [Webpack's BundleAnalyzerPlugin](https://github.com/webpack-contrib/webpack-bundle-analyzer)
 - [Webpack's MiniCssExtractPlugin](https://webpack.js.org/plugins/mini-css-extract-plugin/)
 - [Webpack's CssMinimizerPlugin](https://webpack.js.org/plugins/css-minimizer-webpack-plugin/)
+- [Webpack's SplitChunksPlugin](https://webpack.js.org/plugins/split-chunks-plugin/)

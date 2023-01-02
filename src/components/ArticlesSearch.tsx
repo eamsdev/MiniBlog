@@ -7,7 +7,7 @@ import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { observer } from 'mobx-react';
 dayjs.extend(customParseFormat);
 
-export const ArticlesSearch: FC = observer(() => {
+const ArticlesSearch: FC = observer(() => {
   const { route } = useRouteNode('');
   let blogPosts: BlogPostModel[] = [];
   let headerComponent = undefined;
@@ -71,3 +71,5 @@ export const ArticlesSearch: FC = observer(() => {
     </>
   );
 });
+
+export default ArticlesSearch;
