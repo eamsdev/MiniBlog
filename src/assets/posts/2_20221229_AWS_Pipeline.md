@@ -25,7 +25,7 @@ AWS CodePipeline is a continuous delivery service that helps you automate your s
 
 Let's start by creating a pipeline. Navigate to the AWS CodePipeline console and click on "Create Pipeline."
 
-![create pipeline](/post-img/aws-pipeline-0.JPG)
+![create pipeline](/post-img/aws-pipeline-0.webp)
 
 On the next screen, fill out the name of your pipeline and choose "New service role." The role name should be automatically populated. Click "Next."
 
@@ -33,7 +33,7 @@ On the next screen, fill out the name of your pipeline and choose "New service r
 
 Next, you will need to choose the source of your build. In this case, we will be using GitHub.
 
-![choose source](/post-img/aws-pipeline-1.JPG)
+![choose source](/post-img/aws-pipeline-1.webp)
 
 Select the following:
 
@@ -51,12 +51,12 @@ Click "Create project" to configure your new build project and configure the fol
 - Project name - as appropriate
 - Environment - as below
 
-![choose source](/post-img/aws-pipeline-2.JPG)
+![configure build stage](/post-img/aws-pipeline-2.webp)
 
 - Buildspec - we will use a buildspec file as this can be source controlled
 - Leave the rest as default
 
-![choose source](/post-img/aws-pipeline-3.JPG)
+![configure build stage 2](/post-img/aws-pipeline-3.webp)
 
 Click continue to code pipeline, and select the project name you had just created. Leave the rest of the settings as default and click next.
 
@@ -69,7 +69,7 @@ Next, we will configure the deployment stage. You will need to configure the fol
 - Select the bucket that your static content is being served from. 
 - **Make sure** to enable the option to "Extract file before deploy."
 
-![choose source](/post-img/aws-pipeline-4.JPG)
+![deployment](/post-img/aws-pipeline-4.webp)
 
 Click Next and review and complete your changes.
 

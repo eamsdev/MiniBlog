@@ -187,7 +187,7 @@ The feature is incredibly powerful as it also allows for a shorter load time whe
 
 Before we embark on the journey of splitting our js bundle, let's start by observing the current state of our monolithic bundle.
 
-![bundle before splitting](/post-img/bundle-size-0.JPG)
+![bundle before splitting](/post-img/bundle-size-0.webp)
 
 We can see that the bundle composes of the following:
 
@@ -282,7 +282,7 @@ We provide the Regex for the `node_modules` directory in the `test` argument and
 
 With this new configuration added, rerunning the bundle analyzer gives us the following result.
 
-![bundle before splitting](/post-img/bundle-size-1.JPG)
+![bundle with node modules split](/post-img/bundle-size-1.webp)
 
 **_Nice!_** We can see that our bundles are no longer monolithic, the larger dependencies are broken up into chunks, and the smaller ones are grouped into larger chunks to reduce HTTP overhead.
 
@@ -292,7 +292,7 @@ Splitting out volatile components in your bundle can help improve subsequent loa
 
 Let's observe the main bundle where our react code resides.
 
-![bundle before splitting](/post-img/bundle-size-2.JPG)
+![main bundle](/post-img/bundle-size-2.webp)
 
 Here we see that our blog posts (markdown files) are part of the main bundle. Because this is a blog application, these posts are the most volatile components of the system.
 
@@ -353,7 +353,7 @@ With this configuration, we have created a new cacheGroup called `posts` and con
 
 Let's rerun the bundle analyzer and the build to see the impact:
 
-![bundle before splitting](/post-img/bundle-size-3.JPG)
+![results](/post-img/bundle-size-3.webp)
 
 We can see that the markdown files have been split out into their own bundles and running the build has shown that the warning on the file size has totally disappeared! **_Nice!_**
 

@@ -5,6 +5,7 @@ export const ThemeToggle: FC = observer(() => {
   return (
     <div className="d-flex align-items-center justify-content-center">
       <button
+        aria-label="Toggle theme"
         className="theme-toggle border-0 d-inline fit-content rounded-pill px-2 position-relative"
         style={{ cursor: 'pointer' }}
         onClick={() => rootStore.themeStore.toggleTheme()}

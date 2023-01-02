@@ -33,6 +33,7 @@ export const ContentWrapper: FC<PropsWithChildren<ContentWrapperProps>> = observ
         <nav className="px-2 d-flex flex-md-row flex-column justify-content-between flex-wrap w-100 align-content-center align-items-center">
           <div className="d-flex justify-content-flex-start align-items-center flex-nowrap">
             <button
+              aria-label="Home"
               className="btn btn-primary"
               onClick={() => {
                 props.onPageSelected(0);

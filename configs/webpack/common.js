@@ -36,5 +36,4 @@ module.exports = {
       patterns: [{ from: '../src/assets/post-img', to: 'post-img' }],
     }),
   ],
-  externals: ['jquery'],
 };
