@@ -33,7 +33,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({ template: 'index.html.ejs', favicon: './assets/favicon.ico' }),
     new CopyPlugin({
-      patterns: [{ from: '../src/assets/post-img', to: 'post-img' }],
+      patterns: [{ from: '../src/assets/post-img', to: 'post-img' }, '../src/assets/robots.txt'],
     }),
   ],
 };
