@@ -80,11 +80,9 @@
     "react-is": "^18.2.0",
     "react-markdown": "^8.0.3",
     "react-paginate": "^8.1.4",
-    "react-router5": "^8.0.1",
+    "react-router-dom": "^6.8.0",
     "react-syntax-highlighter": "^15.5.0",
     "react-transition-group": "^4.4.5",
-    "router5": "^8.0.1",
-    "router5-plugin-browser": "^8.0.1",
     "styled-components": "^5.3.6"
   }
 }

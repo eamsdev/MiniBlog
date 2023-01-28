@@ -1,19 +1,23 @@
 import { FC } from 'react';
-import { useRouteNode } from 'react-router5';
 import { BlogPostModel } from 'stores/BlogPostStore';
 import { rootStore } from '../stores/RootStore';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { observer } from 'mobx-react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 dayjs.extend(customParseFormat);
 
 const ArticlesSearch: FC = observer(() => {
-  const { route } = useRouteNode('');
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const tag = searchParams.get('tag');
+  const date = searchParams.get('date');
+
   let blogPosts: BlogPostModel[] = [];
   let headerComponent = undefined;
 
-  if (!!route.params.date) {
-    const monthAndYear = route.params.date.split('-');
+  if (!!date) {
+    const monthAndYear = date.split('-');
     headerComponent = (
       <h1 className="fs-3">
         <i className="icon fa fa-calendar" />
@@ -22,15 +26,15 @@ const ArticlesSearch: FC = observer(() => {
           .format('MMMM')} ${monthAndYear[1]}`}
       </h1>
     );
-    blogPosts = rootStore.blogPostStore.getByDate(monthAndYear[0], monthAndYear[1]);
-  } else if (!!route.params.tag) {
+    blogPosts = rootStore.blogPostStore.getByDate(+monthAndYear[0], +monthAndYear[1]);
+  } else if (!!tag) {
     headerComponent = (
       <h1 className="fs-3">
         <i className="icon fa fa-tag" />
-        {` Tag: ${route.params.tag}`}
+        {` Tag: ${tag}`}
       </h1>
     );
-    blogPosts = rootStore.blogPostStore.getByTag(route.params.tag);
+    blogPosts = rootStore.blogPostStore.getByTag(tag);
   }
 
   return (
@@ -44,8 +48,12 @@ const ArticlesSearch: FC = observer(() => {
               key={x.attributes.id}
             >
               <a
-                className="link-unstyled d-flex flex-row alignt-items-center justify-content-start"
-                href={`/article/${x.attributes.id}`}
+                className="link-unstyled d-flex flex-row align-items-center justify-content-start"
+                href="#"
+                onClick={() => {
+                  rootStore.blogPostStore.onNavigate(x.attributes.id);
+                  navigate(`/article/${x.attributes.id}`);
+                }}
               >
                 <i className="icon fa fa-file-o d-md-flex d-none align-items-center fs-3 me-3" />
                 <div className="border-0">

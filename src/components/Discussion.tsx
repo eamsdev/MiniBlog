@@ -17,7 +17,7 @@ export const Discussion: FC<{ title: string }> = observer(({ title }) => {
       reactionsEnabled="1"
       emitMetadata="1"
       inputPosition="bottom"
-      loading="eager"
+      loading="lazy"
       theme={rootStore.themeStore.isLight ? 'light_high_contrast' : 'transparent_dark'}
       lang="en"
     />

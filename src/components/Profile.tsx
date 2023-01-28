@@ -3,6 +3,7 @@ import { rootStore } from '../stores/RootStore';
 import styled from 'styled-components';
 import { observer } from 'mobx-react';
 import { ThemeToggle } from '../components-library/ThemeToggle';
+import { useNavigate } from 'react-router-dom';
 
 type StyledProfileContainerProps = {
   showNavbar: boolean;
@@ -32,12 +33,29 @@ export const Profile: FC = observer(() => {
 });
 
 const Nav: FC = () => {
+  const navigate = useNavigate();
   return (
     <nav className="d-flex flex-column fs-5 justify-content-center align-items-center">
-      <a href="/blogs/page/0" className="pe-auto text-decoration-none" title="Blogs">
+      <a
+        href="#"
+        onClick={() => {
+          rootStore.blogPostStore.onNavigate('0');
+          navigate('/blogs/page/0');
+        }}
+        className="pe-auto text-decoration-none"
+        title="Blogs"
+      >
         <i className="icon fa fa-book" /> Blog
       </a>
-      <a href="/about" className="pe-auto text-decoration-none" title="Home">
+      <a
+        href="#"
+        onClick={() => {
+          rootStore.blogPostStore.onNavigate('about');
+          navigate('/about');
+        }}
+        className="pe-auto text-decoration-none"
+        title="Home"
+      >
         <i className="icon fa fa-user" /> About me
       </a>
     </nav>
@@ -55,7 +73,7 @@ export const Separator: FC = () => {
 const Header: FC = () => {
   return (
     <header>
-      <picture className="d-flex flex-row alignt-items-center justify-content-center mb-3">
+      <picture className="d-flex flex-row align-items-center justify-content-center mb-3">
         <img
           src="/profilePhoto.webp"
           alt="Pete Eamsuwan"

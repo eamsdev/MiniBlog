@@ -2,10 +2,11 @@ import TextInput from '../components-library/TextInput';
 import { observer } from 'mobx-react';
 import { FC, useEffect, useRef } from 'react';
 import { rootStore } from '../stores/RootStore';
-import { useRoute } from 'react-router5';
+import { useNavigate } from 'react-router-dom';
 
 export const LiveSearch: FC = observer(() => {
-  const { router } = useRoute();
+  const navigate = useNavigate();
+
   const liveSearchStore = rootStore.liveSearchStore;
   const wrapperRef = useRef(null);
   const handleClickOutside = (event) => {
@@ -43,9 +44,10 @@ export const LiveSearch: FC = observer(() => {
               liveSearchStore.matches.map((x) => (
                 <li
                   key={x.title}
-                  className="search-result p-3 mb-2 rounded h-auto d-flex flex-row alignt-items-center justify-content-start"
+                  className="search-result p-3 mb-2 rounded h-auto d-flex flex-row align-items-center justify-content-start"
                   onClick={() => {
-                    router.navigate('article', { id: x.reference }, { reload: true });
+                    rootStore.blogPostStore.onNavigate(x.reference);
+                    navigate('/article/' + x.reference);
                     liveSearchStore.clearSearch();
                   }}
                 >

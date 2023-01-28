@@ -22,6 +22,7 @@ module.exports = merge(commonConfig, {
   // https://burnedikt.com/webpack-dev-server-and-routing/
   devServer: {
     historyApiFallback: true,
+    hot: true,
   },
   output: {
     publicPath: '/',
