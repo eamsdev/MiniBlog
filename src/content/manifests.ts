@@ -8,7 +8,6 @@ type Manifest = {
   tags: string[];
   meta: string;
   content: () => Promise<{
-    attributes: Record<string, string>;
     body: string;
   }>;
 };
@@ -48,6 +47,18 @@ const manifests: Manifest[] = [
     tags: ['AWS', 'CICD'],
     meta: 'Learn how to set up CICD Pipeline for your github projects using AWS Pipeline, to deploy your static content automatically.',
     content: () => import('../assets/posts/2_20221229_AWS_Pipeline.md'),
+  },
+  {
+    id: 'lazy-loading',
+    title: 'Lazy Loading React Components',
+    description:
+      'Use React.lazy() and import() to dynamically load content on demand instead of up-front.',
+    date: '31-01-2023',
+    author: 'Pete Eamsuwan',
+    readTime: '3 min',
+    tags: ['React', 'Typescript', 'Webpack'],
+    meta: 'Learn how to Use React.lazy and Webpacks dynamic import to dynamically load content on demand instead of up-front.',
+    content: () => import('../assets/posts/3_20230129_Lazy_Loading.md'),
   },
 ];
 

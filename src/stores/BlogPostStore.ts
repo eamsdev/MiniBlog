@@ -45,7 +45,6 @@ export class BlogPostStore {
               tags: x.tags,
               meta: x.meta,
             },
-            'old body',
             x.content,
           ),
       )
@@ -175,21 +174,9 @@ export type NavigableBlogPostModel = {
 
 export class BlogPostModel {
   readonly attributes: FrontMatterSchema;
-  readonly body: string;
-  readonly lazyLoadBody: () => Promise<{
-    attributes: Record<string, string>;
-    body: string;
-  }>;
+  readonly lazyLoadBody: () => Promise<{ body: string }>;
 
-  constructor(
-    attributes: FrontMatterSchema,
-    body: string,
-    lazyLoadBody: () => Promise<{
-      attributes: Record<string, string>;
-      body: string;
-    }>,
-  ) {
-    this.body = body;
+  constructor(attributes: FrontMatterSchema, lazyLoadBody: () => Promise<{ body: string }>) {
     this.attributes = attributes;
     this.lazyLoadBody = lazyLoadBody;
     this.matches.bind(this.matches);

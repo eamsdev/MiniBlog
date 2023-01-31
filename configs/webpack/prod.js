@@ -16,6 +16,7 @@ const paths = [
   '/article/require-context',
   '/article/bundle-size',
   '/article/aws-pipeline',
+  '/article/lazy-loading',
 ];
 
 module.exports = merge(commonConfig, {
