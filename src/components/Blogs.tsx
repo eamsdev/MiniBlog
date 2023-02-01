@@ -1,85 +1,90 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { BlogPost } from './BlogPost';
 import { StylisedMarkdown } from './StylisedMarkdown';
 import { rootStore } from '../stores/RootStore';
 import { observer } from 'mobx-react';
-import { useRoute, useRouteNode } from 'react-router5';
 import { ContentType, ContentWrapper } from './ContentWrapper';
-import { Helmet } from 'react-helmet';
+import { BlogPostModel } from 'stores/BlogPostStore';
+import React from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Spinner } from '../components-library/Spinner';
 
 const Blogs: FC = observer(() => {
-  const { router } = useRoute();
-  const { route } = useRouteNode('');
-  const articleId = route.params.id;
-  const pageNumber = route.params.page;
-
-  let content = undefined;
-  let itemsKey = undefined;
-  let newerPostId: string | undefined = undefined;
-  let olderPostId: string | undefined = undefined;
-  let blogPostDate: string | undefined = undefined;
-  const contentType =
-    route.params.id != undefined ? ContentType.NAVIGATION : ContentType.PAGINATION;
-
-  if (contentType == ContentType.NAVIGATION) {
-    const navigableBlogPostModel = rootStore.blogPostStore.getBlogPostById(articleId);
-    if (navigableBlogPostModel == undefined) {
-      return (
-        <div className="container p-0 m-0 d-flex flex-row align-items-center justify-content-center">
-          <h1>Content Not Found</h1>
-        </div>
-      );
-    }
-
-    const blogPost = navigableBlogPostModel.currentPost;
-    newerPostId = navigableBlogPostModel.newerPostId;
-    olderPostId = navigableBlogPostModel.olderPostId;
-    blogPostDate = navigableBlogPostModel.currentPost.attributes.date;
-    itemsKey = blogPost.attributes.id;
-    content = (
-      <div className="container p-0 m-0">
-        <Helmet>
-          <title>{blogPost.attributes.title}</title>
-          <meta name="description" content={blogPost.attributes.meta} />
-        </Helmet>
-        <BlogPost key={blogPost.attributes.title as string} frontMatter={blogPost.attributes}>
-          <StylisedMarkdown markdown={blogPost.body} />
-        </BlogPost>
-      </div>
-    );
-  } else {
-    const itemsAtPage = rootStore.blogPostStore.getItemsAtPage(pageNumber);
-    itemsKey = itemsAtPage[0]?.attributes.id;
-    content = (
-      <div className="container p-0 m-0">
-        {itemsAtPage.map((x) => (
-          <BlogPost key={x.attributes.title as string} frontMatter={x.attributes}>
-            <StylisedMarkdown markdown={x.body} />
-          </BlogPost>
-        ))}
-      </div>
-    );
+  const navigate = useNavigate();
+  let { pageNumber } = useParams();
+  if (pageNumber == undefined) {
+    pageNumber = '0';
   }
 
+  rootStore.blogPostStore.selectPage(+pageNumber);
+
+  const itemsAtPage = rootStore.blogPostStore.getItemsAtPage(+pageNumber);
+  const itemsKey = itemsAtPage[0]?.attributes.id;
+  const styles = { display: rootStore.blogPostStore.isLoading ? 'none' : 'block' };
   return (
     <ContentWrapper
       onPageSelected={(pageNumber) => {
-        router.navigate('blogs', { page: pageNumber }, { reload: true });
+        rootStore.blogPostStore.onNavigate(pageNumber.toString());
+        navigate('/blogs/page/' + pageNumber);
         rootStore.blogPostStore.selectPage(pageNumber);
       }}
+      isLoading={rootStore.blogPostStore.isLoading}
       pageCount={rootStore.blogPostStore.pageCount}
       currentPage={rootStore.blogPostStore.currentPage}
-      onNewerBlogPost={() => router.navigate('article', { id: newerPostId }, { reload: true })}
-      hasNewerBlogPost={!!newerPostId}
-      onOlderBlogPost={() => router.navigate('article', { id: olderPostId }, { reload: true })}
-      hasOlderBlogPost={!!olderPostId}
-      blogPostDate={blogPostDate}
-      type={contentType}
-      transitionKey={contentType + '-' + itemsKey}
+      onNewerBlogPost={undefined}
+      hasNewerBlogPost={undefined}
+      onOlderBlogPost={undefined}
+      hasOlderBlogPost={false}
+      blogPostDate={undefined}
+      type={ContentType.PAGINATION}
+      transitionKey={ContentType.PAGINATION + '-' + itemsKey}
     >
-      {content}
+      <>
+        <MultiBlogView
+          styles={styles}
+          blogPosts={itemsAtPage}
+          onFinishLoading={() => rootStore.blogPostStore.onLoadFinish()}
+        />
+        {rootStore.blogPostStore.isLoading && (
+          <div className="container p-0 m-0">
+            <Spinner />
+          </div>
+        )}
+      </>
     </ContentWrapper>
   );
 });
+
+type MultiBlogViewProps = {
+  styles: React.CSSProperties;
+  blogPosts: BlogPostModel[];
+  onFinishLoading: () => void;
+};
+
+const MultiBlogView = ({ blogPosts, onFinishLoading, styles }: MultiBlogViewProps) => {
+  const [map, setMap] = React.useState(new Map());
+  useEffect(() => {
+    blogPosts.map((x) =>
+      x.lazyLoadBody().then((y) => {
+        map[x.attributes.id] = y.body;
+        setMap(map);
+
+        if (blogPosts.every((x) => map[x.attributes.id] != undefined)) {
+          onFinishLoading();
+        }
+      }),
+    );
+  }, [blogPosts]);
+
+  return (
+    <div style={styles} className="container p-0 m-0">
+      {blogPosts.map((x) => (
+        <BlogPost key={x.attributes.title as string} frontMatter={x.attributes}>
+          <StylisedMarkdown markdown={map[x.attributes.id]} />
+        </BlogPost>
+      ))}
+    </div>
+  );
+};
 
 export default Blogs;

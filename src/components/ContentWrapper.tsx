@@ -1,8 +1,9 @@
-import { TransitionWrapper } from '../components-library/TransitionWrapper';
 import { observer } from 'mobx-react';
 import { FC, PropsWithChildren } from 'react';
 import ReactPaginate from 'react-paginate';
 import { LiveSearch } from './LiveSearch';
+import { rootStore } from '../stores/RootStore';
+import { useNavigate } from 'react-router-dom';
 
 export class ContentType {
   static NAVIGATION: 'navigation' = 'navigation';
@@ -12,21 +13,15 @@ export class ContentType {
 export type ContentWrapperProps = PaginationProps &
   BlogPostNavigationProps & {
     type: 'pagination' | 'navigation';
+    isLoading: boolean;
     transitionKey: string;
   };
 
 export const ContentWrapper: FC<PropsWithChildren<ContentWrapperProps>> = observer(
   (props: PropsWithChildren<ContentWrapperProps>) => {
+    const navigate = useNavigate();
     const navigationComponent =
-      props.type == 'pagination' ? (
-        <TransitionWrapper transitionKey={props.type}>
-          <Pagination {...props} />
-        </TransitionWrapper>
-      ) : (
-        <TransitionWrapper transitionKey={props.type}>
-          <BlogPostNavigation {...props} />
-        </TransitionWrapper>
-      );
+      props.type == 'pagination' ? <Pagination {...props} /> : <BlogPostNavigation {...props} />;
 
     return (
       <>
@@ -36,7 +31,9 @@ export const ContentWrapper: FC<PropsWithChildren<ContentWrapperProps>> = observ
               aria-label="Home"
               className="btn btn-primary"
               onClick={() => {
-                props.onPageSelected(0);
+                rootStore.blogPostStore.onNavigate('0');
+                navigate('/blogs/page/0');
+                rootStore.blogPostStore.selectPage(0);
               }}
             >
               <i className="icon fa fa-home" />
@@ -45,10 +42,14 @@ export const ContentWrapper: FC<PropsWithChildren<ContentWrapperProps>> = observ
           </div>
           {navigationComponent}
         </nav>
-        <TransitionWrapper {...props}>{props.children}</TransitionWrapper>
-        <nav className="mt-4 px-2 d-flex w-100 justify-content-md-end justify-content-center">
-          {navigationComponent}
-        </nav>
+        {props.children}
+        {!props.isLoading && (
+          <>
+            <nav className="mt-4 px-2 d-flex w-100 justify-content-md-end justify-content-center">
+              {navigationComponent}
+            </nav>
+          </>
+        )}
       </>
     );
   },

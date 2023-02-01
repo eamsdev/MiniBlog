@@ -1,14 +1,14 @@
-import { observable, makeObservable, runInAction, toJS, computed, action } from 'mobx';
+import { observable, makeObservable, toJS, computed, action } from 'mobx';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
+import { manifests } from '../content/manifests';
 dayjs.extend(customParseFormat);
-
-const markdownContext = require.context('../assets/posts', false, /\.md$/);
 
 export class BlogPostStore {
   itemsPerPage = 2;
   @observable currentPage = 0;
   @observable isLoading = true;
+  @observable selectedPageKey: string;
   @observable blogPosts: BlogPostModel[] = [];
 
   constructor() {
@@ -16,20 +16,43 @@ export class BlogPostStore {
     this.loadPosts();
   }
 
-  private async loadPosts() {
-    const getModules = (context: __WebpackModuleApi.RequireContext) => context.keys().map(context);
-    const markdownModules: BlogPostModel[] = getModules(markdownContext) as BlogPostModel[];
+  @action
+  onNavigate(key: string) {
+    if (this.selectedPageKey != key) {
+      this.isLoading = true;
+    }
+    this.selectedPageKey = key;
+  }
 
-    runInAction(() => {
-      this.blogPosts = markdownModules
-        .map((x) => new BlogPostModel(x.attributes, x.body))
-        .sort(
-          (a, b) =>
-            dayjs(a.attributes.date, 'DD-MM-YYYY').valueOf() -
-            dayjs(b.attributes.date, 'DD-MM-YYYY').valueOf(),
-        );
-      this.isLoading = false;
-    });
+  @action
+  onLoadFinish() {
+    this.isLoading = false;
+  }
+
+  private loadPosts() {
+    const content = manifests;
+    this.blogPosts = content
+      .map(
+        (x) =>
+          new BlogPostModel(
+            {
+              id: x.id,
+              title: x.title,
+              description: x.description,
+              date: x.date,
+              author: x.author,
+              readTime: x.readTime,
+              tags: x.tags,
+              meta: x.meta,
+            },
+            x.content,
+          ),
+      )
+      .sort(
+        (a, b) =>
+          dayjs(a.attributes.date, 'DD-MM-YYYY').valueOf() -
+          dayjs(b.attributes.date, 'DD-MM-YYYY').valueOf(),
+      );
   }
 
   @action
@@ -117,7 +140,7 @@ export class BlogPostStore {
       return undefined;
     }
 
-    return {
+    const x = {
       currentPost: toJS(this.blogPosts[currentPostIndex]),
       olderPostId:
         currentPostIndex == 0
@@ -128,6 +151,8 @@ export class BlogPostStore {
           ? undefined
           : toJS(this.blogPosts[currentPostIndex + 1]).attributes.id,
     };
+
+    return x;
   }
 }
 
@@ -149,11 +174,11 @@ export type NavigableBlogPostModel = {
 
 export class BlogPostModel {
   readonly attributes: FrontMatterSchema;
-  readonly body: string;
+  readonly lazyLoadBody: () => Promise<{ body: string }>;
 
-  constructor(attributes: FrontMatterSchema, body: string) {
-    this.body = body;
+  constructor(attributes: FrontMatterSchema, lazyLoadBody: () => Promise<{ body: string }>) {
     this.attributes = attributes;
+    this.lazyLoadBody = lazyLoadBody;
     this.matches.bind(this.matches);
   }
 
@@ -171,7 +196,7 @@ export type FrontMatterSchema = {
   description: string | undefined;
   date: string | undefined;
   author: string | undefined;
-  readtime: string | undefined;
+  readTime: string | undefined;
   meta: string | undefined;
   tags: string[] | undefined;
 };
