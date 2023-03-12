@@ -6,6 +6,7 @@ import typescript from 'react-syntax-highlighter/dist/esm/languages/prism/typesc
 import javascript from 'react-syntax-highlighter/dist/esm/languages/prism/javascript';
 import tsx from 'react-syntax-highlighter/dist/esm/languages/prism/tsx';
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx';
+import csharp from 'react-syntax-highlighter/dist/esm/languages/prism/csharp';
 import scss from 'react-syntax-highlighter/dist/esm/languages/prism/scss';
 import json from 'react-syntax-highlighter/dist/esm/languages/prism/json';
 import yaml from 'react-syntax-highlighter/dist/esm/languages/prism/yaml';
@@ -15,6 +16,7 @@ SyntaxHighlighter.registerLanguage('typescript', typescript);
 SyntaxHighlighter.registerLanguage('javascript', javascript);
 SyntaxHighlighter.registerLanguage('tsx', tsx);
 SyntaxHighlighter.registerLanguage('jsx', jsx);
+SyntaxHighlighter.registerLanguage('csharp', csharp);
 SyntaxHighlighter.registerLanguage('yaml', yaml);
 SyntaxHighlighter.registerLanguage('json', json);
 SyntaxHighlighter.registerLanguage('scss', scss);
