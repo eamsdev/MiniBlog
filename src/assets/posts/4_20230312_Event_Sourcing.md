@@ -1,6 +1,6 @@
 Event sourcing is a powerful pattern for building a resilient and scalable applications, especially in use cases where maintaining a complete and accurate audit trail of events is essential. In this article, we will explore the process of building an event sourcing micro framework, using EventStoreDB as the event store.
 
-## Commands and Events
+### Commands and Events
 
 In event sourcing, commands and events are two different concepts that represent different aspects of a system's behavior.
 
@@ -8,7 +8,7 @@ A command is an encapsulation that represents an intention to change the state o
 
 An event is an encapsulation of the truth/fact that has happened in the system. It describes something that has happened in the past, such as a state mutation. Events are often represented in past tensed as to describe something that has already happened, for example: `UserAccountCreatedEvent`. One major distinction between commands and events is command represents an intention, and can be rejected, events represented a fact that has happened.
 
-## Aggregate
+### Aggregate
 
 In event sourcing (or more accurately, [Domain Driven Design](https://martinfowler.com/tags/domain%20driven%20design.html)), an aggregate is a collection of entities that are treated as a single unit of consistency for transactional integrity, meaning that when changes are made, it is never left in an inconsistent state. It is responsible for enforcing business rules and invariants and for maintaining a consistent state within the system.
 
@@ -85,7 +85,7 @@ public interface IHandleCommand<in T> where T : ICommand
     void Handle(T command);
 }
 
-// TodoListAggregateRoot.cs (Example)
+// TodoListAggregateRoot.cs (Implementation Example)
 public class TodoListAggregateRoot : 
     BaseAggregateRoot<TodoListAggregateRoot>,
     IHandleCommand<TodoListCommands.Create>,
@@ -122,7 +122,7 @@ private static void ApplyEvent(IEntity aggregate, IDomainEvent @event)
       .Invoke(aggregate, new[] { @event });
 }
 
-// TodoListAggregateRoot.cs (Example)
+// TodoListAggregateRoot.cs (Implementation Example)
 public void Handle(TodoListEvents.Created domainEvent)
 {
     Title = domainEvent.Title;
@@ -208,7 +208,7 @@ To hydrate the aggregate, we need to load all the past events that has happened 
 
 As shown [here](https://github.com/eamsdev/MiniESS/blob/master/MiniESS.Core/Aggregate/BaseAggregateRoot.cs#L35), I'm using a static constructor to aid the subclass construction. After the instance of the aggregate is created, all the events from the stream are applied via the `foreach` loop, and the version is incremented accordingly.
 
-## Projection
+### Projection
 
 In event sourcing, projection refers to a read model or a view that represents a subset of the events in the event store. Unlike the events in the event store, which contains a complete history of things that have occurred in the past, a projection or a read model is represented in the form that is optimized for query, hence the name read model.
 
@@ -283,7 +283,7 @@ public async Task SendToProjector(IDomainEvent @event, CancellationToken token)
     await projector.ProjectEventAsync(@event, token);
 }
 
-// TodoListProjector.cs (Example)
+// TodoListProjector.cs (Implementation Example)
 public class TodoListProjector :
     ProjectorBase<TodoListAggregateRoot>,
     IProject<TodoListEvents.Created>
