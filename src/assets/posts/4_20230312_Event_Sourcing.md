@@ -1,4 +1,4 @@
-Event sourcing is a powerful pattern for building a resilient and scalable applications, especially in use cases where maintaining a complete and accurate audit trail of events is essential. In this article, we will explore the process of building an event sourcing micro framework, using EventStoreDB as the event store.
+Event sourcing is a powerful pattern for building resilient and scalable applications, especially in use cases where maintaining a complete and accurate audit trail of events is essential. In this article, we will explore the process of building an event sourcing micro framework, using EventStoreDB as the event store.
 
 The following diagram (the dashed lines) is what we will be building.
 
@@ -10,15 +10,15 @@ In event sourcing, commands and events are two different concepts that represent
 
 A command is an encapsulation that represents an intention to change the state of the system. It contains all the necessary information required to perform the mutation, for example parameters needed to execute the change. Commands are typically requested by external actors of the system, such as the user. Commands are generally represented in a language that request something to be done, for example: `CreateUserAccountCommand`.
 
-An event is an encapsulation of the truth/fact that has happened in the system. It describes something that has happened in the past, such as a state mutation. Events are often represented in past tensed as to describe something that has already happened, for example: `UserAccountCreatedEvent`. One major distinction between commands and events is command represents an intention, and can be rejected, events represented a fact that has happened.
+An event is an encapsulation of the truth/fact that has happened in the system. It describes something that has happened in the past, such as a state mutation. Events are often represented in past tense to indicate it has already happened, for example: `UserAccountCreatedEvent`. One major distinction between a command and event is commands represent an intention, and can be rejected, events represent a fact that has happened.
 
 ## Aggregate
 
-In event sourcing (or more accurately, [Domain Driven Design](https://martinfowler.com/tags/domain%20driven%20design.html)), an aggregate is a collection of entities that are treated as a single unit of consistency for transactional integrity. It is responsible for enforcing business rules and invariants and for maintaining a consistent state within the system.
+In event sourcing (or more accurately, [Domain Driven Design](https://martinfowler.com/tags/domain%20driven%20design.html)), an aggregate is a collection of entities that are treated as a single unit of consistency for transactional integrity. It is responsible for enforcing business rules and invariants, and for maintaining a consistent state within the system.
 
 In the context of event sourcing, in response to a command, an aggregate may generate one or more events, which each event representing a state change. These events are persisted in something called the event store, and are often loaded to reconstruct the aggregate to process further commands.
 
-Internally, implementation wise, an aggregate needs to be able to generate events representing state changes, therefore it must maintain and track an events that it will eventually need to persist, as shown below.
+Internally, implementation wise, an aggregate needs to be able to generate events representing state changes, therefore it must maintain and track events that will eventually need to be persisted, as shown below.
 
 ```csharp
 // BaseAggregateRoot.cs
@@ -31,7 +31,7 @@ public abstract class BaseAggregateRoot<TAggregateRoot> : BaseEntity, IAggregate
 }
 ```
 
-An aggregate also needs to store its version, so that the system can detect and resolve conflicts as well as allowing the system to track the changes made overtime. An aggregate's version number is incremented each time a new event is added to its event stream.
+An aggregate also needs to store its version, so that the system can detect and resolve conflicts as well as allow the system to track the changes made overtime. An aggregate's version number is incremented each time a new event is added to its event stream.
 
 ```csharp
 // BaseAggregateRoot.cs
@@ -74,9 +74,9 @@ public class CommandProcessor
 }
 ```
 
-In the above snippet, an instance of an aggregate is retrieved from the aggregate repository. If it was not found, implying that the command is most likely a creation command, then a new instance of an aggregate is created.
+In the above snippet, an instance of an aggregate is retrieved from the aggregate repository. If it is not found, implying that the command is most likely a creation command, then a new instance of an aggregate is created.
 
-Using Reflection and a little help from the marker interface `IHandleCommand<in T> where T : ICommand`, we are able to find the corresponding handler method for the Command that we need to process.
+Using Reflection and a little help from the marker interface `IHandleCommand<in T> where T : ICommand`, we are able to find the corresponding handler method for the command that we need to process.
 
 Shown below, is an example of how the command handler is implemented.
 
@@ -104,7 +104,7 @@ public class TodoListAggregateRoot :
     ...
 ```
 
-Here you will observe that a command can be rejected if the aggregate deems that the input is not valid (recall that on of aggregate's roles is to maintain a consistency boundary), otherwise, an event is "raised" via the `RaiseEvent` method, but how does it actually work?
+Here you will observe that a command can be rejected if the aggregate deems the input invalid (recall that one of aggregate's roles is to maintain a consistency boundary), otherwise, an event is "raised" via the `RaiseEvent` method, but how does it actually work?
 
 ```csharp
 // BaseAggregateRoot.cs
@@ -139,11 +139,11 @@ public void Handle(TodoListEvents.Created domainEvent)
 }
 ```
 
-The `RaiseEvent` method does multiple thing:
+The `RaiseEvent` method does multiple things:
 
 1. Adds the event to queue, so that it can be persisted afterwards
-2. Call the `ApplyEvent`, which via reflection calls the corresponding event handling method defined on the aggregate. This mutates the state of the aggregate in memory so subsequent commands in the same scope are handled by the most up-to-date aggregate (scope-wise).
-3. Increment the version of the aggregate.
+2. Calls the `ApplyEvent`, which via Reflection calls the corresponding event handling method defined on the aggregate. This mutates the state of the aggregate in memory, so subsequent commands in the same scope are handled by the most up-to-date aggregate (scope-wise).
+3. Increments the version of the aggregate.
 
 You can probably gather that for the complete implementation, the aggregate will need to implement both the `IHandleCommand`/`IHandleEvent` interfaces for the command and the corresponding event to be handled properly.
 
@@ -199,7 +199,7 @@ The above snippet is pretty straight forward, we are using EventStoreDb's librar
 
 ## Loading the aggregate aka. hydrating
 
-Persisting the events is good and all, but how do we load them from event store in to the aggregate to process further commands? This is actually called hydration, it refers to the process of reconstructing the current state of an aggregate by replaying series of events that have occurred in the past.
+Persisting the events is good and all, but how do we load them from event store into the aggregate to process further commands? This is called hydration, and refers to the process of reconstructing the current state of an aggregate by replaying a series of events that have occurred in the past.
 
 ```csharp
 // AggregateRepository.cs
@@ -215,13 +215,13 @@ public async Task<TAggregateRoot?> LoadAsync(Guid key, CancellationToken token)
 }
 ```
 
-To hydrate the aggregate, we need to load all the past events that has happened to the aggregate. And with a little use of some reflection magic, we can construct the aggregate, and re-apply all the events that has happened to it before processing more commands.
+To hydrate the aggregate, we need to load all the past events that have happened to the aggregate. And with a little bit of Reflection magic, we can construct the aggregate, and re-apply all the events that have happened before processing additional commands.
 
 As shown [here](https://github.com/eamsdev/MiniESS/blob/master/MiniESS.Core/Aggregate/BaseAggregateRoot.cs#L35), I'm using a static constructor to aid the subclass construction. After the instance of the aggregate is created, all the events from the stream are applied via the `foreach` loop, and the version is incremented accordingly.
 
 ### Projection
 
-In event sourcing, projection refers to a read model or a view that represents a subset of the events in the event store. Unlike the events in the event store, which contains a complete history of things that have occurred in the past, a projection or a read model is represented in the form that is optimized for query, hence the name read model.
+In event sourcing, projection refers to a read model or a view that represents a subset of events in the event store. Unlike the events in the event store, which contain a complete history of things that have occurred in the past, a projection or a read model is represented in a form that is optimized for query, hence the name read model.
 
 Implementing projection by integrating with EventStoreDB will involve the following steps:
 
@@ -341,7 +341,7 @@ public class ReadonlyDbContext
 
 ## Final Remarks
 
-It's impossible to cover all the code that went into creating this micro-framework in a single article. If you are interested in seeing the entire codebase and this working in action, please check out the source code at [my github repo](https://github.com/eamsdev/MiniESS), it also include a working example implementing a Todo List application.
+It's impossible to cover all the code that went into creating this micro-framework in a single article. If you are interested in seeing the entire codebase and this working in action, please check out the source code at [my github repo](https://github.com/eamsdev/MiniESS), it also includes a working example implementing a To-do List application.
 
 ## Resources
 
