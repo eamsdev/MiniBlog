@@ -13,10 +13,12 @@ const paths = [
   '/about',
   '/blogs/page/0',
   '/blogs/page/1',
+  '/blogs/page/2',
   '/article/require-context',
   '/article/bundle-size',
   '/article/aws-pipeline',
   '/article/lazy-loading',
+  '/article/event-sourcing',
 ];
 
 module.exports = merge(commonConfig, {

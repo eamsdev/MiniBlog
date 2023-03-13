@@ -323,7 +323,7 @@ hr {
 
 .markdown {
   p > code,
-  ul > li > code {
+  li > code {
     padding: 0.2em 0.4em;
     margin: 0;
     font-size: 85%;
@@ -331,6 +331,10 @@ hr {
     border-radius: 6px;
     @include theme-aware('color', 'color-code');
     @include theme-aware('background-color', 'color-background-code');
+  }
+  
+  pre, img {
+    border-radius: 0.3em;
   }
 }
 

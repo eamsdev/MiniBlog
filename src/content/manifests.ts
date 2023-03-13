@@ -57,8 +57,20 @@ const manifests: Manifest[] = [
     author: 'Pete Eamsuwan',
     readTime: '3 min',
     tags: ['React', 'Typescript', 'Webpack'],
-    meta: 'Learn how to Use React.lazy and Webpacks dynamic import to dynamically load content on demand instead of up-front.',
+    meta: 'Learn how to use React.lazy and Webpacks dynamic import to dynamically load content on demand instead of up-front.',
     content: () => import('../assets/posts/3_20230129_Lazy_Loading.md'),
+  },
+  {
+    id: 'event-sourcing',
+    title: 'Event Sourcing micro-framework with EventStore DB',
+    description:
+      'Create an Event Sourcing micro-framework with Entity Framework Core and EventStore DB',
+    date: '12-03-2023',
+    author: 'Pete Eamsuwan',
+    readTime: '12 min',
+    tags: ['.Net', 'Event Sourcing', 'CSharp'],
+    meta: 'Learn how to use create a event sourcing micro framework with Entity Framework Core and EventStore DB',
+    content: () => import('../assets/posts/4_20230312_Event_Sourcing.md'),
   },
 ];
 
