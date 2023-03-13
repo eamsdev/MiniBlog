@@ -1,6 +1,10 @@
 Event sourcing is a powerful pattern for building a resilient and scalable applications, especially in use cases where maintaining a complete and accurate audit trail of events is essential. In this article, we will explore the process of building an event sourcing micro framework, using EventStoreDB as the event store.
 
-### Commands and Events
+The following diagram (the dashed lines) is what we will be building.
+
+![Event Sourcing Architecture](/post-img/event-sourcing-0.webp)
+
+## Commands and Events
 
 In event sourcing, commands and events are two different concepts that represent different aspects of a system's behavior.
 
@@ -8,11 +12,9 @@ A command is an encapsulation that represents an intention to change the state o
 
 An event is an encapsulation of the truth/fact that has happened in the system. It describes something that has happened in the past, such as a state mutation. Events are often represented in past tensed as to describe something that has already happened, for example: `UserAccountCreatedEvent`. One major distinction between commands and events is command represents an intention, and can be rejected, events represented a fact that has happened.
 
-### Aggregate
+## Aggregate
 
-In event sourcing (or more accurately, [Domain Driven Design](https://martinfowler.com/tags/domain%20driven%20design.html)), an aggregate is a collection of entities that are treated as a single unit of consistency for transactional integrity, meaning that when changes are made, it is never left in an inconsistent state. It is responsible for enforcing business rules and invariants and for maintaining a consistent state within the system.
-
-![Event Sourcing Architecture](/post-img/event-sourcing-0.jpg)
+In event sourcing (or more accurately, [Domain Driven Design](https://martinfowler.com/tags/domain%20driven%20design.html)), an aggregate is a collection of entities that are treated as a single unit of consistency for transactional integrity. It is responsible for enforcing business rules and invariants and for maintaining a consistent state within the system.
 
 In the context of event sourcing, in response to a command, an aggregate may generate one or more events, which each event representing a state change. These events are persisted in something called the event store, and are often loaded to reconstruct the aggregate to process further commands.
 
@@ -36,7 +38,7 @@ An aggregate also needs to store its version, so that the system can detect and 
 public long Version { get; set; }
 ```
 
-### Command Processing
+## Command Processing
 
 Before we can store events using EventStoreDB, we need to be able to handle and process commands. Here I chose to abstract the interaction between the client who issues the command and the aggregate who maintains the consistency boundary using a CommandProcessor object.
 
@@ -89,6 +91,7 @@ public interface IHandleCommand<in T> where T : ICommand
 public class TodoListAggregateRoot : 
     BaseAggregateRoot<TodoListAggregateRoot>,
     IHandleCommand<TodoListCommands.Create>,
+    IHandleEvent<TodoListEvents.Created>,
     ...
 
     public void Handle(TodoListCommands.Create command)
@@ -122,6 +125,12 @@ private static void ApplyEvent(IEntity aggregate, IDomainEvent @event)
       .Invoke(aggregate, new[] { @event });
 }
 
+// IHandleEvent.cs
+public interface IHandleEvent<in T> where T : IDomainEvent
+{ 
+    void Handle(T domainEvent);
+}
+
 // TodoListAggregateRoot.cs (Implementation Example)
 public void Handle(TodoListEvents.Created domainEvent)
 {
@@ -136,7 +145,9 @@ The `RaiseEvent` method does multiple thing:
 2. Call the `ApplyEvent`, which via reflection calls the corresponding event handling method defined on the aggregate. This mutates the state of the aggregate in memory so subsequent commands in the same scope are handled by the most up-to-date aggregate (scope-wise).
 3. Increment the version of the aggregate.
 
-### Events Processing/Persistence
+You can probably gather that for the complete implementation, the aggregate will need to implement both the `IHandleCommand`/`IHandleEvent` interfaces for the command and the corresponding event to be handled properly.
+
+## Events Processing/Persistence
 
 In the previous section, we processed commands, mutated the state of the aggregate in-memory and as a result generated some events. These events need to be persisted for them to be considered the source-of-truths.
 
@@ -186,7 +197,7 @@ public class AggregateRepository<TAggregateRoot> : IAggregateRepository<TAggrega
 
 The above snippet is pretty straight forward, we are using EventStoreDb's library to interact with the event store. The events from the aggregate are mapped to the DTO definition provided by EventStoreDb. The expected version needs to be included to ensure that any out of order events are rejected in the event of race condition.
 
-### Loading the aggregate aka. hydrating
+## Loading the aggregate aka. hydrating
 
 Persisting the events is good and all, but how do we load them from event store in to the aggregate to process further commands? This is actually called hydration, it refers to the process of reconstructing the current state of an aggregate by replaying series of events that have occurred in the past.
 
@@ -212,7 +223,7 @@ As shown [here](https://github.com/eamsdev/MiniESS/blob/master/MiniESS.Core/Aggr
 
 In event sourcing, projection refers to a read model or a view that represents a subset of the events in the event store. Unlike the events in the event store, which contains a complete history of things that have occurred in the past, a projection or a read model is represented in the form that is optimized for query, hence the name read model.
 
-Implementing projection by integrating with EventStoreDB will follow the following steps:
+Implementing projection by integrating with EventStoreDB will involve the following steps:
 
 1. A service, or a background service, subscribes to events that are published to the event store.
 
@@ -306,7 +317,7 @@ public class TodoListProjector :
 }
 ```
 
-### Querying the read model
+## Querying the read model
 
 Using EF Core, querying the read model is just as easy as accessing the objects from the `DbContext`. However, if you want to take it a step further and provide a `ReadOnlyDbContext` abstraction, then the following implementation can be used:
 
@@ -328,7 +339,7 @@ public class ReadonlyDbContext
 }
 ```
 
-### Final Remarks
+## Final Remarks
 
 It's impossible to cover all the code that went into creating this micro-framework in a single article. If you are interested in seeing the entire codebase and this working in action, please check out the source code at [my github repo](https://github.com/eamsdev/MiniESS), it also include a working example implementing a Todo List application.
 

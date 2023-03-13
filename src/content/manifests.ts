@@ -68,7 +68,7 @@ const manifests: Manifest[] = [
     date: '12-03-2023',
     author: 'Pete Eamsuwan',
     readTime: '12 min',
-    tags: ['.Net', 'Event-Sourcing', 'C#'],
+    tags: ['.Net', 'Event Sourcing', 'CSharp'],
     meta: 'Learn how to use create a event sourcing micro framework with Entity Framework Core and EventStore DB',
     content: () => import('../assets/posts/4_20230312_Event_Sourcing.md'),
   },
