@@ -199,7 +199,7 @@ The above snippet is pretty straight forward, we are using EventStoreDb's librar
 
 ## Loading the aggregate aka. hydrating
 
-Persisting the events is good and all, but how do we load them from event store into the aggregate to process further commands? This is called hydration, and refers to the process of reconstructing the current state of an aggregate by replaying a series of events that have occurred in the past.
+Persisting the events is good and all, but how do we load them from event store into the aggregate to process further commands? This is called hydration, it refers to the process of reconstructing the current state of an aggregate by replaying a series of events that have occurred in the past.
 
 ```csharp
 // AggregateRepository.cs
