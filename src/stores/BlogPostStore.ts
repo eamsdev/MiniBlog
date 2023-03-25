@@ -10,6 +10,7 @@ export class BlogPostStore {
   @observable isLoading = true;
   @observable selectedPageKey: string;
   @observable blogPosts: BlogPostModel[] = [];
+  @observable blogPostsMap: Map<string, string> = new Map();
 
   constructor() {
     makeObservable(this);
@@ -22,6 +23,22 @@ export class BlogPostStore {
       this.isLoading = true;
     }
     this.selectedPageKey = key;
+  }
+
+  @action
+  async loadBlogContents(blogPosts: BlogPostModel[]) {
+    this.isLoading = true;
+    const loadedContent = await Promise.all(
+      blogPosts.map(async (x) => {
+        return {
+          id: x.attributes.id,
+          body: (await x.lazyLoadBody()).body,
+        };
+      }),
+    );
+
+    loadedContent.forEach((x) => (this.blogPostsMap[x.id] = x.body));
+    this.isLoading = false;
   }
 
   @action
