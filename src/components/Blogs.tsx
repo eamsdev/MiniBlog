@@ -4,7 +4,7 @@ import { StylisedMarkdown } from './StylisedMarkdown';
 import { rootStore } from '../stores/RootStore';
 import { observer } from 'mobx-react';
 import { ContentType, ContentWrapper } from './ContentWrapper';
-import { BlogPostModel } from 'stores/BlogPostStore';
+import { BlogPostModel, blogPostStore } from '../stores/BlogPostStore';
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Spinner } from '../components-library/Spinner';
@@ -21,6 +21,11 @@ const Blogs: FC = observer(() => {
   const itemsAtPage = rootStore.blogPostStore.getItemsAtPage(+pageNumber);
   const itemsKey = itemsAtPage[0]?.attributes.id;
   const styles = { display: rootStore.blogPostStore.isLoading ? 'none' : 'block' };
+
+  useEffect(() => {
+    blogPostStore.loadBlogContents(itemsAtPage);
+  }, [pageNumber]);
+
   return (
     <ContentWrapper
       onPageSelected={(pageNumber) => {
@@ -40,11 +45,7 @@ const Blogs: FC = observer(() => {
       transitionKey={ContentType.PAGINATION + '-' + itemsKey}
     >
       <>
-        <MultiBlogView
-          styles={styles}
-          blogPosts={itemsAtPage}
-          onFinishLoading={() => rootStore.blogPostStore.onLoadFinish()}
-        />
+        <MultiBlogView styles={styles} blogPosts={itemsAtPage} />
         {rootStore.blogPostStore.isLoading && (
           <div className="container p-0 m-0">
             <Spinner />
@@ -58,33 +59,18 @@ const Blogs: FC = observer(() => {
 type MultiBlogViewProps = {
   styles: React.CSSProperties;
   blogPosts: BlogPostModel[];
-  onFinishLoading: () => void;
 };
 
-const MultiBlogView = ({ blogPosts, onFinishLoading, styles }: MultiBlogViewProps) => {
-  const [map, setMap] = React.useState(new Map());
-  useEffect(() => {
-    blogPosts.map((x) =>
-      x.lazyLoadBody().then((y) => {
-        map[x.attributes.id] = y.body;
-        setMap(map);
-
-        if (blogPosts.every((x) => map[x.attributes.id] != undefined)) {
-          onFinishLoading();
-        }
-      }),
-    );
-  }, [blogPosts]);
-
+const MultiBlogView = observer(({ blogPosts, styles }: MultiBlogViewProps) => {
   return (
     <div style={styles} className="container p-0 m-0">
       {blogPosts.map((x) => (
         <BlogPost key={x.attributes.title as string} frontMatter={x.attributes}>
-          <StylisedMarkdown markdown={map[x.attributes.id]} />
+          <StylisedMarkdown markdown={blogPostStore.blogPostsMap[x.attributes.id]} />
         </BlogPost>
       ))}
     </div>
   );
-};
+});
 
 export default Blogs;
