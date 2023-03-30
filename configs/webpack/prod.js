@@ -19,6 +19,7 @@ const paths = [
   '/article/aws-pipeline',
   '/article/lazy-loading',
   '/article/event-sourcing',
+  '/article/oauth2-github',
 ];
 
 module.exports = merge(commonConfig, {
