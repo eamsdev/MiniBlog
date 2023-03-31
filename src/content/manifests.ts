@@ -74,15 +74,15 @@ const manifests: Manifest[] = [
   },
   {
     id: 'oauth2-github',
-    title: 'Dissecting Github OAuth2',
+    title: 'Dissecting OAuth2, with Github',
     description:
-      'Learn more about OAuth2 and how to use it to create a sign-in button for your application.',
+      'Learn more about OAuth2 and how to use it to access protected resource on github.',
     date: '30-03-2023',
     author: 'Pete Eamsuwan',
     readTime: '14 min',
     tags: ['OAuth', 'Security'],
-    meta: 'Learn more about OAuth2 and how to use it to create a sign-in button for your application.',
-    content: () => import('../assets/posts/5_20230330_Dissecting_Github_OAuth2.md'),
+    meta: 'Learn more about OAuth2 and how to use it to access protected resource on github.',
+    content: () => import('../assets/posts/5_20230330_Dissecting_OAuth2_With_Github.md'),
   },
 ];
 
