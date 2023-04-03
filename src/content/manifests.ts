@@ -72,6 +72,18 @@ const manifests: Manifest[] = [
     meta: 'Learn how to use create a event sourcing micro framework with Entity Framework Core and EventStore DB',
     content: () => import('../assets/posts/4_20230312_Event_Sourcing.md'),
   },
+  {
+    id: 'oauth2-github',
+    title: 'Dissecting OAuth2, with Github',
+    description:
+      'Learn more about OAuth2 and how to use it to access protected resources on github.',
+    date: '03-04-2023',
+    author: 'Pete Eamsuwan',
+    readTime: '14 min',
+    tags: ['OAuth', 'Security'],
+    meta: 'Learn more about OAuth2 and how to use it to access protected resources on github.',
+    content: () => import('../assets/posts/5_20230330_Dissecting_OAuth2_With_Github.md'),
+  },
 ];
 
 export { manifests, Manifest };
