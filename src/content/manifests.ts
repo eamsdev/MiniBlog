@@ -77,7 +77,7 @@ const manifests: Manifest[] = [
     title: 'Dissecting OAuth2, with Github',
     description:
       'Learn more about OAuth2 and how to use it to access protected resources on github.',
-    date: '30-03-2023',
+    date: '03-04-2023',
     author: 'Pete Eamsuwan',
     readTime: '14 min',
     tags: ['OAuth', 'Security'],
