@@ -18,10 +18,6 @@ The [diagram](https://www.rfc-editor.org/rfc/rfc6749#section-1.2) above describe
 3. Note that the OAuth specification makes a very **clear distinction** on the *Authorization Grant vs Access Token*.
 4. **Nowhere** in the spec did they mention *JSON Web Tokens (JWT)*, that's implementation detail.
 
-### The Dad's Car Analogy
-
-You (the Client) want to take your dad's car (protected resource), which is in the garage (resource server), for a spin. However, the car's key is with your mum (authorization server), and she won't give it up without your dad's permission. So, you go to your dad and ask for permission (authorization request), and he grants it (authorization grant). Then, you go to your mum and somehow convince her that you have permission to use the car. She gives you the car key (access token), which allows you to retrieve the car (Protected Resource) from the garage (Resource Server), using the key that you obtained.
-
 ## Implicit Flow
 
 Implicit flow is a simplified authorization flow optimized for clients and implemented in a browser (read: no backend). Instead of issuing the client Authorization Code, the client is issued the Access Token directly. The access token is returned directly to the client as a result of the redirect and is exposed to the client side code which could be potentially intercepted. Because of said security vulnerability, we won't be digging deeper into the implicit flow.
