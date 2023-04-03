@@ -31,7 +31,7 @@ const ByTags: FC = observer(() => {
               rootStore.blogPostStore.onNavigate(`articles?tag=${x}`);
               navigate(`/articles?tag=${x}`);
             }}
-            className="text-white fs-7 pe-auto me-1"
+            className="text-white fs-7 pe-auto me-1 text-nowrap"
             key={x}
           >
             <i className="icon fa fa-tag" /> {x}
