@@ -20,6 +20,7 @@ const paths = [
   '/article/lazy-loading',
   '/article/event-sourcing',
   '/article/oauth2-github',
+  '/article/oauth-react-dotnet',
 ];
 
 module.exports = merge(commonConfig, {
