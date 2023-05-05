@@ -2,11 +2,9 @@ In the previous article we examined OAuth2 specification and how the Authorizati
 
 ## What we will be building
 
-Let's consider the scenario where you have an existing React Dotnet application with some basic authentication mechanism, say Cookie Authentication. Users can register and sign in to your application via username/password combination and the users' information is stored in the database that you host yourself. Your application has noticeably gained popularity, and you would like to add additional sign-in mechanisms such as Github sign-in. Let's explore how you can do this, the following diagram depicts what we will be building:
+Let's consider the scenario where you have an existing React Dotnet application with some basic authentication mechanism, say Cookie Authentication. Users can register and sign in to your application via username/password combination and the users' information is stored in the database that you host yourself. Your application has noticeably gained popularity, and you would like to add additional sign-in mechanisms such as Github sign-in. Let's explore how you can do this.
 
-![OAuth With DotNet/React](/post-img/oauth-react-dotnet-0.webp)
-
-With basic cookie authentication, the user creation/login flow could be:
+Traditionally, with basic cookie authentication, the user creation/login flow could be:
 
 1. User registers an account
 2. A user is created by the application
@@ -25,7 +23,7 @@ With OAuth, assuming that you won't be using OpenIdConnect, your user creation/l
 7. If the user does not exist, then the user is created and signed in (via a cookie)
 8. Said cookie is sent on subsequent requests, is validated server-side to access protected resources
 
-As you can probably tell, the access token is short-lived, as we are only using it to access the user profile of the user logging in. There are downsides to this, which we will discuss later.
+As you can probably tell, the access token is short-lived, as we are only using it to access the user profile of the user logging in.
 
 ## Configuring your .Net Web Api for OAuth
 
@@ -135,12 +133,19 @@ The good news is, because the server manages the OAuth flow entirely and switche
 
 ## Seeing it work in action
 
+The source code for this example can be found at [my github repo](https://github.com/eamsdev/OAuthTutorial), so feel free to clone it to test it yourself. The OAuth demo application contains a simple login screen where you can sign in with your github account.
 
-![Login Screen](/post-img/oauth-react-dotnet-1.webp)
+![Login Screen](/post-img/oauth-react-dotnet-0.webp)
 
-![Github Authorization](/post-img/oauth-react-dotnet-2.webp)
+After clicking the sign-in button, you will be redirect to Github sign-in and authorization page.
 
-![Displaying username](/post-img/oauth-react-dotnet-3.webp)
+![Github Authorization](/post-img/oauth-react-dotnet-1.webp)
+
+After which you will be redirected back to the home page without login name and your account id displayed.
+
+![Displaying username](/post-img/oauth-react-dotnet-2.webp)
+
+Pretty simple working example to demonstrate how one can integrate OAuth into their .Net/React application!
 
 ## Concluding Remarks
 
