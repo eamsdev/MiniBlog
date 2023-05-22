@@ -84,6 +84,18 @@ const manifests: Manifest[] = [
     meta: 'Learn more about OAuth2 and how to use it to access protected resources on github.',
     content: () => import('../assets/posts/5_20230330_Dissecting_OAuth2_With_Github.md'),
   },
+  {
+    id: 'oauth-react-dotnet',
+    title: 'OAuth with .Net 6 and React',
+    description:
+      'Learn how to authenticate users using OAuth for a .Net application with React frontend.',
+    date: '03-05-2023',
+    author: 'Pete Eamsuwan',
+    readTime: '7 min',
+    tags: ['OAuth', '.Net', 'CSharp', 'React'],
+    meta: 'Learn how to authenticate users using OAuth for a .Net application with React frontend.',
+    content: () => import('../assets/posts/6_20230503_OAuth_DotNet_React.md'),
+  },
 ];
 
 export { manifests, Manifest };

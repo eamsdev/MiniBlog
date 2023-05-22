@@ -14,12 +14,14 @@ const paths = [
   '/blogs/page/0',
   '/blogs/page/1',
   '/blogs/page/2',
+  '/blogs/page/3',
   '/article/require-context',
   '/article/bundle-size',
   '/article/aws-pipeline',
   '/article/lazy-loading',
   '/article/event-sourcing',
   '/article/oauth2-github',
+  '/article/oauth-react-dotnet',
 ];
 
 module.exports = merge(commonConfig, {
