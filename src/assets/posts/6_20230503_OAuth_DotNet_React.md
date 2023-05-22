@@ -10,18 +10,18 @@ Traditionally, with basic cookie authentication, the user creation/login flow co
 2. A user is created by the application
 3. User signs in using the aforementioned account
 4. A cookie with claims containing the identity of the user is returned and stored by the browser
-5. Said cookie is sent on subsequent requests, is validated server-side to access protected resources
+5. Said cookie is sent on subsequent requests, and validated server-side to access protected resources
 
 With OAuth, assuming that you won't be using OpenIdConnect, your user creation/login flow could be the following:
 
 1. User clicks on "Sign in with Github"
-2. The application redirects the user to Github's Resource Authorization page, here user signs in and grant the application access to the user's profile
-3. Github redirects to the Authorization Callback url which pass the Authorization Code to the server
+2. The application redirects the user to Github's Resource Authorization page, where the user signs in and grants the application access to the user's profile
+3. Github redirects to the Authorization Callback url which passes the Authorization Code to the server
 4. The server exchanges the code for the access token
 5. With the access token, the server retrieves the user profile
 6. If said user exists, then the user is signed in (via a cookie)
 7. If the user does not exist, then the user is created and signed in (via a cookie)
-8. Said cookie is sent on subsequent requests, is validated server-side to access protected resources
+8. Said cookie is sent on subsequent requests, and validated server-side to access protected resources
 
 As you can probably tell, the access token is short-lived, as we are only using it to access the user profile of the user logging in.
 
@@ -58,7 +58,7 @@ private static void ConfigureGithub(OAuthOptions options)
 }
 ```
 
-Lets analyze the `ConfigureGithub` option configuration method, it sets the following:
+Let's analyze the `ConfigureGithub` option configuration method, it sets the following:
 
 1. `SignInScheme`, this could be `ApplicationScheme` or `ExternalScheme` depending on your use-cases. In my case, I use the `ApplicationScheme` because I have no need to treat users who signed in via Github differently.
 2. `ClientId`, the client Id from Github OAuth App registration
@@ -86,7 +86,7 @@ public static class GithubOAuthProvider
     }
 ```
 
-The above method defines the `OnCreatingTicket` action, which we saw configured earlier in the OAuth options configuration. From the code are essentially doing 3 things:
+The above method defines the `OnCreatingTicket` action, which we saw configured earlier in the OAuth options configuration. From the code, we are essentially doing 3 things:
 
 1. Get the internal username of the user attempting to login.
 2. Check whether said user exists
@@ -129,7 +129,7 @@ Creation of user and signing them in is trivial, if you are interested in this p
 
 ## What about the front end?
 
-The good news is, because the server manages the OAuth flow entirely and switches to cookie authentication once the user is signed in, no changes are technically required. This is because as far as the front end is concerned, the user who signed in using Github is no different to the native users.
+The good news is, because the server manages the OAuth flow entirely and switches to cookie authentication once the user is signed in, no changes are technically required. This is because as far as the front end is concerned, the user who signed in using Github is no different to native users.
 
 ## Seeing it work in action
 
@@ -137,11 +137,11 @@ The source code for this example can be found at [my github repo](https://github
 
 ![Login Screen](/post-img/oauth-react-dotnet-0.webp)
 
-After clicking the sign-in button, you will be redirect to Github sign-in and authorization page.
+After clicking the sign-in button, you will be redirected to Github sign-in and authorization page.
 
 ![Github Authorization](/post-img/oauth-react-dotnet-1.webp)
 
-After which you will be redirected back to the home page without login name and your account id displayed.
+After which you will be redirected back to the home page with your login name and account Id displayed.
 
 ![Displaying username](/post-img/oauth-react-dotnet-2.webp)
 

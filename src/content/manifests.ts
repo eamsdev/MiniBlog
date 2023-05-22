@@ -91,7 +91,7 @@ const manifests: Manifest[] = [
       'Learn how to authenticate users using OAuth for a .Net application with React frontend.',
     date: '03-05-2023',
     author: 'Pete Eamsuwan',
-    readTime: '15 min',
+    readTime: '7 min',
     tags: ['OAuth', '.Net', 'CSharp', 'React'],
     meta: 'Learn how to authenticate users using OAuth for a .Net application with React frontend.',
     content: () => import('../assets/posts/6_20230503_OAuth_DotNet_React.md'),
