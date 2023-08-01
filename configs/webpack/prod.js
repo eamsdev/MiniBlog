@@ -22,6 +22,7 @@ const paths = [
   '/article/event-sourcing',
   '/article/oauth2-github',
   '/article/oauth-react-dotnet',
+  '/article/learnings-from-terraform',
 ];
 
 module.exports = merge(commonConfig, {

@@ -96,6 +96,17 @@ const manifests: Manifest[] = [
     meta: 'Learn how to authenticate users using OAuth for a .Net application with React frontend.',
     content: () => import('../assets/posts/6_20230503_OAuth_DotNet_React.md'),
   },
+  {
+    id: 'learnings-from-terraform',
+    title: 'Tips, tricks and learnings from using Terraform with AWS and Azure',
+    description: 'Tips and tricks on how you could improve your Terraform code',
+    date: '02-08-2023',
+    author: 'Pete Eamsuwan',
+    readTime: '5 min',
+    tags: ['Terraform', 'AWS', 'Azure'],
+    meta: 'Tips, tricks and learnings from using Terraform with AWS and Azure',
+    content: () => import('../assets/posts/7_20230801_Learnings_From_Terraform.md'),
+  },
 ];
 
 export { manifests, Manifest };
