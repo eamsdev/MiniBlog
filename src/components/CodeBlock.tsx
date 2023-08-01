@@ -12,6 +12,7 @@ import scss from 'react-syntax-highlighter/dist/esm/languages/prism/scss';
 import json from 'react-syntax-highlighter/dist/esm/languages/prism/json';
 import yaml from 'react-syntax-highlighter/dist/esm/languages/prism/yaml';
 import bash from 'react-syntax-highlighter/dist/esm/languages/prism/bash';
+import hcl from 'react-syntax-highlighter/dist/esm/languages/prism/hcl';
 import { rootStore } from '../stores/RootStore';
 import { observer } from 'mobx-react-lite';
 
@@ -24,6 +25,7 @@ SyntaxHighlighter.registerLanguage('yaml', yaml);
 SyntaxHighlighter.registerLanguage('json', json);
 SyntaxHighlighter.registerLanguage('scss', scss);
 SyntaxHighlighter.registerLanguage('bash', bash);
+SyntaxHighlighter.registerLanguage('hcl', hcl);
 
 const CodeBlock: FC<{ className?; inline?; children? }> = observer(
   ({ className, inline, children }) => {
