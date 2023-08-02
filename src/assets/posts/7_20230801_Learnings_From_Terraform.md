@@ -44,11 +44,11 @@ Using a local state file for Terraform is generally advised against, for obvious
 2. Local state locking is not possible, multiple users executing terraform commands will cause their state files to drift away from the state of the infrastructure
 3. Local state file may contain sensitive information, checking in sensitive information to source control is a NO NO.
 
-## Utilize state locking (AWS Only)
+## Utilize state locking (AWS)
 
 In a collaborative environment, it is crucial that you use the state locking mechanism if you are using AWS. This can be done by configuring the `dynamodb_table` property in your Terraform backend configuration.
 
-State locking prevents race condition that can arise from multiple users executing Terraform commands on the same remote state. This will help you maintain integrity of your infrastructure state, preventing conflicts, state corruptions and unintended state changes. By pointing the backend configuration to an existing DynamoDb table, Terraform will automatically setup state locking for you.
+State locking prevents race condition that can arise from multiple users executing Terraform commands on the same remote state. This will help you maintain integrity of your infrastructure state, prevents conflicts, state corruptions and unintended state changes. By pointing the backend configuration to an existing DynamoDb table, Terraform will automatically setup state locking for you.
 
 ```hcl
 // backend.tfvars - AWS
@@ -61,11 +61,11 @@ region                = ...
 
 Note this Azure handles this by default (good job Microsoft).
 
-## Using provider features to configure provider specific behaviors
+## Using the provider's features block to configure provider's specific behaviors
 
 The features block allows providers such as AWS or Azure to offer advanced or experimental configurations that are not enabled by default. By configuring the features block, you can opt in out of these additional capabilities.
 
-As an example, my initial draft of my Azure IasC would consistently fail to perform the `destroy` command to tear down the entire infrastructure, due to Azure creating unwanted resources in my resource group. With some research, I found that I could use the `prevent_deletion_if_contains_resources` property in the Azure provider's features block, to force the tear down of the resource group. Shown below, is an example of how you could do it.
+As an example, my initial draft of my Azure IasC would consistently fail to perform the `destroy` command to tear down the entire infrastructure, this is due to Azure creating unwanted resources in my resource group. With some research, I found that I could use the `prevent_deletion_if_contains_resources` property in the Azure provider's features block, to force the tear down of the resource group regardless of whether it contains any resources or not. Shown below, is an example of how you could do it.
 
 ```hcl
 provider "azurerm" {
@@ -106,11 +106,11 @@ resource "azurerm_linux_web_app" "webapp" {
 }
 ```
 
-With the above configuration, when the docker_image_name property is set to another image name or tag, and the Terraform configuration is re-applied, it wont force the property to revert back to its original configuration.
+With the above configuration, when the docker_image_name property is set to another image name or tag and the Terraform configuration is re-applied, it wont force the property to revert back to its original configuration.
 
 ## Use sensitive variable flags
 
-Often in your Terraform journey, you will often need pass secrets or sensitive information to the configuration. Should this be the case, you should use the property `sensitive = true` in your `variables.tf`. Apart from ensuring that the sensitive information is not stored in plaintext in your configuration, the sensitive flag ensures that the sensitive variables are not displayed in plain text in Terraform output or logs as well as ensures that the values are not exposed in the state file.
+In your Terraform journey, you will often need to pass secrets or sensitive information to your Terraform configuration. Should this be the case, you should use the property `sensitive = true` in your `variables.tf`. Apart from ensuring that the sensitive information is not stored in plaintext in your configuration, the sensitive flag ensures that the sensitive variables are not displayed in plain text in Terraform output or logs as well as ensures that the values are not exposed in the state file.
 
 ```hcl
 // variables.tf
